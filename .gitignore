@@ -27,7 +27,7 @@ coverage/
 # Front-End #
 #############
 node_modules/
-dist/
 npm-debug.log
+dist/
 
 .snyk
