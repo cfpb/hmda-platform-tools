@@ -15,7 +15,7 @@ export class AppContainer extends Component {
           <BannerUSA />
           <div className="usa-nav-container">
             <div className="usa-logo" id="logo">
-              <img src="/img/ffiec-logo.png" width="125px"/>
+              <img src="./img/ffiec-logo.png" width="125px"/>
             </div>
             <div className="WIP usa-alert-warning usa-text-small">
               <h5>This website is a work in progress</h5>
