@@ -16,9 +16,9 @@ const renderLarErrors= (larErrors) => {
         </tr>
       </thead>
       <tbody>
-        {larErrors.map((larErrorObj) => {
+        {larErrors.map((larErrorObj, i) => {
           return (
-            <tr>
+            <tr key={i}>
               <td>{larErrorObj.row}</td>
               <td>{larErrorObj.error}</td>
             </tr>

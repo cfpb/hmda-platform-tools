@@ -1,11 +1,8 @@
 jest.unmock('../../src/js/components/UploadForm.jsx')
-jest.unmock('../../src/js/components/ValidationProgress.jsx')
 
 import UploadForm, {
-  renderValidationProgress,
   renderErrors
 } from '../../src/js/components/UploadForm.jsx'
-import ValidationProgress from '../../src/js/components/ValidationProgress.jsx'
 import Wrapper from '../Wrapper.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -76,16 +73,5 @@ describe('renderErrors', () => {
 
   it('doesn\'t renders errors', () => {
     expect(renderErrors([])).toBe(null)
-  })
-})
-
-describe('renderValidationProgress', () => {
-  it('renders validation progress', () => {
-    const rendered = renderValidationProgress({code: 2})
-    expect(TestUtils.isElement(rendered)).toBe(true)
-  })
-
-  it('doesn\'t renders validation progress', () => {
-    expect(renderValidationProgress({code: 1})).toBe(null)
   })
 })
