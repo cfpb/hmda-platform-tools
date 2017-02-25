@@ -1,11 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import ValidationProgress from './ValidationProgress.jsx'
 import Dropzone from 'react-dropzone'
-
-export const renderValidationProgress = (props) => {
-  if(props.code === 1) return null
-  return <ValidationProgress code={props.code} />
-}
 
 export const renderErrors = (errors) => {
   if(errors.length === 0) return null
@@ -28,24 +22,20 @@ export default class Upload extends Component {
     super(props)
   }
 
+  updateDropArea() {
+    let message = 'Drag another LAR file to this area or click to select a LAR file to check.'
+    let check = this.props.errors.length === 0 ? 'Check' : 'Can\'t check'
+    this.dropzoneContent.innerHTML = `<p>${check} "${this.props.file.name}".</p><p>${message}</p>`
+  }
+
   componentDidUpdate() {
-    let message = 'Drag another LAR file to this area or click to select a LAR file to upload.'
-    if (this.props.code > 1) {
-      message = 'Submission currently in progess. You have to click the "Refile" button to start again.'
-    }
-    let upload = this.props.errors.length === 0 ? 'Upload' : 'Can\'t upload'
-    this.dropzoneContent.innerHTML = `<p>${upload} "${this.props.file.name}".</p><p>${message}</p>`
+    this.updateDropArea()
   }
 
   // keeps the info about the file after leaving /upload and coming back
   componentDidMount() {
-    let message = 'Drag another LAR file to this area or click to select a LAR file to upload.'
-    if (this.props.code > 1) {
-      message = 'Submission currently in progess. You have to click the "Refile" button to start again.'
-    }
-    let upload = this.props.errors.length === 0 ? 'Upload' : 'Can\'t upload'
     if(this.props.file && 'name' in this.props.file) {
-      this.dropzoneContent.innerHTML = `<p>${upload} "${this.props.file.name}".</p><p>${message}</p>`
+      this.updateDropArea()
     }
   }
 
@@ -69,13 +59,12 @@ export default class Upload extends Component {
                 <div
                   ref={(node) => {this.dropzoneContent = node}}
                   className="usa-text-small">
-                  <p>Drag your LAR file to this area or click to select a LAR file to upload.</p>
+                  <p>Drag your LAR file to this area or click to select a LAR file to check.</p>
                 </div>
               </Dropzone>
             </div>
-            <input disabled={isUploadDisabled} className="usa-button" id="uploadButton" name="uploadButton" type="submit" value="Upload"></input>
+            <input disabled={isUploadDisabled} className="usa-button" id="uploadButton" name="uploadButton" type="submit" value="Check Format"></input>
           </form>
-          {renderValidationProgress(this.props)}
         </div>
       </div>
     )

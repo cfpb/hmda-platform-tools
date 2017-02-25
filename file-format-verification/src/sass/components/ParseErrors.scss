@@ -1,11 +1,24 @@
-.ParseErrors {
-  .desc {
-    border-bottom: 1px solid $color-gray-lighter;
+#parseErrors {
+  margin-bottom: 2em;
+
+  .ParseResults {
+    padding: 1em;
   }
+
   h2 {
-    margin-top: 0;
+    margin: 0;
   }
+
   p.usa-font-lead {
-    margin-top: .5em;
+    margin: 0.5em 0 0 0;
   }
+
+  table {
+    margin: 0;
+  }
+
+  caption {
+    text-align: left;
+  }
+
 }

@@ -1,12 +1,9 @@
 import { combineReducers } from 'redux'
 import {
   SELECT_FILE,
-  UPLOAD_PROGRESS,
-  UPLOAD_COMPLETE,
-  UPLOAD_ERROR,
   UPDATE_STATUS,
-  REQUEST_PARSE_ERRORS,
-  RECEIVE_PARSE_ERRORS
+  BEGIN_PARSE,
+  END_PARSE
 } from '../constants'
 
 const defaultUpload = {
@@ -21,7 +18,8 @@ const defaultStatus = {
 }
 
 const defaultParseErrors = {
-  isFetching: false,
+  isParsing: false,
+  parsed: false,
   transmittalSheetErrors: [],
   larErrors: []
 }
@@ -59,15 +57,16 @@ export const status = (state = defaultStatus, action) => {
 
 export const parseErrors = (state = defaultParseErrors, action) => {
   switch(action.type) {
-    case REQUEST_PARSE_ERRORS:
+    case BEGIN_PARSE:
       return {
         ...state,
-        isFetching: true
+        isParsing: true
       }
 
-    case RECEIVE_PARSE_ERRORS:
+    case END_PARSE:
       return {
-        isFetching: false,
+        parsed: true,
+        isParsing: false,
         transmittalSheetErrors: action.transmittalSheetErrors,
         larErrors: action.larErrors
       }

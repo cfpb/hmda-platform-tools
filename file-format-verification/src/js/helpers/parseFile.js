@@ -18,7 +18,7 @@ export default function (file) {
 
     const tsErrors = []
     const larErrors = []
-    let isFirstLine = true
+    let currentLine = 0
 
     const fileStream = reader(file)
     const lineStream = split()
@@ -26,11 +26,10 @@ export default function (file) {
     const rejectOnErr = (err) => reject(err)
 
     fileStream.pipe(lineStream).on('data', (data) => {
-      if(isFirstLine){
-        isFirstLine = false
+      if(++currentLine === 1){
         concatErrors(parseTS(data), tsErrors)
       }else{
-        concatErrors(parseLar(data), larErrors)
+        concatErrors(parseLar(data, currentLine), larErrors)
       }
     })
 

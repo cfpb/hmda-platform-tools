@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Upload from '../components/UploadForm.jsx'
-import { selectFile, requestUpload, createNewSubmission } from '../actions'
+import { selectFile, triggerParse } from '../actions'
 
 export function mapStateToProps(state) {
   const {
@@ -28,7 +28,7 @@ export function mapDispatchToProps(dispatch) {
     handleSubmit: (e, file) => {
       e.preventDefault()
       if(file){
-        dispatch(requestUpload(file))
+        dispatch(triggerParse(file))
       }
     },
 
@@ -36,10 +36,6 @@ export function mapDispatchToProps(dispatch) {
       if(!acceptedFiles || !rejectedFiles) return
       let file = acceptedFiles[0] || rejectedFiles[0]
       dispatch(selectFile(file))
-    },
-
-    refileLink: (id, period) => {
-      dispatch(createNewSubmission(id, period))
     }
   }
 }

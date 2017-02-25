@@ -1,74 +1,84 @@
 import React, { Component, PropTypes } from 'react'
+import LoadingIcon from './LoadingIcon.jsx'
 
-const renderErrorMessages = (messages) => {
+const renderLarErrors= (larErrors) => {
+  if(larErrors.length === 0) return null
   return (
-    <ul className="usa-unstyled-list">
-      {
-        messages.map((message, i) => {
-          return <li key={i}>{message}</li>
-        })
-      }
-    </ul>
-  )
-}
-
-const renderData = (larError) => {
-  let data
-
-  return (
-    Object.keys(larError).map((error, i) => {
-      if(error === 'errorMessages') {
-        // the error messages are in an array
-        data = renderErrorMessages(larError[error])
-      } else {
-        // the row number
-        data = larError[error]
-      }
-      return <td key={i}>{data}</td>
-    })
+    <table className="margin-bottom-0" width="100%">
+      <caption>
+        <h3>LAR Errors</h3>
+        <p>Formatting errors in loan application records, arranged by row.</p>
+      </caption>
+      <thead>
+        <tr>
+          <th>Row</th>
+          <th>Errors</th>
+        </tr>
+      </thead>
+      <tbody>
+        {larErrors.map((larErrorObj) => {
+          return (
+            <tr>
+              <td>{larErrorObj.row}</td>
+              <td>{larErrorObj.error}</td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
   )
 }
 
 const renderTSErrors = (transmittalSheetErrors) => {
   if(transmittalSheetErrors.length === 0) return null
   return (
-    <tr>
-      <td>Transmittal Sheet</td>
-      <td>
-        <ul className="usa-unstyled-list" id="tsErrors">
-          {transmittalSheetErrors.map((tsError, i) => {
-            return <li key={i}>{tsError}</li>
-          })}
-        </ul>
-      </td>
-    </tr>
+    <table className="margin-bottom-0" width="100%">
+      <caption>
+        <h3>Transmittal Sheet Errors</h3>
+        <p>Formatting errors in the transmittal sheet, the first row of your HMDA file.</p>
+      </caption>
+      <thead>
+        <tr>
+          <th>Transmittal Sheet Errors</th>
+        </tr>
+      </thead>
+      <tbody>
+        {transmittalSheetErrors.map((tsError, i) => {
+          return <tr key={i}><td>{tsError}</td></tr>
+        })}
+      </tbody>
+    </table>
+  )
+}
+
+const renderParseResults = (count) => {
+  const successCopy = 'Congratulations, your file has no formatting errors.'
+  const failCopy = 'Your file failed to parse. Please fix the following errors and try again.'
+  const errorText = count === 1 ? 'Error' : 'Errors'
+  const noErrors = count === 0
+
+  return (
+    <div className={'ParseResults ' + (noErrors ? 'usa-alert-success' : 'usa-alert-error')}>
+      <h2 className={noErrors ? 'text-green' : 'text-secondary'}>
+        {noErrors ? 'No' : count} Formatting {errorText}
+      </h2>
+      <p className="usa-font-lead">{noErrors ? successCopy : failCopy}</p>
+    </div>
   )
 }
 
 const ParseErrors = (props) => {
-  const count = props.transmittalSheetErrors.length + props.larErrors.length
-  const errorText = count > 1 ? 'Errors' : 'Error'
+  const { parsed, isParsing, transmittalSheetErrors, larErrors } = props
+  const count = transmittalSheetErrors.length + larErrors.length
+
+  if(isParsing) return <LoadingIcon/>
+  if(!parsed) return null
 
   return (
     <div className="ParseErrors usa-grid-full" id="parseErrors">
-      <div className="desc">
-        <h2 className="margin-top-0 text-secondary">{count} Parsing {errorText}</h2>
-        <p className="usa-font-lead">There are errors that prevented your file from being validated. You must fix these errors and re-upload your file.</p>
-      </div>
-      <table className="margin-bottom-0" width="100%">
-        <thead>
-          <tr>
-            <th>Row</th>
-            <th>Errors</th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderTSErrors(props.transmittalSheetErrors)}
-          {props.larErrors.map((larError, i) => {
-            return <tr key={i}>{renderData(larError)}</tr>
-          })}
-        </tbody>
-      </table>
+      {renderParseResults(count)}
+      {renderTSErrors(transmittalSheetErrors)}
+      {renderLarErrors(larErrors)}
     </div>
   )
 }
