@@ -10,16 +10,17 @@ export class AppContainer extends Component {
   render() {
     return (
       <div className="AppContainer">
+        <div className="WIP usa-alert-warning usa-text-small">
+          <h4><img src="./img/error-round.png" alt="Warning icon"/>This website is a work in progress</h4>
+          <p>This is part of our work to improve the HMDA electronic reporting process for financial institutions.</p>
+          <p>For more information about filing your HMDA data, please visit <a target="_blank" href="https://www.ffiec.gov/hmda/">https://www.ffiec.gov/hmda/</a>.</p>
+        </div>
         <a className="usa-skipnav" href="#main-content">Skip to main content</a>
         <header className="usa-header usa-header-basic" role="banner">
           <BannerUSA />
           <div className="usa-nav-container">
             <div className="usa-logo" id="logo">
               <img src="./img/ffiec-logo.png" width="125px"/>
-            </div>
-            <div className="WIP usa-alert-warning usa-text-small">
-              <h5>This website is a work in progress</h5>
-              <p>This is part of our work to improve the HMDA electronic reporting process for financial institutions.</p>
             </div>
           </div>
         </header>
