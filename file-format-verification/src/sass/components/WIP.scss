@@ -1,10 +1,17 @@
 .WIP.usa-alert-warning {
   margin: 0;
-  float:right;
-  padding: 0.5em 1em;
-  text-align: right;
-  > h5 {
-   margin: 0 0 2px 0;
+  width:100%;
+  padding: 2em 6em;
+  text-align: left;
+  > h4 {
+    margin: 0 0 0.5em 0;
+    display: block;
+    > img {
+      margin-left: -35px;
+      width: 30px;
+      position: absolute;
+      display: block;
+    }
   }
   > p {
     margin:0;
