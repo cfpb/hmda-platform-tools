@@ -1,6 +1,4 @@
-import {
-  getParseErrors,
-} from '../api'
+import parseFile from '../helpers/parseFile.js'
 import * as types from '../constants'
 
 export function updateStatus(status) {
@@ -31,48 +29,27 @@ export function selectFile(file) {
   }
 }
 
-export function uploadStart() {
+export function beginParse() {
   return {
-    type: types.UPLOAD_START
+    type: types.BEGIN_PARSE
   }
 }
 
-export function uploadComplete(xhrLoadEvent) {
+export function endParse(data) {
   return {
-    type: types.UPLOAD_COMPLETE,
-    xhrLoadEvent
-  }
-}
-
-export function uploadError() {
-  return {
-    type: types.UPLOAD_ERROR
-  }
-}
-
-export function requestIRS() {
-  return {
-    type: types.REQUEST_IRS
-  }
-}
-
-export function receiveIRS(data) {
-  return {
-    type: types.RECEIVE_IRS,
-    msas: data.msas
-  }
-}
-
-export function requestParseErrors() {
-  return {
-    type: types.REQUEST_PARSE_ERRORS
-  }
-}
-
-export function receiveParseErrors(data) {
-  return {
-    type: types.RECEIVE_PARSE_ERRORS,
+    type: types.END_PARSE,
     transmittalSheetErrors: data.transmittalSheetErrors,
     larErrors: data.larErrors
+  }
+}
+
+export function triggerParse(file) {
+  return dispatch => {
+    dispatch(beginParse())
+    return parseFile(file)
+      .then(json => {
+        dispatch(endParse(json))
+      })
+      .catch(err => console.error(err))
   }
 }

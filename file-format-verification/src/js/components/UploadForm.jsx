@@ -1,63 +1,70 @@
 import React, { Component, PropTypes } from 'react'
-import ValidationProgress from './ValidationProgress.jsx'
+import Dropzone from 'react-dropzone'
 
-class Upload extends Component {
+export const renderErrors = (errors) => {
+  if(errors.length === 0) return null
+
+  return(
+    <div className="usa-alert usa-alert-error" role="alert">
+      <div className="usa-alert-body">
+        <ul className="usa-alert-text">
+          {errors.map((error, i) => {
+            return(<li key={i}>{error}</li>)
+          })}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export default class Upload extends Component {
   constructor(props) {
     super(props)
   }
 
-  componentDidUpdate() {
-    this.fileName.value = this.props.file.name
+  updateDropArea() {
+    let message = 'Drag another LAR file to this area or click to select a LAR file to check.'
+    let check = this.props.errors.length === 0 ? 'Check' : 'Can\'t check'
+    this.dropzoneContent.innerHTML = `<p>${check} "${this.props.file.name}".</p><p>${message}</p>`
   }
 
-  // keeps the filename after leaving /upload and coming back
+  componentDidUpdate() {
+    this.updateDropArea()
+  }
+
+  // keeps the info about the file after leaving /upload and coming back
   componentDidMount() {
     if(this.props.file && 'name' in this.props.file) {
-      this.fileName.value = this.props.file.name
+      this.updateDropArea()
     }
   }
 
-  getValidationProgress(props) {
-    if(props.code === 1) return null
-    return <ValidationProgress code={props.code} />
-  }
-
-  getErrors(errors) {
-    if(errors.length === 0) return null
-
-    return(
-      <div className="usa-alert usa-alert-error" role="alert">
-        <div className="usa-alert-body">
-          <ul className="usa-alert-text">
-            {errors.map((error, i) => {
-              return(<li key={i}>{error}</li>)
-            })}
-          </ul>
-        </div>
-      </div>
-    )
-  }
-
   render() {
-    const isSelectDisabled = this.props.code > 1 ? true : false
     const isUploadDisabled = (this.props.code > 1 || this.props.file === null || this.props.file.name === 'No file chosen' || this.props.errors.length !== 0) ? true : false
-    const disabledFileInput = (this.props.code > 1) ? 'usa-button-disabled' : ''
-    const disabledFileName = (this.props.code > 1) ? 'input-disabled' : ''
     const inputError = (this.props.errors.length === 0) ? '' : 'input-error'
-
+    // don't do anything if submission is in progress
+    const setFile = (this.props.code > 1) ? null : this.props.setFile
+    const dropzoneDisabled = (this.props.code > 1) ? 'dropzone-disabled' : ''
     return (
       <div>
         <div className="UploadForm">
-          {this.getErrors(this.props.errors)}
+          {renderErrors(this.props.errors)}
           <form className="usa-form" encType="multipart/form-data" onSubmit={e => this.props.handleSubmit(e, this.props.file)}>
-            <div className={`hmda-file-input usa-button usa-button-gray ${disabledFileInput}`}>
-              <label htmlFor="hmdaFile">Select a file</label>
-              <input id="hmdaFile" name="hmdaFile" type="file" ref={(input) => {this.fileInput = input}} disabled={isSelectDisabled} onChange={this.props.setFile}></input>
+            <div className="container-upload">
+              <Dropzone
+                disablePreview={true}
+                onDrop={setFile}
+                multiple={false}
+                className={`dropzone ${dropzoneDisabled}`}>
+                <div
+                  ref={(node) => {this.dropzoneContent = node}}
+                  className="usa-text-small">
+                  <p>Drag your LAR file to this area or click to select a LAR file to check.</p>
+                </div>
+              </Dropzone>
             </div>
-            <input className={`${disabledFileName} ${inputError}`} id="hmdaFileName" name="hmdaFileName" type="text" value='No file chosen' ref={(input) => {this.fileName = input}} readOnly disabled></input>
-            <input disabled={isUploadDisabled} className="usa-button" id="uploadButton" name="uploadButton" type="submit" value="Verify file format"></input>
+            <input disabled={isUploadDisabled} className="usa-button" id="uploadButton" name="uploadButton" type="submit" value="Check Format"></input>
           </form>
-          {this.getValidationProgress(this.props)}
         </div>
       </div>
     )
@@ -79,5 +86,3 @@ Upload.defaultProps = {
   },
   errors: []
 }
-
-export default Upload

@@ -8,6 +8,7 @@ import createLogger from 'redux-logger'
 
 import AppContainer from './containers/App.jsx'
 import UploadContainer from './containers/UploadForm.jsx'
+import ParseErrorsContainer from './containers/ParseErrors.jsx'
 
 import appReducer from './reducers'
 
@@ -25,11 +26,12 @@ const store = createStore(
 render(
   <Provider store={store}>
     <AppContainer>
-      <div className="usa-grid">
+      <div id="main-content" className="usa-grid">
         <div className="usa-width-two-thirds padding-left-1 padding-right-1">
           <h2>File Format Verification Tool</h2>
           <p>Select a HMDA file from your computer and test whether it meets the format requirements. Note that no data, HMDA or otherwise, is transferred off of your computer during this test.</p>
           <UploadContainer/>
+          <ParseErrorsContainer/>
         </div>
         <div className="usa-width-one-third usa-text-small">
           <p>This website is a resource for testing whether your file meets the requirements provided in the Filing Instructions Guide for HMDA data collected in 2017. This website does not allow you to submit your HMDA data.</p>

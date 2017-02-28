@@ -1,15 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchParseErrors } from '../actions'
 import ParseErrors from '../components/ParseErrors.jsx'
 
 class ParseErrorsContainer extends Component {
   constructor(props) {
     super(props)
-  }
-
-  componentDidMount() {
-    this.props.dispatch(fetchParseErrors())
   }
 
   render() {
@@ -19,17 +14,15 @@ class ParseErrorsContainer extends Component {
 
 function mapStateToProps(state) {
   const {
-    isFetching,
+    isParsing,
+    parsed,
     transmittalSheetErrors,
     larErrors
-  } = state.app.parseErrors || {
-    isFetching: true,
-    transmittalSheetErrors: [],
-    larErrors: []
-  }
+  } = state.app.parseErrors
 
   return {
-    isFetching,
+    isParsing,
+    parsed,
     transmittalSheetErrors,
     larErrors
   }

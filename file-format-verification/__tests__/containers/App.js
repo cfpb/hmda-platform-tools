@@ -1,5 +1,4 @@
 jest.unmock('../../src/js/containers/App.jsx')
-jest.mock('../../src/js/redirect.js', () => {})
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -11,7 +10,7 @@ import Wrapper from '../Wrapper.js'
 describe('AppContainer', () => {
   console.error = jest.fn()
   const wrappedContainer = TestUtils.renderIntoDocument(
-    <Wrapper store={{app:{},oidc:{user:{profile:{name:'auser'}}}}}>
+    <Wrapper store={{app:{}}}>
       <AppContainer><p>hey</p></AppContainer>
     </Wrapper>
   )

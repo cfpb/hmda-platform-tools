@@ -86,13 +86,17 @@
     ]
   },
   "dependencies": {
+    "filereader-stream": "1.0.0",
+    "hmda-file-parser": "1.0.x",
     "immutable": "3.8.1",
     "react": "15.4.0",
+    "react-dropzone": "3.11.0",
     "react-redux": "4.4.6",
     "react-select": "0.9.1",
     "redux": "3.6.0",
     "redux-logger": "2.7.4",
     "redux-thunk": "2.1.0",
+    "split2": "2.1.1",
     "uswds": "0.14.0"
   }
 }

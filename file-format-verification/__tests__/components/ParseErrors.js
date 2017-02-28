@@ -10,22 +10,18 @@ const fs = require('fs')
 const parseJSON = JSON.parse(fs.readFileSync('./__tests__/json/parseErrors.json'))
 
 describe('Parse errors', () => {
-  const pasrseErrors = TestUtils.renderIntoDocument(
+  const parseErrors = TestUtils.renderIntoDocument(
     <Wrapper>
-      <ParseErrors transmittalSheetErrors={parseJSON.transmittalSheetErrors} larErrors={parseJSON.larErrors} />
+      <ParseErrors isParsing={false} parsed={true} transmittalSheetErrors={parseJSON.transmittalSheetErrors} larErrors={parseJSON.larErrors} />
     </Wrapper>
   )
-  const pasrseErrorsNode = ReactDOM.findDOMNode(pasrseErrors)
+  const parseErrorsNode = ReactDOM.findDOMNode(parseErrors)
 
   it('renders the parser errors', () => {
-    expect(pasrseErrorsNode).toBeDefined()
+    expect(parseErrorsNode).toBeDefined()
   })
 
   it('creates the correct number of rows', () => {
-    expect(TestUtils.scryRenderedDOMComponentsWithTag(pasrseErrors, 'tr').length).toEqual(5)
-  })
-
-  it('creates the correct number of lists', () => {
-    expect(TestUtils.scryRenderedDOMComponentsWithTag(pasrseErrors, 'ul').length).toEqual(4)
+    expect(TestUtils.scryRenderedDOMComponentsWithTag(parseErrors, 'tr').length).toEqual(7)
   })
 })
