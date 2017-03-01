@@ -28,8 +28,8 @@ render(
     <AppContainer>
       <div id="main-content" className="usa-grid">
         <div className="usa-width-two-thirds padding-left-1 padding-right-1">
-          <h2>File Format Verification Tool</h2>
-          <p>Select a HMDA file from your computer and test whether it meets the format requirements. Note that no data, HMDA or otherwise, is transferred off of your computer during this test.</p>
+          <h2>LAR Format Testing Tool</h2>
+          <p>Select a HMDA file from your computer and test whether it meets the format requirements for HMDA data collected in 2017. The testing tool does not test for compliance with edits for HMDA data collected in 2017. No data, HMDA or otherwise, is transferred off of your computer during this test.</p>
           <UploadContainer/>
           <ParseErrorsContainer/>
         </div>
