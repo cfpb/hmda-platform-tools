@@ -1,5 +1,5 @@
 {
-  "name": "file-format-verification-tool",
+  "name": "LAR-format-testing-tool",
   "version": "0.0.0",
   "description": "Tool for client-side verification of HMDA file parsing.",
   "main": "index.js",
