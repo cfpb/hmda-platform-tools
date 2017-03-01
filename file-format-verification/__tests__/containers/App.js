@@ -19,7 +19,7 @@ describe('AppContainer', () => {
 
   it('renders the component', () => {
     expect(containerNode).toBeDefined()
-    expect(containerNode.firstChild.textContent).toEqual('Skip to main content')
+    expect(containerNode.firstChild.textContent).toEqual('This website is a work in progress')
     expect(console.error).not.toBeCalled()
   })
 })

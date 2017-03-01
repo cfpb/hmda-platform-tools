@@ -52,8 +52,9 @@ const renderTSErrors = (transmittalSheetErrors) => {
 }
 
 const renderParseResults = (count) => {
-  const successCopy = 'Congratulations, your file has no formatting errors.'
+  const successCopy = 'Congratulations! Your file has no formatting errors.'
   const failCopy = 'Your file failed to parse. Please fix the following errors and try again.'
+  const numberOfFieldsWarning = <p>Rows without the correct number of fields will need to be fixed and reuploaded before other errors can be checked.</p>
   const errorText = count === 1 ? 'Error' : 'Errors'
   const noErrors = count === 0
 
@@ -63,6 +64,7 @@ const renderParseResults = (count) => {
         {noErrors ? 'No' : count} Formatting {errorText}
       </h2>
       <p className="usa-font-lead">{noErrors ? successCopy : failCopy}</p>
+      {noErrors ? null : numberOfFieldsWarning }
     </div>
   )
 }
