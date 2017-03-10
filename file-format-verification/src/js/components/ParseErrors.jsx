@@ -39,12 +39,13 @@ const renderTSErrors = (transmittalSheetErrors) => {
       </caption>
       <thead>
         <tr>
+          <th>Row</th>
           <th>Transmittal Sheet Errors</th>
         </tr>
       </thead>
       <tbody>
         {transmittalSheetErrors.map((tsError, i) => {
-          return <tr key={i}><td>{tsError}</td></tr>
+          return <tr key={i}><td>1</td><td>{tsError}</td></tr>
         })}
       </tbody>
     </table>
