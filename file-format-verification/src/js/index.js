@@ -29,17 +29,15 @@ render(
       <div id="main-content" className="usa-grid">
         <div className="usa-width-two-thirds padding-left-1 padding-right-1">
           <h2>File Format Verification Tool</h2>
-          <p>Select a HMDA file from your computer and test whether it meets the format requirements for HMDA data collected in 2017. The file format verification tool does not test for compliance with edits for HMDA data collected in 2017. No data, HMDA or otherwise, is transferred off of your computer during this test.</p>
+          <p>Select a HMDA file from your computer and test whether it meets certain formatting requirements needed to submit HMDA data collected in 2017 to the HMDA Platform. The File Format Verification Tool does not test for compliance with edits. No data, HMDA or otherwise, is transmitted from your computer to the CFPB.</p>
           <UploadContainer/>
           <ParseErrorsContainer/>
         </div>
         <div className="usa-width-one-third usa-text-small">
-          <p>This website is a resource for testing whether your file meets the requirements provided in the Filing Instructions Guide for HMDA data collected in 2017. This website does not allow you to submit your HMDA data.</p>
-          <p>This website does not transmit any HMDA data over the Internet, and your supervising Federal agency will not receive or be able to view the files you test on this website. Instead, this website checks the file you are testing using technology called parsing; and your data never leaves your computer using technology referred to as “client-side testing.”</p>
-          <p>Client-side testing will run efficiently for most files, but it will run slowly for files containing a larger number of LARs. It is recommended that HMDA filers with more than 20,000 LAR rows, break up their files into smaller sizes.</p>
-          <p>This website essentially runs on the same software as the HMDA Platform. This means that if your file passes all the checks on this website, then your file will be in the correct format required to be uploaded to the HMDA Platform.</p>
-          <p>This website was developed with no server logging technology, no login functions, and does not log identifying information about your or your files. This website simply allows HMDA filers to test the formatting of their files and be certain that no errors are logged or monitored.</p>
-          <p>The web site will have minimal formatting/style.</p>
+          <p>The File Format Verification Tool (FFVT) is a resource for testing whether your file meets certain formatting requirements specified in the HMDA Filing Instructions Guide, specifically that the file (1) is pipe-delimited; (2) has the proper number of data fields; and (3) has data fields formatted as integers, where necessary. The FFVT does not allow you to submit HMDA data.</p>
+          <p>The FFVT uses “client-side testing” which runs on the user’s computer and does not transmit any HMDA data over the internet. Thus, no Federal agency will receive or be able to view the files you test using it. The FFVT was developed with no server logging technology, no login functions, and does not log identifying information about you or your files. The FFVT simply allows HMDA filers to test the formatting of their files.</p>
+          <p>The FFVT will run efficiently for most files, but it will run more slowly for larger files (e.g., containing more than 20,000 entries).</p>
+          <p>This website essentially runs on the same software as the HMDA Platform. This means that if your file passes all the checks on this website, then your file will be in the correct format required to be uploaded to the HMDA Platform. The FFVT does not check for compliance with HMDA edits.</p>
         </div>
       </div>
     </AppContainer>
