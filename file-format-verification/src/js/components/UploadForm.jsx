@@ -23,7 +23,7 @@ export default class Upload extends Component {
   }
 
   updateDropArea() {
-    let message = 'Drag another LAR file to this area or click to select a LAR file to check.'
+    let message = 'Drag another LAR file into this area or click in this box to select a LAR file to test.'
     let check = this.props.errors.length === 0 ? 'Check' : 'Can\'t check'
     this.dropzoneContent.innerHTML = `<p>${check} "${this.props.file.name}".</p><p>${message}</p>`
   }
@@ -59,7 +59,7 @@ export default class Upload extends Component {
                 <div
                   ref={(node) => {this.dropzoneContent = node}}
                   className="usa-text-small">
-                  <p>Drag your LAR file to this area or click to select a LAR file to check.</p>
+                  <p>Drag your LAR file into this area or click in this box to select a LAR file to test.</p>
                 </div>
               </Dropzone>
             </div>
