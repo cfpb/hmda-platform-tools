@@ -12,7 +12,7 @@
     "js": "webpack --progress",
     "js:dev": "webpack --config webpack.dev.js --progress",
     "sass": "node-sass --quiet --output-style=compressed --source-map=./dist/css/ ./src/sass/app.scss ./dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* ./dist/fonts",
-    "html": "html-minifier --collapse-whitespace ./src/index.html -o ./dist/index.html && html-minifier --collapse-whitespace ./src/silent_renew.html -o ./dist/silent_renew.html",
+    "html": "html-minifier --collapse-whitespace ./src/index.html -o ./dist/index.html",
     "img": "cp ./src/img/min/* ./dist/img && cp -r ./node_modules/uswds/dist/img/* ./dist/img",
     "postinstall": "yarn run clearDist && yarn run build",
     "watch:js": "yarn run js:dev -- --watch",
@@ -49,8 +49,7 @@
     "react-addons-test-utils": "15.6.2",
     "rimraf": "2.6.2",
     "webpack": "3.7.1",
-    "webpack-merge": "4.1.0",
-    "webpack-shell-plugin": "0.5.0"
+    "webpack-merge": "4.1.0"
   },
   "jest": {
     "transform": {
