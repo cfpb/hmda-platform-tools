@@ -21,8 +21,8 @@ class Form extends Component {
     if (!this.props.onSubmit || !this.props.onChange) return null
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label for="uli">Enter the ULI</label>
+      <form className="usa-grid" id="main-content" onSubmit={this.handleSubmit}>
+        <label for="uli">Enter a ULI</label>
         <input
           id="uli"
           type="text"

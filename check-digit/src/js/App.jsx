@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import BannerUSA from './BannerUSA.jsx'
+import BannerBeta from './BannerBeta.jsx'
+import Header from './Header.jsx'
 import Form from './Form.jsx'
 import Answer from './Answer.jsx'
+import Footer from './Footer.jsx'
 
 export default class App extends Component {
   constructor(props) {
@@ -28,13 +30,15 @@ export default class App extends Component {
     const checkDigit = this.state.checkDigit
 
     return [
-      <BannerUSA />,
+      <BannerBeta />,
+      <Header />,
       <Form
         uli={uli}
         onChange={this.handleChange}
         onSubmit={this.handleSubmit}
       />,
-      <Answer answer={checkDigit} />
+      <Answer answer={checkDigit} />,
+      <Footer />
     ]
   }
 }
