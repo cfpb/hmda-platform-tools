@@ -8,20 +8,15 @@ import Footer from './Footer.jsx'
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { uli: '', checkDigit: '' }
+    this.state = { checkDigit: '' }
 
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(uli) {
-    this.setState({ uli: uli })
-  }
-
-  handleSubmit() {
+  handleSubmit(uli) {
     // TODO: calculate check digit
     // const checkDigit = calcCheckDigit(this.state.uli)
-    const checkDigit = this.state.uli + 1
+    const checkDigit = uli + 1
     this.setState({ checkDigit: checkDigit })
   }
 
@@ -32,11 +27,7 @@ export default class App extends Component {
     return [
       <BannerBeta />,
       <Header />,
-      <Form
-        uli={uli}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit}
-      />,
+      <Form onSubmit={this.handleSubmit} />,
       <Answer answer={checkDigit} />,
       <Footer />
     ]
