@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-const getText = answer => {
-  let text = 'Your answer will show up here.'
-  if (answer) {
-    text = ['Your check digit is ', <code>{answer}</code>, '.']
-  }
-
-  return text
-}
+import Alert from './Alert.jsx'
 
 const Answer = ({ answer }) => {
-  return <p className="Answer usa-grid">{getText(answer)}</p>
+  if (answer)
+    return (
+      <Alert type="success" heading="Check digit calculated!">
+        <p>
+          Your check digit is <strong>{answer}</strong>.
+        </p>
+      </Alert>
+    )
+
+  return null
 }
 
 Answer.propTypes = {

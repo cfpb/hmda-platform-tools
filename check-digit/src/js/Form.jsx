@@ -7,15 +7,22 @@ class Form extends Component {
     super(props)
     this.state = { uli: '' }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUliChange = this.handleUliChange.bind(this)
+    this.handleUliBlur = this.handleUliBlur.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({ uli: event.target.value })
+  handleUliChange(event) {
+    this.setState({ uli: event.target.value }, () => {
+      this.props.onChange()
+    })
   }
 
-  handleSubmit(event) {
+  handleUliBlur(event) {
+    this.props.validate(this.state.uli)
+  }
+
+  handleFormSubmit(event) {
     event.preventDefault()
     this.props.onSubmit(this.state.uli)
   }
@@ -29,13 +36,19 @@ class Form extends Component {
       )
 
     return (
-      <form className="usa-grid" id="main-content" onSubmit={this.handleSubmit}>
+      <form
+        className="CheckDigitForm usa-grid"
+        id="main-content"
+        onSubmit={this.handleFormSubmit}
+      >
         <label for="uli">Enter a ULI</label>
         <input
           id="uli"
+          ref="uli"
           type="text"
           value={this.state.uli}
-          onChange={this.handleChange}
+          onChange={this.handleUliChange}
+          onBlur={this.handleUliBlur}
         />
         <input type="submit" value="Get the check digit" />
       </form>
@@ -44,7 +57,9 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  validate: PropTypes.func.isRequired
 }
 
 export default Form
