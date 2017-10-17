@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Alert from './Alert.jsx'
 
-const Answer = ({ answer }) => {
-  if (answer)
+const Answer = ({ answer, isSubmitted }) => {
+  if (answer && isSubmitted)
     return (
       <Alert type="success" heading="Check digit calculated!">
         <p>
@@ -16,7 +16,8 @@ const Answer = ({ answer }) => {
 }
 
 Answer.propTypes = {
-  answer: PropTypes.string
+  answer: PropTypes.string,
+  isSubmitted: PropTypes.bool
 }
 
 export default Answer

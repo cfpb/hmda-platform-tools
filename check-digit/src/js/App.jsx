@@ -8,7 +8,8 @@ import Footer from './Footer.jsx'
 
 const defaultState = {
   checkDigit: '',
-  errors: []
+  errors: [],
+  isSubmitted: false
 }
 
 export default class App extends Component {
@@ -28,17 +29,15 @@ export default class App extends Component {
   }
 
   handleSubmit(uli) {
+    this.setState({ isSubmitted: true })
     this.validateUli(uli)
-    this.setCheckDigit(uli)
   }
 
   setCheckDigit(uli) {
-    if (this.state.errors.length === 0) {
-      // TODO: calculate check digit
-      // const checkDigit = calcCheckDigit(uli)
-      const checkDigit = uli + 1
-      this.setState({ checkDigit: checkDigit })
-    }
+    // TODO: calculate check digit
+    // const checkDigit = calcCheckDigit(uli)
+    const checkDigit = uli + 1
+    this.setState({ checkDigit: checkDigit })
   }
 
   validateUli(uli) {
@@ -55,23 +54,31 @@ export default class App extends Component {
       errors.push('A ULI can only contain alphanumeric characters.')
     }
 
-    this.setState({errors: errors})
+    if (errors.length > 0) {
+      this.setState({ errors: errors })
+    } else {
+      this.setCheckDigit(uli)
+    }
   }
 
   render() {
-    const checkDigit = this.state.checkDigit
-    const errors = this.state.errors
+    const { checkDigit, errors, isSubmitted } = this.state
 
     return [
       <BannerBeta />,
       <Header />,
-      <InputError errors={errors} answer={checkDigit} />,
+      <InputError
+        errors={errors}
+        answer={checkDigit}
+        isSubmitted={isSubmitted}
+      />,
       <Form
         onSubmit={this.handleSubmit}
         onChange={this.handleChange}
         validate={this.validateUli}
+        errors={errors}
       />,
-      <Answer answer={checkDigit} />,
+      <Answer answer={checkDigit} isSubmitted={isSubmitted} />,
       <Footer />
     ]
   }

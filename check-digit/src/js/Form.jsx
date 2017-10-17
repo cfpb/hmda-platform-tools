@@ -42,6 +42,13 @@ class Form extends Component {
         onSubmit={this.handleFormSubmit}
       >
         <label for="uli">Enter a ULI</label>
+        {this.props.errors.map((error, i) => {
+          return (
+            <span key={i} className="usa-input-error-message" role="alert">
+              {error}
+            </span>
+          )
+        })}
         <input
           id="uli"
           ref="uli"
@@ -59,7 +66,8 @@ class Form extends Component {
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  validate: PropTypes.func.isRequired
+  validate: PropTypes.func.isRequired,
+  errors: PropTypes.array
 }
 
 export default Form

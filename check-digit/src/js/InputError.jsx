@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Alert from './Alert.jsx'
 
-const InputError = ({ errors }) => {
-  if (errors.length > 0) {
+const InputError = ({ isSubmitted, errors }) => {
+  if (isSubmitted && errors.length > 0) {
     return (
       <Alert type="error" heading="ULI errors.">
         <ul>
