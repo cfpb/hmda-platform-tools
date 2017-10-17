@@ -65,21 +65,23 @@ export default class App extends Component {
     const { checkDigit, errors, isSubmitted } = this.state
 
     return [
-      <BannerBeta />,
-      <Header />,
+      <BannerBeta key={1} />,
+      <Header key={2} />,
       <InputError
+        key={3}
         errors={errors}
         answer={checkDigit}
         isSubmitted={isSubmitted}
       />,
       <Form
+        key={4}
         onSubmit={this.handleSubmit}
         onChange={this.handleChange}
         validate={this.validateUli}
         errors={errors}
       />,
-      <Answer answer={checkDigit} isSubmitted={isSubmitted} />,
-      <Footer />
+      <Answer key={5} answer={checkDigit} isSubmitted={isSubmitted} />,
+      <Footer key={6} />
     ]
   }
 }
