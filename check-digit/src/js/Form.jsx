@@ -12,6 +12,10 @@ class Form extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
+  componentDidMount() {
+    this.uliInput.focus()
+  }
+
   handleUliChange(event) {
     this.setState({ uli: event.target.value }, () => {
       this.props.onChange()
@@ -41,7 +45,7 @@ class Form extends Component {
         id="main-content"
         onSubmit={this.handleFormSubmit}
       >
-        <label for="uli">Enter a ULI</label>
+        <label htmlFor="uli">Enter a ULI</label>
         {this.props.errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
@@ -51,7 +55,9 @@ class Form extends Component {
         })}
         <input
           id="uli"
-          ref="uli"
+          ref={input => {
+            this.uliInput = input
+          }}
           type="text"
           value={this.state.uli}
           onChange={this.handleUliChange}
