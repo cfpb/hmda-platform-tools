@@ -7,15 +7,26 @@ class Form extends Component {
     super(props)
     this.state = { uli: '' }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUliChange = this.handleUliChange.bind(this)
+    this.handleUliBlur = this.handleUliBlur.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({ uli: event.target.value })
+  componentDidMount() {
+    this.uliInput.focus()
   }
 
-  handleSubmit(event) {
+  handleUliChange(event) {
+    this.setState({ uli: event.target.value }, () => {
+      this.props.onChange()
+    })
+  }
+
+  handleUliBlur(event) {
+    this.props.validate(this.state.uli)
+  }
+
+  handleFormSubmit(event) {
     event.preventDefault()
     this.props.onSubmit(this.state.uli)
   }
@@ -29,13 +40,28 @@ class Form extends Component {
       )
 
     return (
-      <form className="usa-grid" id="main-content" onSubmit={this.handleSubmit}>
-        <label for="uli">Enter a ULI</label>
+      <form
+        className="CheckDigitForm usa-grid"
+        id="main-content"
+        onSubmit={this.handleFormSubmit}
+      >
+        <label htmlFor="uli">Enter a ULI</label>
+        {this.props.errors.map((error, i) => {
+          return (
+            <span key={i} className="usa-input-error-message" role="alert">
+              {error}
+            </span>
+          )
+        })}
         <input
           id="uli"
+          ref={input => {
+            this.uliInput = input
+          }}
           type="text"
           value={this.state.uli}
-          onChange={this.handleChange}
+          onChange={this.handleUliChange}
+          onBlur={this.handleUliBlur}
         />
         <input type="submit" value="Get the check digit" />
       </form>
@@ -44,7 +70,10 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  validate: PropTypes.func.isRequired,
+  errors: PropTypes.array
 }
 
 export default Form

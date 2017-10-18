@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Alert from './Alert.jsx'
 
-const getText = answer => {
-  let text = 'Your answer will show up here.'
-  if (answer) {
-    text = ['Your check digit is ', <code>{answer}</code>, '.']
-  }
+const Answer = ({ answer, isSubmitted }) => {
+  if (answer && isSubmitted)
+    return (
+      <Alert type="success" heading="Check digit calculated!">
+        <p>
+          Your check digit is <strong>{answer}</strong>.
+        </p>
+      </Alert>
+    )
 
-  return text
-}
-
-const Answer = ({ answer }) => {
-  return <p className="Answer usa-grid">{getText(answer)}</p>
+  return null
 }
 
 Answer.propTypes = {
-  answer: PropTypes.string
+  answer: PropTypes.string,
+  isSubmitted: PropTypes.bool
 }
 
 export default Answer
