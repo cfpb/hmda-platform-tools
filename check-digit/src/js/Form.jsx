@@ -5,37 +5,37 @@ import Alert from './Alert.jsx'
 class Form extends Component {
   constructor(props) {
     super(props)
-    this.state = { uli: '' }
+    this.state = { loanId: '' }
 
-    this.handleUliChange = this.handleUliChange.bind(this)
-    this.handleUliBlur = this.handleUliBlur.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleInputBlur = this.handleInputBlur.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.uliInput.focus()
+    this.dataInput.focus()
   }
 
-  handleUliChange(event) {
-    this.setState({ uli: event.target.value }, () => {
+  handleInputChange(event) {
+    this.setState({ loanId: event.target.value }, () => {
       this.props.onChange()
     })
   }
 
-  handleUliBlur(event) {
-    this.props.validate(this.state.uli)
+  handleInputBlur(event) {
+    this.props.validateLoanId(this.state.loanId)
   }
 
   handleFormSubmit(event) {
     event.preventDefault()
-    this.props.onSubmit(this.state.uli)
+    this.props.onSubmit(this.state.loanId)
   }
 
   render() {
     if (!this.props.onSubmit)
       return (
         <Alert type="error" heading="Uh oh!">
-          <p>Something went wrong. Submitting a ULI won't work.</p>
+          <p>Something went wrong. Submitting a loan ID won't work.</p>
         </Alert>
       )
 
@@ -45,7 +45,7 @@ class Form extends Component {
         id="main-content"
         onSubmit={this.handleFormSubmit}
       >
-        <label htmlFor="uli">Enter a ULI</label>
+        <label htmlFor="dataInput">Enter a loan ID (LEI + loan or application ID)</label>
         {this.props.errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
@@ -54,14 +54,14 @@ class Form extends Component {
           )
         })}
         <input
-          id="uli"
+          id="dataInput"
           ref={input => {
-            this.uliInput = input
+            this.dataInput = input
           }}
           type="text"
-          value={this.state.uli}
-          onChange={this.handleUliChange}
-          onBlur={this.handleUliBlur}
+          value={this.state.loanId}
+          onChange={this.handleInputChange}
+          onBlur={this.handleInputBlur}
         />
         <input type="submit" value="Get the check digit" />
       </form>
@@ -72,7 +72,8 @@ class Form extends Component {
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  validate: PropTypes.func.isRequired,
+  validateUli: PropTypes.func.isRequired,
+  validateLoanId: PropTypes.func.isRequired,
   errors: PropTypes.array
 }
 

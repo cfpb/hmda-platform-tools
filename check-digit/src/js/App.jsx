@@ -8,6 +8,7 @@ import Footer from './Footer.jsx'
 
 const defaultState = {
   checkDigit: '',
+  uli: '',
   errors: [],
   isSubmitted: false
 }
@@ -20,6 +21,7 @@ export default class App extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.validateUli = this.validateUli.bind(this)
+    this.validateLoanId = this.validateLoanId.bind(this)
   }
 
   handleChange() {
@@ -33,11 +35,12 @@ export default class App extends Component {
     this.validateUli(uli)
   }
 
-  setCheckDigit(uli) {
+  setCheckDigit(loanId) {
     // TODO: calculate check digit
     // const checkDigit = calcCheckDigit(uli)
-    const checkDigit = uli + 1
-    this.setState({ checkDigit: checkDigit })
+    const checkDigit = '22'
+    const uli = loanId + checkDigit
+    this.setState({ uli: uli, checkDigit: checkDigit })
   }
 
   validateUli(uli) {
@@ -61,8 +64,34 @@ export default class App extends Component {
     }
   }
 
+  validateLoanId(loanId) {
+    let errors = []
+    let characters = 'characters'
+
+    if (loanId.length === 0) {
+      errors.push('You have to enter a loan ID to get the check digit.')
+    }
+    // LEI alone is 20 characters
+    if (loanId.length > 0 && loanId.length <= 20) {
+      if (loanId.length === 1) characters = 'character'
+      errors.push(
+        'An LEI is 20 characters in length. This load id you entered is only ' +
+          loanId.length +
+          ' ' +
+          characters +
+          '.'
+      )
+    }
+
+    if (errors.length > 0) {
+      this.setState({ errors: errors })
+    } else {
+      this.setCheckDigit(loanId)
+    }
+  }
+
   render() {
-    const { checkDigit, errors, isSubmitted } = this.state
+    const { uli, checkDigit, errors, isSubmitted } = this.state
 
     return [
       <BannerBeta key={1} />,
@@ -77,10 +106,16 @@ export default class App extends Component {
         key={4}
         onSubmit={this.handleSubmit}
         onChange={this.handleChange}
-        validate={this.validateUli}
+        validateUli={this.validateUli}
+        validateLoanId={this.validateLoanId}
         errors={errors}
       />,
-      <Answer key={5} answer={checkDigit} isSubmitted={isSubmitted} />,
+      <Answer
+        key={5}
+        uli={uli}
+        checkDigit={checkDigit}
+        isSubmitted={isSubmitted}
+      />,
       <Footer key={6} />
     ]
   }
