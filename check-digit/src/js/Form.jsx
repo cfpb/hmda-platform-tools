@@ -5,7 +5,6 @@ import Alert from './Alert.jsx'
 class Form extends Component {
   constructor(props) {
     super(props)
-   // this.state = { inputValue: '' }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleInputBlur = this.handleInputBlur.bind(this)
@@ -19,9 +18,6 @@ class Form extends Component {
 
   handleInputChange(event) {
     this.props.onChange(event.target.value)
-    /*this.setState({ inputValue: event.target.value }, () => {
-      this.props.onChange()
-    })*/
   }
 
   handleInputBlur(event) {
