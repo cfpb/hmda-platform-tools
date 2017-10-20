@@ -34,8 +34,10 @@ const Answer = ({ uli, isValidUli, checkDigit, isSubmitted, errors }) => {
 
 Answer.propTypes = {
   uli: PropTypes.string,
+  isValidUli: PropTypes.bool,
   checkDigit: PropTypes.string,
-  isSubmitted: PropTypes.bool
+  isSubmitted: PropTypes.bool,
+  errors: PropTypes.array
 }
 
 export default Answer
