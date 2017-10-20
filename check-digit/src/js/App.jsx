@@ -9,8 +9,10 @@ import Footer from './Footer.jsx'
 const defaultState = {
   checkDigit: '',
   uli: '',
+  isValidUli: false,
   errors: [],
-  isSubmitted: false
+  isSubmitted: false,
+  whichApp: 'get'
 }
 
 export default class App extends Component {
@@ -20,6 +22,7 @@ export default class App extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleRadioChange = this.handleRadioChange.bind(this)
     this.validateUli = this.validateUli.bind(this)
     this.validateLoanId = this.validateLoanId.bind(this)
   }
@@ -27,12 +30,17 @@ export default class App extends Component {
   handleChange() {
     // when input changes reset state to hide error(s)
     // and clear the check digit, it will need re-calculated
-    this.setState(defaultState)
+    this.setState({ ...defaultState, whichApp: this.state.whichApp })
   }
 
-  handleSubmit(uli) {
+  handleSubmit(inputValue) {
     this.setState({ isSubmitted: true })
-    this.validateUli(uli)
+
+    if(this.state.whichApp === 'get') {
+      this.validateLoanId(inputValue)
+    } else {
+      this.validateUli(inputValue)
+    }
   }
 
   setCheckDigit(loanId) {
@@ -41,6 +49,14 @@ export default class App extends Component {
     const checkDigit = '22'
     const uli = loanId + checkDigit
     this.setState({ uli: uli, checkDigit: checkDigit })
+  }
+
+  isValidUli(uli) {
+    this.setState({ isValidUli: true })
+  }
+
+  handleRadioChange(app) {
+    this.setState({ ...defaultState, whichApp: app })
   }
 
   validateUli(uli) {
@@ -60,7 +76,7 @@ export default class App extends Component {
     if (errors.length > 0) {
       this.setState({ errors: errors })
     } else {
-      this.setCheckDigit(uli)
+      this.isValidUli(uli)
     }
   }
 
@@ -71,15 +87,18 @@ export default class App extends Component {
     if (loanId.length === 0) {
       errors.push('You have to enter a loan ID to get the check digit.')
     }
+    if (!!loanId.match(/[^a-zA-Z0-9]/)) {
+      errors.push('A loan id can only contain alphanumeric characters.')
+    }
     // LEI alone is 20 characters
     if (loanId.length > 0 && loanId.length <= 20) {
       if (loanId.length === 1) characters = 'character'
       errors.push(
-        'An LEI is 20 characters in length. This load id you entered is only ' +
+        'The loan id you entered is only ' +
           loanId.length +
           ' ' +
           characters +
-          '.'
+          '. An LEI is 20 characters in length.'
       )
     }
 
@@ -91,7 +110,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { uli, checkDigit, errors, isSubmitted } = this.state
+    const {
+      whichApp,
+      uli,
+      isValidUli,
+      checkDigit,
+      errors,
+      isSubmitted
+    } = this.state
 
     return [
       <BannerBeta key={1} />,
@@ -109,12 +135,16 @@ export default class App extends Component {
         validateUli={this.validateUli}
         validateLoanId={this.validateLoanId}
         errors={errors}
+        onRadioChange={this.handleRadioChange}
+        whichApp={whichApp}
       />,
       <Answer
         key={5}
         uli={uli}
+        isValidUli={isValidUli}
         checkDigit={checkDigit}
         isSubmitted={isSubmitted}
+        whichApp={whichApp}
       />,
       <Footer key={6} />
     ]

@@ -5,10 +5,11 @@ import Alert from './Alert.jsx'
 class Form extends Component {
   constructor(props) {
     super(props)
-    this.state = { loanId: '' }
+    this.state = { inputValue: '' }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleInputBlur = this.handleInputBlur.bind(this)
+    this.handleRadioChange = this.handleRadioChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
@@ -17,18 +18,42 @@ class Form extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({ loanId: event.target.value }, () => {
+    this.setState({ inputValue: event.target.value }, () => {
       this.props.onChange()
     })
   }
 
   handleInputBlur(event) {
-    this.props.validateLoanId(this.state.loanId)
+    if(this.props.whichApp === 'get') {
+      this.props.validateLoanId(this.state.inputValue)
+    } else {
+      this.props.validateUli(this.state.inputValue)
+    }
+  }
+
+  handleRadioChange(event) {
+    this.props.onRadioChange(event.target.value)
   }
 
   handleFormSubmit(event) {
     event.preventDefault()
-    this.props.onSubmit(this.state.loanId)
+    this.props.onSubmit(this.state.inputValue)
+  }
+
+  getInputLabel(app) {
+    if(app === 'get') {
+      return 'Enter a loan ID (LEI + loan or application ID)'
+    }
+
+    return 'Enter a ULI'
+  }
+
+  getSubmitText(app) {
+    if(app === 'get') {
+      return 'Get the check digit'
+    }
+
+    return 'Validate the check digit'
   }
 
   render() {
@@ -45,7 +70,33 @@ class Form extends Component {
         id="main-content"
         onSubmit={this.handleFormSubmit}
       >
-        <label htmlFor="dataInput">Enter a loan ID (LEI + loan or application ID)</label>
+        <ul className="usa-unstyled-list">
+          <li>
+            <input
+              id="getCheckDigit"
+              type="radio"
+              name="whichApp"
+              value="get"
+              onChange={this.handleRadioChange}
+              checked={this.props.whichApp === 'get'}
+            />
+            <label htmlFor="getCheckDigit">get a check digit</label>
+          </li>
+          <li>
+            <input
+              id="validateCheckDigit"
+              type="radio"
+              name="whichApp"
+              value="validate"
+              onChange={this.handleRadioChange}
+              checked={this.props.whichApp === 'validate'}
+            />
+            <label htmlFor="validateCheckDigit">validate a check digit</label>
+          </li>
+        </ul>
+        <label htmlFor="dataInput">
+          {this.getInputLabel(this.props.whichApp)}
+        </label>
         {this.props.errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
@@ -59,11 +110,11 @@ class Form extends Component {
             this.dataInput = input
           }}
           type="text"
-          value={this.state.loanId}
+          value={this.state.inputValue}
           onChange={this.handleInputChange}
           onBlur={this.handleInputBlur}
         />
-        <input type="submit" value="Get the check digit" />
+        <input type="submit" value={this.getSubmitText(this.props.whichApp)} />
       </form>
     )
   }
@@ -74,7 +125,9 @@ Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   validateUli: PropTypes.func.isRequired,
   validateLoanId: PropTypes.func.isRequired,
-  errors: PropTypes.array
+  errors: PropTypes.array,
+  onRadioChange: PropTypes.func,
+  whichApp: PropTypes.string
 }
 
 export default Form
