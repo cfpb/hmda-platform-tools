@@ -7,6 +7,7 @@ import Answer from './Answer.jsx'
 import Footer from './Footer.jsx'
 
 const defaultState = {
+  inputValue: '',
   checkDigit: '',
   uli: '',
   isValidUli: false,
@@ -27,19 +28,31 @@ export default class App extends Component {
     this.validateLoanId = this.validateLoanId.bind(this)
   }
 
-  handleChange() {
-    // when input changes reset state to hide error(s)
-    // and clear the check digit, it will need re-calculated
-    this.setState({ ...defaultState, whichApp: this.state.whichApp })
+  handleRadioChange(app) {
+    this.setState({
+      ...defaultState,
+      inputValue: this.state.inputValue, // keep this around
+      whichApp: app
+    })
   }
 
-  handleSubmit(inputValue) {
+  handleChange(inputValue) {
+    // when input changes reset state to hide error(s)
+    // and clear the check digit, it will need re-calculated
+    this.setState({
+      ...defaultState,
+      inputValue: inputValue,
+      whichApp: this.state.whichApp // keep this around
+    })
+  }
+
+  handleSubmit() {
     this.setState({ isSubmitted: true })
 
-    if(this.state.whichApp === 'get') {
-      this.validateLoanId(inputValue)
+    if (this.state.whichApp === 'get') {
+      this.validateLoanId(this.state.inputValue)
     } else {
-      this.validateUli(inputValue)
+      this.validateUli(this.state.inputValue)
     }
   }
 
@@ -53,10 +66,6 @@ export default class App extends Component {
 
   isValidUli(uli) {
     this.setState({ isValidUli: true })
-  }
-
-  handleRadioChange(app) {
-    this.setState({ ...defaultState, whichApp: app })
   }
 
   validateUli(uli) {
@@ -111,6 +120,7 @@ export default class App extends Component {
 
   render() {
     const {
+      inputValue,
       whichApp,
       uli,
       isValidUli,
@@ -130,6 +140,7 @@ export default class App extends Component {
       />,
       <Form
         key={4}
+        inputValue={inputValue}
         onSubmit={this.handleSubmit}
         onChange={this.handleChange}
         validateUli={this.validateUli}
@@ -144,7 +155,7 @@ export default class App extends Component {
         isValidUli={isValidUli}
         checkDigit={checkDigit}
         isSubmitted={isSubmitted}
-        whichApp={whichApp}
+        errors={errors}
       />,
       <Footer key={6} />
     ]
