@@ -37,22 +37,6 @@ class Form extends Component {
     this.props.onSubmit(this.props.inputValue)
   }
 
-  getInputLabel(app) {
-    if(app === 'get') {
-      return 'Enter a loan ID (LEI + loan or application ID)'
-    }
-
-    return 'Enter a ULI'
-  }
-
-  getSubmitText(app) {
-    if(app === 'get') {
-      return 'Get the check digit'
-    }
-
-    return 'Validate the check digit'
-  }
-
   render() {
     if (!this.props.onSubmit)
       return (
@@ -60,6 +44,16 @@ class Form extends Component {
           <p>Something went wrong. Submitting a loan ID won't work.</p>
         </Alert>
       )
+
+    const labelText = {
+      get: 'Enter a loan ID (LEI + loan or application ID)',
+      validate: 'Validate the check digit'
+    }[this.props.whichApp]
+
+    const buttonText = {
+      get: 'Get the check digit',
+      validate: 'Validate the check digit'
+    }[this.props.whichApp]
 
     return (
       <form
@@ -92,7 +86,7 @@ class Form extends Component {
           </li>
         </ul>
         <label htmlFor="dataInput">
-          {this.getInputLabel(this.props.whichApp)}
+          {labelText}
         </label>
         {this.props.errors.map((error, i) => {
           return (
@@ -111,7 +105,7 @@ class Form extends Component {
           onChange={this.handleInputChange}
           onBlur={this.handleInputBlur}
         />
-        <input type="submit" value={this.getSubmitText(this.props.whichApp)} />
+        <input type="submit" value={buttonText} />
       </form>
     )
   }
