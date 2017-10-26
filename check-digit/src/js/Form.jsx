@@ -21,7 +21,7 @@ class Form extends Component {
   }
 
   handleInputBlur(event) {
-    if(this.props.whichApp === 'get') {
+    if (this.props.whichApp === 'get') {
       this.props.validateLoanId(this.props.inputValue)
     } else {
       this.props.validateUli(this.props.inputValue)
@@ -45,15 +45,17 @@ class Form extends Component {
         </Alert>
       )
 
+    const { whichApp, errors, inputValue } = this.props
+
     const labelText = {
       get: 'Enter a loan ID (LEI + loan or application ID)',
       validate: 'Validate the check digit'
-    }[this.props.whichApp]
+    }[whichApp]
 
     const buttonText = {
       get: 'Get the check digit',
       validate: 'Validate the check digit'
-    }[this.props.whichApp]
+    }[whichApp]
 
     return (
       <form
@@ -69,7 +71,7 @@ class Form extends Component {
               name="whichApp"
               value="get"
               onChange={this.handleRadioChange}
-              checked={this.props.whichApp === 'get'}
+              checked={whichApp === 'get'}
             />
             <label htmlFor="getCheckDigit">get a check digit</label>
           </li>
@@ -80,15 +82,13 @@ class Form extends Component {
               name="whichApp"
               value="validate"
               onChange={this.handleRadioChange}
-              checked={this.props.whichApp === 'validate'}
+              checked={whichApp === 'validate'}
             />
             <label htmlFor="validateCheckDigit">validate a check digit</label>
           </li>
         </ul>
-        <label htmlFor="dataInput">
-          {labelText}
-        </label>
-        {this.props.errors.map((error, i) => {
+        <label htmlFor="dataInput">{labelText}</label>
+        {errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
               {error}
@@ -101,7 +101,7 @@ class Form extends Component {
             this.dataInput = input
           }}
           type="text"
-          value={this.props.inputValue}
+          value={inputValue}
           onChange={this.handleInputChange}
           onBlur={this.handleInputBlur}
         />
