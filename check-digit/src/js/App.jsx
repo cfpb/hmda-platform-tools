@@ -5,6 +5,7 @@ import InputError from './InputError.jsx'
 import Form from './Form.jsx'
 import Answer from './Answer.jsx'
 import Footer from './Footer.jsx'
+import isomorphicFetch from 'isomorphic-fetch'
 
 const defaultState = {
   inputValue: '',
