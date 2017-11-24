@@ -11,7 +11,7 @@ const defaultState = {
   inputValue: '',
   checkDigit: null,
   uli: null,
-  isValidUli: false,
+  isValidUli: null,
   errors: [],
   isSubmitted: false,
   whichApp: 'get'
