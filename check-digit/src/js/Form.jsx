@@ -45,7 +45,7 @@ class Form extends Component {
 
     const labelText = {
       get: 'Enter a loan ID (LEI + loan or application ID)',
-      validate: 'Validate the check digit'
+      validate: 'Enter a ULI'
     }[whichApp]
 
     const buttonText = {
