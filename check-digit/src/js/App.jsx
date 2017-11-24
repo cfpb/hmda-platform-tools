@@ -27,8 +27,7 @@ export default class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.validateInput = this.validateInput.bind(this)
-    this.getCheckDigit = this.getCheckDigit.bind(this)
-    this.getIsUliValid = this.getIsUliValid.bind(this)
+    this.getResponse = this.getResponse.bind(this)
   }
 
   handleRadioChange(app) {
@@ -68,55 +67,46 @@ export default class App extends Component {
     })
   }
 
-  getCheckDigit(loanId) {
-    if (this.state.isSubmitted) {
-      isomorphicFetch(
-        'https://hmda-ops-api.demo.cfpb.gov/public/uli/checkDigit',
-        {
-          method: 'POST',
-          body: JSON.stringify({ loanId: this.state.inputValue }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-        .then(response => {
-          return response.json()
-        })
-        .then(json => {
-          this.setState({ uli: json.uli, checkDigit: json.checkDigit })
-        })
+  getResponse(loanId) {
+    let endpoint = 'checkDigit'
+    let body = {
+      loanId: this.state.inputValue
     }
-  }
+    if (this.state.whichApp === 'validate') {
+      endpoint = 'validate'
+      body = {
+        uli: this.state.inputValue
+      }
+    }
 
-  getIsUliValid(uli) {
+    const API_URL = 'https://hmda-ops-api.demo.cfpb.gov/public/uli/'
+    
     if (this.state.isSubmitted) {
-      isomorphicFetch(
-        'https://hmda-ops-api.demo.cfpb.gov/public/uli/validate',
-        {
-          method: 'POST',
-          body: JSON.stringify({ uli: this.state.inputValue }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      isomorphicFetch(API_URL + endpoint, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
         }
-      )
+      })
         .then(response => {
           return response.json()
         })
         .then(json => {
-          this.setState({ isValidUli: json.isValid })
+          if (endpoint === 'checkDigit') {
+            this.setState({ uli: json.uli, checkDigit: json.checkDigit })
+          } else {
+            this.setState({ isValidUli: json.isValid })
+          }
         })
     }
   }
 
   validateInput(input) {
     let validateFunction = isLoanIdValid
-    let getFunction = this.getCheckDigit
 
     if (this.state.whichApp === 'validate') {
       validateFunction = isUliValid
-      getFunction = this.getIsUliValid
     }
 
     const errors = validateFunction(input)
@@ -124,7 +114,7 @@ export default class App extends Component {
     if (errors.length > 0) {
       this.setState({ errors: errors })
     } else {
-      getFunction(input)
+      this.getResponse(input)
     }
   }
 
