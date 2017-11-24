@@ -9,8 +9,8 @@ import isomorphicFetch from 'isomorphic-fetch'
 
 const defaultState = {
   inputValue: '',
-  checkDigit: '',
-  uli: '',
+  checkDigit: null,
+  uli: null,
   isValidUli: false,
   errors: [],
   isSubmitted: false,
@@ -56,25 +56,60 @@ export default class App extends Component {
   }
 
   handleSubmit() {
-    this.setState({ isSubmitted: true })
-
-    if (this.state.whichApp === 'get') {
-      this.validateLoanId(this.state.inputValue)
-    } else {
-      this.validateUli(this.state.inputValue)
-    }
+    /* 
+    setState callback used
+    to make sure isSubmitted is true
+    before doing anything else
+    */
+    this.setState({ isSubmitted: true }, () => {
+      if (this.state.whichApp === 'get') {
+        this.validateLoanId(this.state.inputValue)
+      } else {
+        this.validateUli(this.state.inputValue)
+      }
+    })
   }
 
   setCheckDigit(loanId) {
-    // TODO: API call to get the check digit and uli
-    const checkDigit = '22'
-    const uli = loanId + checkDigit
-    this.setState({ uli: uli, checkDigit: checkDigit })
+    if (this.state.isSubmitted) {
+      isomorphicFetch(
+        'https://hmda-ops-api.demo.cfpb.gov/public/uli/checkDigit',
+        {
+          method: 'POST',
+          body: JSON.stringify({ loanId: this.state.inputValue }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+        .then(response => {
+          return response.json()
+        })
+        .then(json => {
+          this.setState({ uli: json.uli, checkDigit: json.checkDigit })
+        })
+    }
   }
 
   isValidUli(uli) {
-    // TODO: api call to check for validity
-    this.setState({ isValidUli: true })
+    if (this.state.isSubmitted) {
+      isomorphicFetch(
+        'https://hmda-ops-api.demo.cfpb.gov/public/uli/validate',
+        {
+          method: 'POST',
+          body: JSON.stringify({ uli: this.state.inputValue }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+        .then(response => {
+          return response.json()
+        })
+        .then(json => {
+          this.setState({ isValidUli: json.isValid })
+        })
+    }
   }
 
   validateUli(uli) {
@@ -162,12 +197,7 @@ export default class App extends Component {
     return [
       <BannerBeta key={1} />,
       <Header key={2} />,
-      <InputError
-        key={3}
-        errors={errors}
-        answer={checkDigit}
-        isSubmitted={isSubmitted}
-      />,
+      <InputError key={3} errors={errors} isSubmitted={isSubmitted} />,
       <Form
         key={4}
         inputValue={inputValue}

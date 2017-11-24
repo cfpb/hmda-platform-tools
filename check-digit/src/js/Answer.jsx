@@ -33,9 +33,9 @@ const Answer = ({ uli, isValidUli, checkDigit, isSubmitted, errors }) => {
 }
 
 Answer.propTypes = {
-  uli: PropTypes.string,
+  uli: PropTypes.number,
   isValidUli: PropTypes.bool,
-  checkDigit: PropTypes.string,
+  checkDigit: PropTypes.number,
   isSubmitted: PropTypes.bool,
   errors: PropTypes.array
 }
