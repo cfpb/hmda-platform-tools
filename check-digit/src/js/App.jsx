@@ -26,8 +26,9 @@ export default class App extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
-    this.validateUli = this.validateUli.bind(this)
-    this.validateLoanId = this.validateLoanId.bind(this)
+    this.validateInput = this.validateInput.bind(this)
+    this.getCheckDigit = this.getCheckDigit.bind(this)
+    this.getIsUliValid = this.getIsUliValid.bind(this)
   }
 
   handleRadioChange(app) {
@@ -63,11 +64,7 @@ export default class App extends Component {
     before doing anything else
     */
     this.setState({ isSubmitted: true }, () => {
-      if (this.state.whichApp === 'get') {
-        this.validateLoanId(this.state.inputValue)
-      } else {
-        this.validateUli(this.state.inputValue)
-      }
+      this.validateInput(this.state.inputValue)
     })
   }
 
@@ -92,7 +89,7 @@ export default class App extends Component {
     }
   }
 
-  getIsValidUli(uli) {
+  getIsUliValid(uli) {
     if (this.state.isSubmitted) {
       isomorphicFetch(
         'https://hmda-ops-api.demo.cfpb.gov/public/uli/validate',
@@ -113,21 +110,21 @@ export default class App extends Component {
     }
   }
 
-  validateUli(uli) {
-    const errors = isUliValid(uli)
-    if (errors.length > 0) {
-      this.setState({ errors: errors })
-    } else {
-      this.getIsValidUli(uli)
-    }
-  }
+  validateInput(input) {
+    let validateFunction = isLoanIdValid
+    let getFunction = this.getCheckDigit
 
-  validateLoanId(loanId) {
-    const errors = isLoanIdValid(loanId)
+    if (this.state.whichApp === 'validate') {
+      validateFunction = isUliValid
+      getFunction = this.getIsUliValid
+    }
+
+    const errors = validateFunction(input)
+
     if (errors.length > 0) {
       this.setState({ errors: errors })
     } else {
-      this.getCheckDigit(loanId)
+      getFunction(input)
     }
   }
 
@@ -151,8 +148,7 @@ export default class App extends Component {
         inputValue={inputValue}
         onSubmit={this.handleSubmit}
         onChange={this.handleChange}
-        validateUli={this.validateUli}
-        validateLoanId={this.validateLoanId}
+        validateInput={this.validateInput}
         errors={errors}
         onRadioChange={this.handleRadioChange}
         whichApp={whichApp}

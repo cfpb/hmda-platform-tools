@@ -21,11 +21,7 @@ class Form extends Component {
   }
 
   handleInputBlur(event) {
-    if (this.props.whichApp === 'get') {
-      this.props.validateLoanId(this.props.inputValue)
-    } else {
-      this.props.validateUli(this.props.inputValue)
-    }
+    this.props.validateInput(this.props.inputValue)
   }
 
   handleRadioChange(event) {
@@ -115,8 +111,7 @@ Form.propTypes = {
   inputValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  validateUli: PropTypes.func.isRequired,
-  validateLoanId: PropTypes.func.isRequired,
+  validateInput: PropTypes.func.isRequired,
   errors: PropTypes.array,
   onRadioChange: PropTypes.func,
   whichApp: PropTypes.string
