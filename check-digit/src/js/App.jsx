@@ -23,7 +23,7 @@ export default class App extends Component {
     super(props)
     this.state = defaultState
 
-    this.handleChange = this.handleChange.bind(this)
+    this.handleTextChange = this.handleTextChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.validateInput = this.validateInput.bind(this)
@@ -43,7 +43,7 @@ export default class App extends Component {
     })
   }
 
-  handleChange(inputValue) {
+  handleTextChange(inputValue) {
     /*
     when input changes
     clear everything to reset errors and answer
@@ -80,7 +80,7 @@ export default class App extends Component {
     }
 
     const API_URL = 'https://hmda-ops-api.demo.cfpb.gov/public/uli/'
-    
+
     if (this.state.isSubmitted) {
       isomorphicFetch(API_URL + endpoint, {
         method: 'POST',
@@ -137,7 +137,7 @@ export default class App extends Component {
         key={4}
         inputValue={inputValue}
         onSubmit={this.handleSubmit}
-        onChange={this.handleChange}
+        onTextChange={this.handleTextChange}
         validateInput={this.validateInput}
         errors={errors}
         onRadioChange={this.handleRadioChange}

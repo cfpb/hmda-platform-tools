@@ -6,7 +6,7 @@ class Form extends Component {
   constructor(props) {
     super(props)
 
-    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleTextChange = this.handleTextChange.bind(this)
     this.handleInputBlur = this.handleInputBlur.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -16,8 +16,8 @@ class Form extends Component {
     this.dataInput.focus()
   }
 
-  handleInputChange(event) {
-    this.props.onChange(event.target.value)
+  handleTextChange(event) {
+    this.props.onTextChange(event.target.value)
   }
 
   handleInputBlur(event) {
@@ -98,7 +98,7 @@ class Form extends Component {
           }}
           type="text"
           value={inputValue}
-          onChange={this.handleInputChange}
+          onChange={this.handleTextChange}
           onBlur={this.handleInputBlur}
         />
         <input type="submit" value={buttonText} />
@@ -109,7 +109,7 @@ class Form extends Component {
 
 Form.propTypes = {
   inputValue: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onTextChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   validateInput: PropTypes.func.isRequired,
   errors: PropTypes.array,
