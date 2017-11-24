@@ -130,6 +130,23 @@ export default class App extends Component {
       errors.push('A ULI can only contain alphanumeric characters.')
     }
 
+    /*
+    LEI alone is 20 characters
+    Check digit is 2 characters
+    uli = LEI + check digit from the institution
+    so the uli.length has to be > 22
+    */
+    if (uli.length > 0 && uli.length <= 22) {
+      const characters = uli.length === 1 ? 'character' : 'characters'
+      errors.push(
+        'The ULI you entered is only ' +
+          uli.length +
+          ' ' +
+          characters +
+          '. An LEI + the check digit is 22 characters in length.'
+      )
+    }
+
     if (errors.length > 0) {
       this.setState({ errors: errors })
     } else {
