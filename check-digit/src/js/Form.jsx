@@ -5,7 +5,6 @@ import Alert from './Alert.jsx'
 class Form extends Component {
   constructor(props) {
     super(props)
-    this.state = { inputValue: '' }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleInputBlur = this.handleInputBlur.bind(this)
@@ -18,16 +17,14 @@ class Form extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({ inputValue: event.target.value }, () => {
-      this.props.onChange()
-    })
+    this.props.onChange(event.target.value)
   }
 
   handleInputBlur(event) {
     if(this.props.whichApp === 'get') {
-      this.props.validateLoanId(this.state.inputValue)
+      this.props.validateLoanId(this.props.inputValue)
     } else {
-      this.props.validateUli(this.state.inputValue)
+      this.props.validateUli(this.props.inputValue)
     }
   }
 
@@ -37,7 +34,7 @@ class Form extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault()
-    this.props.onSubmit(this.state.inputValue)
+    this.props.onSubmit(this.props.inputValue)
   }
 
   getInputLabel(app) {
@@ -110,7 +107,7 @@ class Form extends Component {
             this.dataInput = input
           }}
           type="text"
-          value={this.state.inputValue}
+          value={this.props.inputValue}
           onChange={this.handleInputChange}
           onBlur={this.handleInputBlur}
         />
@@ -121,6 +118,7 @@ class Form extends Component {
 }
 
 Form.propTypes = {
+  inputValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   validateUli: PropTypes.func.isRequired,
