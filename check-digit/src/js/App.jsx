@@ -79,7 +79,7 @@ export default class App extends Component {
       }
     }
 
-    const API_URL = 'https://hmda-ops-api.demo.cfpb.gov/public/uli/'
+    const API_URL = 'https://ffiec-api.cfpb.gov/public/uli/'
 
     if (this.state.isSubmitted) {
       isomorphicFetch(API_URL + endpoint, {
