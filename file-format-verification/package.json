@@ -49,7 +49,7 @@
     "jest-cli": "18.1.0",
     "minifyify": "7.3.4",
     "mkdirp": "0.5.1",
-    "node-sass": "3.13.0",
+    "node-sass": "4.7.2",
     "nodemon": "1.11.0",
     "react-addons-test-utils": "15.4.0",
     "react-dom": "15.4.0",
@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "filereader-stream": "1.0.0",
-    "hmda-file-parser": "1.0.x",
+    "hmda-file-parser": "1.18.0",
     "immutable": "3.8.1",
     "react": "15.4.0",
     "react-dropzone": "3.11.0",
