@@ -19,7 +19,7 @@ const InputError = ({ isSubmitted, errors }) => {
 }
 
 InputError.propTypes = {
-  answer: PropTypes.string,
+  errors: PropTypes.array,
   isSubmitted: PropTypes.bool
 }
 

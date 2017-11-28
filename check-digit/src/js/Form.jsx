@@ -6,7 +6,7 @@ class Form extends Component {
   constructor(props) {
     super(props)
 
-    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleTextChange = this.handleTextChange.bind(this)
     this.handleInputBlur = this.handleInputBlur.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -16,16 +16,12 @@ class Form extends Component {
     this.dataInput.focus()
   }
 
-  handleInputChange(event) {
-    this.props.onChange(event.target.value)
+  handleTextChange(event) {
+    this.props.onTextChange(event.target.value)
   }
 
   handleInputBlur(event) {
-    if(this.props.whichApp === 'get') {
-      this.props.validateLoanId(this.props.inputValue)
-    } else {
-      this.props.validateUli(this.props.inputValue)
-    }
+    this.props.validateInput(this.props.inputValue)
   }
 
   handleRadioChange(event) {
@@ -37,22 +33,6 @@ class Form extends Component {
     this.props.onSubmit(this.props.inputValue)
   }
 
-  getInputLabel(app) {
-    if(app === 'get') {
-      return 'Enter a loan ID (LEI + loan or application ID)'
-    }
-
-    return 'Enter a ULI'
-  }
-
-  getSubmitText(app) {
-    if(app === 'get') {
-      return 'Get the check digit'
-    }
-
-    return 'Validate the check digit'
-  }
-
   render() {
     if (!this.props.onSubmit)
       return (
@@ -60,6 +40,18 @@ class Form extends Component {
           <p>Something went wrong. Submitting a loan ID won't work.</p>
         </Alert>
       )
+
+    const { whichApp, errors, inputValue } = this.props
+
+    const labelText = {
+      get: 'Enter a loan ID (LEI + loan or application ID)',
+      validate: 'Enter a ULI'
+    }[whichApp]
+
+    const buttonText = {
+      get: 'Get the check digit',
+      validate: 'Validate the check digit'
+    }[whichApp]
 
     return (
       <form
@@ -75,7 +67,7 @@ class Form extends Component {
               name="whichApp"
               value="get"
               onChange={this.handleRadioChange}
-              checked={this.props.whichApp === 'get'}
+              checked={whichApp === 'get'}
             />
             <label htmlFor="getCheckDigit">get a check digit</label>
           </li>
@@ -86,15 +78,13 @@ class Form extends Component {
               name="whichApp"
               value="validate"
               onChange={this.handleRadioChange}
-              checked={this.props.whichApp === 'validate'}
+              checked={whichApp === 'validate'}
             />
             <label htmlFor="validateCheckDigit">validate a check digit</label>
           </li>
         </ul>
-        <label htmlFor="dataInput">
-          {this.getInputLabel(this.props.whichApp)}
-        </label>
-        {this.props.errors.map((error, i) => {
+        <label htmlFor="dataInput">{labelText}</label>
+        {errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
               {error}
@@ -107,11 +97,11 @@ class Form extends Component {
             this.dataInput = input
           }}
           type="text"
-          value={this.props.inputValue}
-          onChange={this.handleInputChange}
+          value={inputValue}
+          onChange={this.handleTextChange}
           onBlur={this.handleInputBlur}
         />
-        <input type="submit" value={this.getSubmitText(this.props.whichApp)} />
+        <input type="submit" value={buttonText} />
       </form>
     )
   }
@@ -119,10 +109,9 @@ class Form extends Component {
 
 Form.propTypes = {
   inputValue: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onTextChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  validateUli: PropTypes.func.isRequired,
-  validateLoanId: PropTypes.func.isRequired,
+  validateInput: PropTypes.func.isRequired,
   errors: PropTypes.array,
   onRadioChange: PropTypes.func,
   whichApp: PropTypes.string
