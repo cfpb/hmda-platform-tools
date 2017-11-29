@@ -22,7 +22,7 @@ export const isUliValid = uli => {
     uli = LEI + check digit from the institution
     so the uli.length has to be > 22
     */
-  if (uli.length > 0 && uli.length <= 22) {
+  if (uli.length > 0 && uli.length < 22) {
     const characters = uli.length === 1 ? 'character' : 'characters'
     errors.push(
       'The ULI you entered is only ' +
@@ -50,7 +50,7 @@ export const isLoanIdValid = loanId => {
     loanId = LEI + loan/application id from the institution
     so the loadId.length has to be > 20
     */
-  if (loanId.length > 0 && loanId.length <= 20) {
+  if (loanId.length > 0 && loanId.length < 20) {
     const characters = loanId.length === 1 ? 'character' : 'characters'
     errors.push(
       'The loan id you entered is only ' +
