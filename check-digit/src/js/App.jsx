@@ -36,11 +36,18 @@ export default class App extends Component {
     clear everything to reset errors and answer
     but keep in the input and update the app
     */
-    this.setState({
-      ...defaultState,
-      inputValue: this.state.inputValue, // keep this around
-      whichApp: app
-    })
+    this.setState(
+      {
+        ...defaultState,
+        inputValue: this.state.inputValue, // keep this around
+        whichApp: app
+      },
+      () => {
+        if (this.state.inputValue !== '') {
+          this.validateInput(this.state.inputValue)
+        }
+      }
+    )
   }
 
   handleTextChange(inputValue) {
