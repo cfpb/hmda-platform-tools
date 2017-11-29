@@ -43,9 +43,20 @@ class Form extends Component {
 
     const { whichApp, errors, inputValue } = this.props
 
+    //const lei = <abbr title="Legal Entity Identifier">LEI</abbr>
+    //console.log(lei)
     const labelText = {
-      get: 'Enter a loan ID (LEI + loan or application ID)',
-      validate: 'Enter a ULI'
+      get: (
+        <label htmlFor="dataInput">
+          Enter a loan ID (<abbr title="Legal Entity Identifier">LEI</abbr> loan
+          or application ID)
+        </label>
+      ),
+      validate: (
+        <label htmlFor="dataInput">
+          Enter a <abbr title="Universal Loan Identifier">ULI</abbr>
+        </label>
+      )
     }[whichApp]
 
     const buttonText = {
@@ -83,7 +94,7 @@ class Form extends Component {
             <label htmlFor="validateCheckDigit">validate a check digit</label>
           </li>
         </ul>
-        <label htmlFor="dataInput">{labelText}</label>
+        {labelText}
         {errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
