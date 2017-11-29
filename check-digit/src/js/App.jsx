@@ -23,7 +23,7 @@ export default class App extends Component {
     super(props)
     this.state = defaultState
 
-    this.handleTextChange = this.handleTextChange.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.validateInput = this.validateInput.bind(this)
@@ -50,7 +50,7 @@ export default class App extends Component {
     )
   }
 
-  handleTextChange(inputValue) {
+  handleInputChange(inputValue) {
     /*
     when input changes
     clear everything to reset errors and answer
@@ -144,7 +144,7 @@ export default class App extends Component {
         key={4}
         inputValue={inputValue}
         onSubmit={this.handleSubmit}
-        onTextChange={this.handleTextChange}
+        onInputChange={this.handleInputChange}
         validateInput={this.validateInput}
         errors={errors}
         onRadioChange={this.handleRadioChange}
