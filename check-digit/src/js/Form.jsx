@@ -53,6 +53,9 @@ class Form extends Component {
       validate: 'Validate the check digit'
     }[whichApp]
 
+    const buttonDisabled =
+      errors.length === 0 && inputValue !== '' ? false : true
+
     return (
       <form
         className="CheckDigitForm usa-grid"
@@ -101,7 +104,7 @@ class Form extends Component {
           onChange={this.handleTextChange}
           onBlur={this.handleInputBlur}
         />
-        <input type="submit" value={buttonText} />
+        <input disabled={buttonDisabled} type="submit" value={buttonText} />
       </form>
     )
   }
