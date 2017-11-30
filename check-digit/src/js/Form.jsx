@@ -6,8 +6,7 @@ class Form extends Component {
   constructor(props) {
     super(props)
 
-    this.handleTextChange = this.handleTextChange.bind(this)
-    this.handleInputBlur = this.handleInputBlur.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
@@ -16,12 +15,9 @@ class Form extends Component {
     this.dataInput.focus()
   }
 
-  handleTextChange(event) {
-    this.props.onTextChange(event.target.value)
-  }
-
-  handleInputBlur(event) {
-    this.props.validateInput(this.props.inputValue)
+  handleInputChange(event) {
+    this.props.onInputChange(event.target.value)
+    this.props.validateInput(event.target.value)
   }
 
   handleRadioChange(event) {
@@ -52,6 +48,9 @@ class Form extends Component {
       get: 'Get the check digit',
       validate: 'Validate the check digit'
     }[whichApp]
+
+    const buttonDisabled =
+      errors.length === 0 && inputValue !== '' ? false : true
 
     return (
       <form
@@ -98,10 +97,9 @@ class Form extends Component {
           }}
           type="text"
           value={inputValue}
-          onChange={this.handleTextChange}
-          onBlur={this.handleInputBlur}
+          onInput={this.handleInputChange}
         />
-        <input type="submit" value={buttonText} />
+        <input disabled={buttonDisabled} type="submit" value={buttonText} />
       </form>
     )
   }
@@ -109,7 +107,7 @@ class Form extends Component {
 
 Form.propTypes = {
   inputValue: PropTypes.string.isRequired,
-  onTextChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   validateInput: PropTypes.func.isRequired,
   errors: PropTypes.array,
