@@ -43,7 +43,7 @@ class Form extends Component {
 
     const { whichApp, errors, inputValue } = this.props
 
-    const labelText = {
+    const label = {
       get: (
         <label htmlFor="dataInput">
           Enter a loan ID (<abbr title="Legal Entity Identifier">LEI</abbr> loan
@@ -92,7 +92,7 @@ class Form extends Component {
             <label htmlFor="validateCheckDigit">validate a check digit</label>
           </li>
         </ul>
-        {labelText}
+        {label}
         {errors.map((error, i) => {
           return (
             <span key={i} className="usa-input-error-message" role="alert">
