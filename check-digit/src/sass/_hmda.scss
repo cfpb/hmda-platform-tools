@@ -22,3 +22,12 @@ table th {
   padding: 0.75rem;
   border-color: $color-gray-lighter;
 }
+
+/*
+normalize sets a border for IE6, which we don't support
+this removes it
+*/
+
+abbr[title] {
+  border: none;
+}
