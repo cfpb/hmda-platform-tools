@@ -43,8 +43,6 @@ class Form extends Component {
 
     const { whichApp, errors, inputValue } = this.props
 
-    //const lei = <abbr title="Legal Entity Identifier">LEI</abbr>
-    //console.log(lei)
     const labelText = {
       get: (
         <label htmlFor="dataInput">
