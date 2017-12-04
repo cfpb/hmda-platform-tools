@@ -42,12 +42,26 @@ class Form extends Component {
     const label = {
       get: (
         <label htmlFor="dataInput">
-          Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and Loan/Application ID
+          Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and
+          Loan/Application ID<br />
+          <span className="usa-text-small">
+            A value used to identify a loan or application that is comprised of
+            letters, numbers or a combination of both letters and numbers, and
+            is unique within the financial institution.
+          </span>
         </label>
       ),
       validate: (
         <label htmlFor="dataInput">
           Enter the <abbr title="Universal Loan Identifier">ULI</abbr>
+          <br />
+          <span className="usa-text-small">
+            The Universal Loan Identifier (ULI) is a unique value assigned to
+            the loan or application. The ULI is comprised of the financial
+            institution's Legal Entity Identifier (LEI), the institution
+            assigned Loan or Application ID, and a two character check digit
+            calculated using the ISO/IEC 7064, MOD 97-10.
+          </span>
         </label>
       )
     }[whichApp]
@@ -62,7 +76,7 @@ class Form extends Component {
 
     return (
       <form
-        className="CheckDigitForm usa-grid"
+        className="Form usa-grid"
         id="main-content"
         onSubmit={this.handleFormSubmit}
       >
