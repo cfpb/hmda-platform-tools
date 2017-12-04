@@ -1,7 +1,7 @@
 .Form {
-  label {
-    span {
-      color: $color-gray;
-    }
+  .label-desc {
+    color: $color-gray;
+    display: block;
+    max-width: 46rem;
   }
 }

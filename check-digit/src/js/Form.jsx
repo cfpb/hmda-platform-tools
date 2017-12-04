@@ -43,26 +43,32 @@ class Form extends Component {
       get: (
         <label htmlFor="dataInput">
           Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and
-          Loan/Application ID<br />
-          <span className="usa-text-small">
-            A value used to identify a loan or application that is comprised of
-            letters, numbers or a combination of both letters and numbers, and
-            is unique within the financial institution.
-          </span>
+          Loan/Application ID
         </label>
       ),
       validate: (
         <label htmlFor="dataInput">
           Enter the <abbr title="Universal Loan Identifier">ULI</abbr>
-          <br />
-          <span className="usa-text-small">
-            The Universal Loan Identifier (ULI) is a unique value assigned to
-            the loan or application. The ULI is comprised of the financial
-            institution's Legal Entity Identifier (LEI), the institution
-            assigned Loan or Application ID, and a two character check digit
-            calculated using the ISO/IEC 7064, MOD 97-10.
-          </span>
         </label>
+      )
+    }[whichApp]
+
+    const labelDesc = {
+      get: (
+        <span className="usa-text-small label-desc">
+          A value used to identify a loan or application that is comprised of
+          letters, numbers or a combination of both letters and numbers, and is
+          unique within the financial institution.
+        </span>
+      ),
+      validate: (
+        <span className="usa-text-small label-desc">
+          The Universal Loan Identifier (ULI) is a unique value assigned to the
+          loan or application. The ULI is comprised of the financial
+          institution's Legal Entity Identifier (LEI), the institution assigned
+          Loan or Application ID, and a two character check digit calculated
+          using the ISO/IEC 7064, MOD 97-10.
+        </span>
       )
     }[whichApp]
 
@@ -121,6 +127,7 @@ class Form extends Component {
           value={inputValue}
           onInput={this.handleInputChange}
         />
+        {labelDesc}
         <input disabled={buttonDisabled} type="submit" value={buttonText} />
       </form>
     )
