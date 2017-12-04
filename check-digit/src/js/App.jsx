@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import BannerBeta from './BannerBeta.jsx'
 import Header from './Header.jsx'
 import AppIntro from './AppIntro.jsx'
 import InputError from './InputError.jsx'
@@ -138,9 +137,8 @@ export default class App extends Component {
     } = this.state
 
     return [
-      <BannerBeta key={1} />,
-      <Header key={2} />,
-      <div key={3} className="usa-grid" id="main-content">
+      <Header key={1} />,
+      <div key={2} className="usa-grid" id="main-content">
         <AppIntro />
         <InputError errors={errors} isSubmitted={isSubmitted} />
         <Form
@@ -160,7 +158,7 @@ export default class App extends Component {
           errors={errors}
         />
       </div>,
-      <Footer key={4} />
+      <Footer key={3} />
     ]
   }
 }
