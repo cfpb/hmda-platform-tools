@@ -42,7 +42,7 @@ class Form extends Component {
     const label = {
       get: (
         <label htmlFor="dataInput">
-          Enter the (<abbr title="Legal Entity Identifier">LEI</abbr> and Loan/Application ID
+          Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and Loan/Application ID
         </label>
       ),
       validate: (
