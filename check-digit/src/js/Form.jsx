@@ -74,7 +74,7 @@ class Form extends Component {
 
     const buttonText = {
       get: 'Generate a check digit',
-      validate: 'Validate a check digit'
+      validate: 'Validate a ULI'
     }[whichApp]
 
     const buttonDisabled =
