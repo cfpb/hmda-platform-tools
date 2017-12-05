@@ -2,34 +2,41 @@ export const isUliValid = uli => {
   let errors = []
 
   if (uli.length === 0) {
-    errors.push('You have to enter a ULI to get the check digit.')
+    errors.push('Please enter a valid ULI to validate.')
   }
-  /*
-    maxlength for a ULI is 45 characters
-    see page 20 of
-    https://www.consumerfinance.gov/data-research/hmda/static/for-filers/2018/2018-HMDA-FIG.pdf
-    */
-  if (uli.length > 45) {
-    errors.push('A ULI can only be 45 characters.')
-  }
+
+  // a ULI is alphanumeric
   if (!!uli.match(/[^a-zA-Z0-9]/)) {
-    errors.push('A ULI can only contain alphanumeric characters.')
+    errors.push('A valid ULI can only contain alphanumeric characters.')
   }
 
   /*
     LEI alone is 20 characters
     Check digit is 2 characters
     uli = LEI + check digit from the institution
-    so the uli.length has to be > 22
+    so the uli.length has to be >= 22
     */
   if (uli.length > 0 && uli.length < 22) {
     const characters = uli.length === 1 ? 'character' : 'characters'
     errors.push(
-      'The ULI you entered is only ' +
+      'A valid ULI has a minimum of 22 characters. You have entered ' +
         uli.length +
         ' ' +
         characters +
-        '. An LEI + the check digit is 22 characters in length.'
+        '.'
+    )
+  }
+
+  /*
+    maxlength for a ULI is 45 characters
+    see page 20 of
+    https://www.consumerfinance.gov/data-research/hmda/static/for-filers/2018/2018-HMDA-FIG.pdf
+    */
+  if (uli.length > 45) {
+    errors.push(
+      'A valid LEI and Loan/Application ID has a maximum of 45 characters. You have entered ' +
+        uli.length +
+        ' characters.'
     )
   }
 
@@ -40,24 +47,31 @@ export const isLoanIdValid = loanId => {
   let errors = []
 
   if (loanId.length === 0) {
-    errors.push('You have to enter a loan ID to get the check digit.')
+    errors.push(
+      'Please enter a valid LEI and Loan/Application ID to generate the check digit.'
+    )
   }
+
+  // a LEI and Loan/Application ID is alphanumeric
   if (!!loanId.match(/[^a-zA-Z0-9]/)) {
-    errors.push('A loan id can only contain alphanumeric characters.')
+    errors.push(
+      'A valid LEI and Loan/Application ID can only contain alphanumeric characters.'
+    )
   }
+
   /*
     LEI alone is 20 characters
     loanId = LEI + loan/application id from the institution
-    so the loadId.length has to be > 20
+    so the loadId.length has to be >= 20
     */
   if (loanId.length > 0 && loanId.length < 20) {
     const characters = loanId.length === 1 ? 'character' : 'characters'
     errors.push(
-      'The loan id you entered is only ' +
+      'A valid LEI and Loan/Application ID has a minimum of 20 characters. You have entered ' +
         loanId.length +
         ' ' +
         characters +
-        '. An LEI is 20 characters in length.'
+        '.'
     )
   }
 
@@ -69,9 +83,9 @@ export const isLoanIdValid = loanId => {
     */
   if (loanId.length > 43) {
     errors.push(
-      'The load ID you entered is ' +
+      'A valid LEI and Loan/Application ID has a maximum of 43 characters. You have entered ' +
         loanId.length +
-        ' characters. It can not be more than 43 characters.'
+        ' characters.'
     )
   }
 
