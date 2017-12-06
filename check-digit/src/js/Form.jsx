@@ -9,6 +9,25 @@ class Form extends Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+
+    this.label = {
+      get: (
+        <label htmlFor="dataInput">
+          Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and
+          Loan/Application ID
+        </label>
+      ),
+      validate: (
+        <label htmlFor="dataInput">
+          Enter the <abbr title="Universal Loan Identifier">ULI</abbr>
+        </label>
+      )
+    }
+
+    this.buttonText = {
+      get: 'Generate a check digit',
+      validate: 'Validate a ULI'
+    }
   }
 
   componentDidMount() {
@@ -38,31 +57,14 @@ class Form extends Component {
       )
 
     const { whichApp, errors, inputValue } = this.props
-
-    const label = {
-      get: (
-        <label htmlFor="dataInput">
-          Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and Loan/Application ID
-        </label>
-      ),
-      validate: (
-        <label htmlFor="dataInput">
-          Enter the <abbr title="Universal Loan Identifier">ULI</abbr>
-        </label>
-      )
-    }[whichApp]
-
-    const buttonText = {
-      get: 'Generate a check digit',
-      validate: 'Validate a check digit'
-    }[whichApp]
-
+    const label = this.label[whichApp]
+    const buttonText = this.buttonText[whichApp]
     const buttonDisabled =
       errors.length === 0 && inputValue !== '' ? false : true
 
     return (
       <form
-        className="CheckDigitForm usa-grid"
+        className="Form usa-grid"
         id="main-content"
         onSubmit={this.handleFormSubmit}
       >

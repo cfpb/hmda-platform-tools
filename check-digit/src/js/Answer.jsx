@@ -15,7 +15,7 @@ export default class Answer extends Component {
     if (isSubmitted && errors.length === 0) {
       if (uli && checkDigit)
         return (
-          <Alert type="success" heading="Check digit calculated!">
+          <Alert type="success" heading="Check digit generated!">
             <p>
               Your check digit is <strong>{checkDigit}</strong>.<br />
               Your ULI is <strong>{uli}</strong>.
@@ -25,14 +25,14 @@ export default class Answer extends Component {
 
       if (isValidUli) {
         return (
-          <Alert type="success" heading="Check digit valid!">
-            <p>The check digit and ULI are valid.</p>
+          <Alert type="success" heading="Valid ULI!">
+            <p>The ULI is valid.</p>
           </Alert>
         )
       } else {
         return (
-          <Alert type="error" heading="Not a valid check digit!">
-            <p>Sorry, that check digit and ULI do not appear to be valid.</p>
+          <Alert type="error" heading="Not a valid ULI!">
+            <p>Sorry, that ULI does not appear to be valid.</p>
           </Alert>
         )
       }
