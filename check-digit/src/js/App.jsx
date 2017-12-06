@@ -149,6 +149,9 @@ export default class App extends Component {
           errors={errors}
           onRadioChange={this.handleRadioChange}
           whichApp={whichApp}
+          isSubmitted={isSubmitted}
+          uli={uli}
+          isValidUli={isValidUli}
         />
         <Answer
           uli={uli}
