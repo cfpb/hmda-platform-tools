@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import BannerBeta from './BannerBeta.jsx'
 import Header from './Header.jsx'
+import AppIntro from './AppIntro.jsx'
 import InputError from './InputError.jsx'
 import Form from './Form.jsx'
 import Answer from './Answer.jsx'
@@ -137,28 +137,28 @@ export default class App extends Component {
     } = this.state
 
     return [
-      <BannerBeta key={1} />,
-      <Header key={2} />,
-      <InputError key={3} errors={errors} isSubmitted={isSubmitted} />,
-      <Form
-        key={4}
-        inputValue={inputValue}
-        onSubmit={this.handleSubmit}
-        onInputChange={this.handleInputChange}
-        validateInput={this.validateInput}
-        errors={errors}
-        onRadioChange={this.handleRadioChange}
-        whichApp={whichApp}
-      />,
-      <Answer
-        key={5}
-        uli={uli}
-        isValidUli={isValidUli}
-        checkDigit={checkDigit}
-        isSubmitted={isSubmitted}
-        errors={errors}
-      />,
-      <Footer key={6} />
+      <Header key={1} />,
+      <div key={2} className="usa-grid" id="main-content">
+        <AppIntro />
+        <InputError errors={errors} isSubmitted={isSubmitted} />
+        <Form
+          inputValue={inputValue}
+          onSubmit={this.handleSubmit}
+          onInputChange={this.handleInputChange}
+          validateInput={this.validateInput}
+          errors={errors}
+          onRadioChange={this.handleRadioChange}
+          whichApp={whichApp}
+        />
+        <Answer
+          uli={uli}
+          isValidUli={isValidUli}
+          checkDigit={checkDigit}
+          isSubmitted={isSubmitted}
+          errors={errors}
+        />
+      </div>,
+      <Footer key={3} />
     ]
   }
 }

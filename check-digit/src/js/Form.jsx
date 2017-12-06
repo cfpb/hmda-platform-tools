@@ -42,20 +42,19 @@ class Form extends Component {
     const label = {
       get: (
         <label htmlFor="dataInput">
-          Enter a loan ID (<abbr title="Legal Entity Identifier">LEI</abbr> loan
-          or application ID)
+          Enter the <abbr title="Legal Entity Identifier">LEI</abbr> and Loan/Application ID
         </label>
       ),
       validate: (
         <label htmlFor="dataInput">
-          Enter a <abbr title="Universal Loan Identifier">ULI</abbr>
+          Enter the <abbr title="Universal Loan Identifier">ULI</abbr>
         </label>
       )
     }[whichApp]
 
     const buttonText = {
-      get: 'Get the check digit',
-      validate: 'Validate the check digit'
+      get: 'Generate a check digit',
+      validate: 'Validate a check digit'
     }[whichApp]
 
     const buttonDisabled =
@@ -77,7 +76,7 @@ class Form extends Component {
               onChange={this.handleRadioChange}
               checked={whichApp === 'get'}
             />
-            <label htmlFor="getCheckDigit">get a check digit</label>
+            <label htmlFor="getCheckDigit">Generate a check digit</label>
           </li>
           <li>
             <input
@@ -88,7 +87,7 @@ class Form extends Component {
               onChange={this.handleRadioChange}
               checked={whichApp === 'validate'}
             />
-            <label htmlFor="validateCheckDigit">validate a check digit</label>
+            <label htmlFor="validateCheckDigit">Validate a ULI</label>
           </li>
         </ul>
         {label}
