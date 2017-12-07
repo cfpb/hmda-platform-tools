@@ -50,7 +50,6 @@ class Form extends Component {
   }
 
   render() {
-    console.log('Form', this.props)
     if (!this.props.onSubmit)
       return (
         <Alert type="error" heading="Uh oh!">
