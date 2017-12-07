@@ -16,10 +16,10 @@ export const isUliValid = uli => {
     uli = LEI + check digit from the institution
     so the uli.length has to be >= 22
     */
-  if (uli.length > 0 && uli.length < 22) {
+  if (uli.length > 0 && uli.length < 23) {
     const characters = uli.length === 1 ? 'character' : 'characters'
     errors.push(
-      'A valid ULI has a minimum of 22 characters. You have entered ' +
+      'A valid ULI has a minimum of 23 characters. You have entered ' +
         uli.length +
         ' ' +
         characters +
