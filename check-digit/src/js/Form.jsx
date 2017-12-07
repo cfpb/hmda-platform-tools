@@ -76,6 +76,7 @@ class Form extends Component {
     const buttonText = this.buttonText[whichApp]
     const buttonDisabled =
       errors.length === 0 && inputValue !== '' ? false : true
+    const errorClass = errors.length !== 0 ? 'usa-input-error' : ''
 
     return (
       <form
@@ -107,23 +108,25 @@ class Form extends Component {
             <label htmlFor="validateCheckDigit">Validate a ULI</label>
           </li>
         </ul>
-        {label}
-        {errors.map((error, i) => {
-          return (
-            <span key={i} className="usa-input-error-message" role="alert">
-              {error}
-            </span>
-          )
-        })}
-        <input
-          id="dataInput"
-          ref={input => {
-            this.dataInput = input
-          }}
-          type="text"
-          value={inputValue}
-          onInput={this.handleInputChange}
-        />
+        <div className={errorClass}>
+          {label}
+          {errors.map((error, i) => {
+            return (
+              <span key={i} className="usa-input-error-message" role="alert">
+                {error}
+              </span>
+            )
+          })}
+          <input
+            id="dataInput"
+            ref={input => {
+              this.dataInput = input
+            }}
+            type="text"
+            value={inputValue}
+            onInput={this.handleInputChange}
+          />
+        </div>
         <input disabled={buttonDisabled} type="submit" value={buttonText} />
         {loadingIcon}
       </form>
