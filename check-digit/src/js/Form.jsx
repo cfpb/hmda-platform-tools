@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Alert from './Alert.jsx'
+import LoadingIcon from './LoadingIcon.jsx'
 
 class Form extends Component {
   constructor(props) {
@@ -56,7 +57,20 @@ class Form extends Component {
         </Alert>
       )
 
-    const { whichApp, errors, inputValue } = this.props
+    const {
+      whichApp,
+      errors,
+      inputValue,
+      isSubmitted,
+      uli,
+      isValidUli
+    } = this.props
+
+    let loadingIcon = null
+    if (isSubmitted && (uli === null && isValidUli === null)) {
+      loadingIcon = <LoadingIcon />
+    }
+
     const label = this.label[whichApp]
     const buttonText = this.buttonText[whichApp]
     const buttonDisabled =
@@ -110,6 +124,7 @@ class Form extends Component {
           onInput={this.handleInputChange}
         />
         <input disabled={buttonDisabled} type="submit" value={buttonText} />
+        {loadingIcon}
       </form>
     )
   }
@@ -122,7 +137,10 @@ Form.propTypes = {
   validateInput: PropTypes.func.isRequired,
   errors: PropTypes.array,
   onRadioChange: PropTypes.func,
-  whichApp: PropTypes.string
+  whichApp: PropTypes.string,
+  uli: PropTypes.string,
+  isValidUli: PropTypes.bool,
+  isSubmitted: PropTypes.bool
 }
 
 export default Form
