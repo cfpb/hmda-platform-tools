@@ -175,7 +175,7 @@ class Form extends Component {
           id="loanTerm"
           placeholder="(1-50 years)"
         />
-        <input type="submit" value="Calculate check digit" />
+        <input type="submit" value="Calculate rate spread" />
       </form>
     )
   }
