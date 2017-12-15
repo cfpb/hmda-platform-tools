@@ -1,0 +1,18 @@
+#main-content {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  position: relative;
+}
+
+a {
+  cursor: pointer;
+}
+
+/*
+normalize sets a border for IE6, which we don't support
+this removes it
+*/
+
+abbr[title] {
+  border: none;
+}

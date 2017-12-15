@@ -1,0 +1,28 @@
+.usa-header {
+  background-color: $color-white;
+  border-bottom: 1px solid $color-gray-lighter;
+  margin-bottom: 3em;
+}
+
+.usa-logo {
+  line-height: 0;
+}
+
+.usa-header-basic .usa-logo {
+  bottom: 0;
+  font-weight: bold;
+  margin-top: 3px;
+  position: relative;
+}
+
+.usa-nav-container {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  max-width: 100%;
+}
+
+.usa-banner-inner {
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  max-width: 100%;
+}
