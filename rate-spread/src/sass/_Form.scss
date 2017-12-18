@@ -1,0 +1,29 @@
+.Form {
+  padding: 0;
+  & > label {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+
+  & > input {
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+
+  input[type="submit"] {
+    display: inline-block;
+    margin-left: 0;
+  }
+  
+  legend {
+    font-size: 2rem;
+  }
+  fieldset{
+    label {
+      display: inline-block;
+      margin: 0.5em 1em 1em;
+    }
+  }
+}
