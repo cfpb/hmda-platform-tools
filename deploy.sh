@@ -7,7 +7,7 @@ fi
 
 mkdir "$1/dist/$1"
 mv $1/dist/* "$1/dist/$1" 2>/dev/null
-npm run deploy -- -a -d "$1/dist"
+yarn run deploy -- -a -d "$1/dist"
 mv $1/dist/$1/* $1/dist/
 rmdir "$1/dist/$1"
 
