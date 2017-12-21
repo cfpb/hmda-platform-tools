@@ -5,6 +5,10 @@
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 0.5em;
+    span {
+      font-weight: 400;
+      margin-left: 0.5em;
+    }
   }
 
   & > input {
@@ -19,6 +23,10 @@
   
   legend {
     font-size: 2rem;
+    span {
+      font-weight: 400;
+      margin-left: 0.5em;
+    }
   }
   fieldset{
     label {

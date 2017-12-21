@@ -80,7 +80,12 @@ class Form extends Component {
         onSubmit={this.handleFormSubmit}
       >
         <fieldset>
-          <legend>Action Taken</legend>
+          <legend>
+            Action Taken Type<span className="usa-text-small">
+              If Action Taken Type is 3, 4, 5, 6, or 7, report Rate Spread as{' '}
+              <strong>NA</strong>
+            </span>
+          </legend>
           <input
             type="radio"
             id="actionTaken1"
@@ -110,6 +115,24 @@ class Form extends Component {
           <label htmlFor="actionTaken8">8</label>
         </fieldset>
         <fieldset>
+          <legend>
+            Reverse Mortgage<span className="usa-text-small">
+              If Reverse Mortgage is 1, report Rate Spread as{' '}
+              <strong>NA</strong>
+            </span>
+          </legend>
+
+          <input
+            type="radio"
+            id="reverse2"
+            name="reverse"
+            value="2"
+            onChange={this.reverseHandler}
+            checked={this.state.reverse === '2'}
+          />
+          <label htmlFor="reverse2">2</label>
+        </fieldset>
+        <fieldset>
           <legend>Amortization Type</legend>
           <input
             type="radio"
@@ -130,28 +153,12 @@ class Form extends Component {
           />
           <label htmlFor="amortizationVariable">Variable</label>
         </fieldset>
-        <fieldset>
-          <legend>Reverse Mortgage</legend>
-          <input
-            type="radio"
-            id="reverseYes"
-            name="reverse"
-            value="1"
-            onChange={this.reverseHandler}
-            checked={this.state.reverse === '1'}
-          />
-          <label htmlFor="reverseYes">Yes</label>
-          <input
-            type="radio"
-            id="reverseNo"
-            name="reverse"
-            value="2"
-            onChange={this.reverseHandler}
-            checked={this.state.reverse === '2'}
-          />
-          <label htmlFor="reverseNo">No</label>
-        </fieldset>
-        <label htmlFor="rateSetDate">Rate Set Date</label>
+
+        <label htmlFor="rateSetDate">
+          Rate Set Date<span className="usa-text-small">
+            Rate set date must be between 01/03/2000 and today&#39;s date
+          </span>
+        </label>
         <input
           type="input"
           value={this.state.rateSetDate}
@@ -165,7 +172,7 @@ class Form extends Component {
           value={this.state.APR}
           onChange={this.APRHandler}
           id="APR"
-          placeholder="0.00%"
+          placeholder="0.000%"
         />
         <label htmlFor="loanTerm">Loan Term</label>
         <input
