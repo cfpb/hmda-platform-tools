@@ -10,7 +10,7 @@
     "rate-spread": "(export PROJ=rate-spread; yarn run build-with-env)",
     "check-digit": "(export PROJ=check-digit; yarn run build-with-env)",
     "file-format-verification": "(export PROJ=file-format-verification; yarn run build-with-env)",
-    "build-with-env": "webpack --config $PROJ/webpack.config.js --progress && node-sass --quiet --output-style=compressed $PROJ/src/sass/app.scss $PROJ/dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* $PROJ/dist/fonts && html-minifier --collapse-whitespace $PROJ/src/index.html -o $PROJ/dist/index.html && cp ./img/* $PROJ/dist/img && cp -r ./node_modules/uswds/dist/img/* $PROJ/dist/img"
+    "build-with-env": "webpack --progress && node-sass --quiet --output-style=compressed $PROJ/src/sass/app.scss $PROJ/dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* $PROJ/dist/fonts && html-minifier --collapse-whitespace $PROJ/src/index.html -o $PROJ/dist/index.html && cp ./img/* $PROJ/dist/img && cp -r ./node_modules/uswds/dist/img/* $PROJ/dist/img"
   },
   "repository": {
     "type": "git",
@@ -55,7 +55,6 @@
     "rimraf": "2.6.2",
     "split2": "2.1.1",
     "uswds": "1.4.2",
-    "webpack": "3.7.1",
-    "webpack-merge": "4.1.0"
+    "webpack": "3.7.1"
   }
 }
