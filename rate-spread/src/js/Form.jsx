@@ -270,7 +270,11 @@ class Form extends Component {
             placeholder="(1-50 years)"
           />
         </div>
-        <input type="submit" value="Calculate rate spread" />
+        <input
+          disabled={rateSetError || APRError || loanTermError}
+          type="submit"
+          value="Calculate rate spread"
+        />
       </form>
     )
   }
