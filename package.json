@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "description": "Constellation of tools to assist with submitting HMDA files",
   "engines": {
-    "node": ">=7.x"
+    "node": ">=8.x"
   },
   "scripts": {
-    "deploy": "gh-pages"
+    "deploy": "gh-pages",
+    "rate-spread": "(export PROJ=rate-spread; yarn run build-with-env)",
+    "check-digit": "(export PROJ=check-digit; yarn run build-with-env)",
+    "file-format-verification": "(export PROJ=file-format-verification; yarn run build-with-env)",
+    "build-with-env": "webpack --progress && node-sass --quiet --output-style=compressed $PROJ/src/sass/app.scss $PROJ/dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* $PROJ/dist/fonts && html-minifier --collapse-whitespace $PROJ/src/index.html -o $PROJ/dist/index.html && cp ./img/* $PROJ/dist/img && cp -r ./node_modules/uswds/dist/img/* $PROJ/dist/img"
   },
   "repository": {
     "type": "git",
@@ -22,6 +26,35 @@
   },
   "homepage": "https://github.com/cfpb/hmda-platform-tools#readme",
   "devDependencies": {
-    "gh-pages": "^0.12.0"
+    "babel-jest": "21.2.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-env": "1.6.0",
+    "babel-preset-react": "6.24.1",
+    "detect-browser": "2.0.0",
+    "filereader-stream": "1.0.0",
+    "gh-pages": "0.12.0",
+    "hmda-file-parser": "1.18.0",
+    "html-minifier": "3.5.5",
+    "imagemin": "5.3.1",
+    "imagemin-cli": "3.0.0",
+    "isomorphic-fetch": "2.2.1",
+    "jest-cli": "21.2.1",
+    "mkdirp": "0.5.1",
+    "node-sass": "4.5.3",
+    "prop-types": "15.6.0",
+    "react": "16.1.1",
+    "react-dom": "16.1.1",
+    "react-dropzone": "4.2.3",
+    "react-redux": "5.0.6",
+    "react-select": "0.9.1",
+    "redux": "3.6.0",
+    "redux-logger": "2.7.4",
+    "redux-thunk": "2.1.0",
+    "rimraf": "2.6.2",
+    "split2": "2.1.1",
+    "uswds": "1.4.2",
+    "webpack": "3.7.1"
   }
 }
