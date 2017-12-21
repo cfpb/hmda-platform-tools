@@ -20,7 +20,7 @@ const AppIntro = () => {
       variable term (initial fixed-rate period), and reverse mortgage.
     </p>,
     <p key={4}>
-      <a href="/requirements.html">Data requirements</a> for the rate spread
+      <a href="./requirements.html">Data requirements</a> for the rate spread
       calculator are provided in accordance with Regulation C effective January
       1st, 2018.
     </p>
