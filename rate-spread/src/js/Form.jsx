@@ -9,14 +9,50 @@ const defaultState = {
   reverse: '2',
   rateSetDate: '',
   APR: '',
-  loanTerm: null
+  loanTerm: null,
+  errors: {}
 }
+
+const startDate = +new Date('01/03/2017')
+const today = Date.now()
 
 const asNumber = val => +val
 
 const parseDate = date => {
   const parts = date.split('/')
   return `${parts[2]}-${parts[0]}-${parts[1]}`
+}
+
+const getNumericAPR = apr => {
+  if (apr.match(/%$/)) apr = apr.slice(0, -1)
+  return +apr
+}
+
+const validatedInput = {
+  rateSetDate: {
+    validate(date) {
+      const parts = date.split('/')
+      if (parts.length !== 3) return true
+      const numericDate = +new Date(date)
+      if (numericDate < startDate || numericDate > today) return true
+      return false
+    },
+    text:
+      "Rate set date must be in mm/dd/yyyy format and between 01/02/2017 and today's date"
+  },
+  APR: {
+    validate(apr) {
+      apr = getNumericAPR(apr)
+      return isNaN(apr) || apr < 0 || apr > 99.999
+    },
+    text: 'APR must be a number between 0 and 99.999'
+  },
+  loanTerm: {
+    validate(term) {
+      return isNaN(asNumber(term)) || term > 50 || term < 1
+    },
+    text: 'Loan term must be a number between 1 and 50.'
+  }
 }
 
 class Form extends Component {
@@ -31,6 +67,10 @@ class Form extends Component {
     this.rateSetDateHandler = this.makeChangeHandler('rateSetDate')
     this.APRHandler = this.makeChangeHandler('APR')
     this.loanTermHandler = this.makeChangeHandler('loanTerm')
+
+    this.rateSetValidator = this.makeValidator('rateSetDate')
+    this.APRValidator = this.makeValidator('APR')
+    this.loanTermValidator = this.makeValidator('loanTerm')
   }
 
   runFetch(url, body) {
@@ -48,8 +88,28 @@ class Form extends Component {
 
   makeChangeHandler(target) {
     return event => {
+      if (this.state.errors[target]) {
+        if (
+          validatedInput[target].validate(event.target.value) !==
+          this.state.errors[target]
+        )
+          this.setError(target, event)
+      }
       this.setState({ [target]: event.target.value })
     }
+  }
+
+  setError(target, event, fn) {
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        [target]: validatedInput[target].validate(event.target.value)
+      }
+    })
+  }
+
+  makeValidator(target) {
+    return event => this.setError(target, event)
   }
 
   handleFormSubmit(event) {
@@ -67,12 +127,16 @@ class Form extends Component {
       amortizationType: asNumber(this.state.loanTerm),
       reverseMortgage: asNumber(this.state.reverse),
       rateType: this.state.amortization + 'Rate',
-      apr: asNumber(this.state.APR),
+      apr: getNumericAPR(this.state.APR),
       lockinDate: parseDate(this.state.rateSetDate)
     })
   }
 
   render() {
+    const rateSetError = this.state.errors.rateSetDate
+    const APRError = this.state.errors.APR
+    const loanTermError = this.state.errors.loanTerm
+
     return (
       <form
         className="Form usa-grid"
@@ -154,34 +218,58 @@ class Form extends Component {
           <label htmlFor="amortizationVariable">Variable</label>
         </fieldset>
 
-        <label htmlFor="rateSetDate">
-          Rate Set Date<span className="usa-text-small">
-            Rate set date must be between 01/03/2000 and today&#39;s date
-          </span>
-        </label>
-        <input
-          type="input"
-          value={this.state.rateSetDate}
-          onChange={this.rateSetDateHandler}
-          id="rateSetDate"
-          placeholder="mm/dd/yyyy"
-        />
-        <label htmlFor="APR">APR%</label>
-        <input
-          type="input"
-          value={this.state.APR}
-          onChange={this.APRHandler}
-          id="APR"
-          placeholder="0.000%"
-        />
-        <label htmlFor="loanTerm">Loan Term</label>
-        <input
-          type="input"
-          value={this.state.loanTerm}
-          onChange={this.loanTermHandler}
-          id="loanTerm"
-          placeholder="(1-50 years)"
-        />
+        <div className={rateSetError ? 'usa-input-error' : ''}>
+          <label htmlFor="rateSetDate">
+            Rate Set Date<span className="usa-text-small">
+              Rate set date must be between 01/02/2017 and today&#39;s date
+            </span>
+          </label>
+          {rateSetError ? (
+            <h4 className="usa-input-error-message" role="alert">
+              {validatedInput.rateSetDate.text}
+            </h4>
+          ) : null}
+          <input
+            type="input"
+            value={this.state.rateSetDate}
+            onChange={this.rateSetDateHandler}
+            onBlur={this.rateSetValidator}
+            id="rateSetDate"
+            placeholder="mm/dd/yyyy"
+          />
+        </div>
+        <div className={APRError ? 'usa-input-error' : ''}>
+          <label htmlFor="APR">APR%</label>
+          {APRError ? (
+            <h4 className="usa-input-error-message" role="alert">
+              {validatedInput.APR.text}
+            </h4>
+          ) : null}
+          <input
+            type="input"
+            value={this.state.APR}
+            onChange={this.APRHandler}
+            onBlur={this.APRValidator}
+            id="APR"
+            placeholder="0.000%"
+          />
+        </div>
+        <div className={loanTermError ? 'usa-input-error' : ''}>
+          <label htmlFor="loanTerm">Loan Term</label>
+          {loanTermError ? (
+            <h4 className="usa-input-error-message" role="alert">
+              {validatedInput.APR.text}
+            </h4>
+          ) : null}
+          <input
+            type="input"
+            value={this.state.loanTerm}
+            onChange={this.loanTermHandler}
+            onBlur={this.loanTermValidator}
+            id="loanTerm"
+            placeholder="(1-50 years)"
+          />
+        </div>
         <input type="submit" value="Calculate rate spread" />
       </form>
     )
