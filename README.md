@@ -10,14 +10,29 @@ For more information on HMDA, checkout the [About HMDA page](http://www.consumer
 
 ## HMDA Tools
 
-- [File Format Verification Tool](file-format-verification/README.md) (work in progress)
-- [Check Digit Tool](check-digit/README.md) (work in progress)
+- [File Format Verification Tool](file-format-verification/README.md)
+- [Check Digit Tool](check-digit/README.md)
+- [Rate Spread Calculator](rate-spread/README.md)
 
+## Dependencies
+ - [yarn](https://yarnpkg.com)
+
+## Install
+To install each tool, clone this repo and run the following:
+```
+yarn
+```
+
+## Build projects
+Run the npm script of each tool to build it:
+
+```
+yarn run <project to build>
+```
 
 ## Deploy tools
 Run the following from the root of the repo to deploy to gh-pages
 
 ```
-npm install
 ./deploy.sh <project to be deployed>
 ```
