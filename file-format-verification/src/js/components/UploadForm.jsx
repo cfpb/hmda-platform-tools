@@ -51,28 +51,26 @@ export default class Upload extends Component {
       <div>
         <div className="UploadForm">
           {renderErrors(this.props.errors)}
-          <form className="usa-form" encType="multipart/form-data">
-            <div className="container-upload">
-              <Dropzone
-                disablePreview={true}
-                onDrop={setFile}
-                multiple={false}
-                className={`dropzone ${dropzoneDisabled}`}
+          <div className="container-upload">
+            <Dropzone
+              disablePreview={true}
+              onDrop={setFile}
+              multiple={false}
+              className={`dropzone ${dropzoneDisabled}`}
+            >
+              <div
+                ref={node => {
+                  this.dropzoneContent = node
+                }}
+                className="usa-text-small"
               >
-                <div
-                  ref={node => {
-                    this.dropzoneContent = node
-                  }}
-                  className="usa-text-small"
-                >
-                  <p>
-                    Drag your LAR file into this area or click in this box to
-                    select a LAR file to test.
-                  </p>
-                </div>
-              </Dropzone>
-            </div>
-          </form>
+                <p>
+                  Drag your LAR file into this area or click in this box to
+                  select a LAR file to test.
+                </p>
+              </div>
+            </Dropzone>
+          </div>
         </div>
       </div>
     )
