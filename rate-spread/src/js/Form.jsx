@@ -99,7 +99,7 @@ class Form extends Component {
     }
   }
 
-  setError(target, event, fn) {
+  setError(target, event) {
     this.setState({
       errors: {
         ...this.state.errors,
