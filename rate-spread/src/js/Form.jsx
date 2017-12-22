@@ -13,7 +13,7 @@ const defaultState = {
   errors: {}
 }
 
-const startDate = +new Date('01/02/2017')
+const startDate = new Date('01/02/2017').getTime()
 const today = Date.now()
 
 const asNumber = val => +val
@@ -33,7 +33,7 @@ const validatedInput = {
     validate(date) {
       const parts = date.split('/')
       if (parts.length !== 3) return true
-      const numericDate = +new Date(date)
+      const numericDate = new Date(date).getTime()
       if (numericDate < startDate || numericDate > today) return true
       return false
     },
