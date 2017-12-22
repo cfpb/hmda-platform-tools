@@ -13,7 +13,7 @@ const defaultState = {
   errors: {}
 }
 
-const startDate = +new Date('01/03/2017')
+const startDate = +new Date('01/02/2017')
 const today = Date.now()
 
 const asNumber = val => +val
