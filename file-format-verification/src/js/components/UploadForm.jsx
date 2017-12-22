@@ -58,7 +58,8 @@ export default class Upload extends Component {
               multiple={false}
               className={`dropzone ${dropzoneDisabled}`}
             >
-              <div
+              <button
+                onClick={e => e.preventDefault()}
                 ref={node => {
                   this.dropzoneContent = node
                 }}
@@ -68,7 +69,7 @@ export default class Upload extends Component {
                   Drag your LAR file into this area or click in this box to
                   select a LAR file to test.
                 </p>
-              </div>
+              </button>
             </Dropzone>
           </div>
         </div>
