@@ -1,19 +1,17 @@
-@import "uswds/uswds-customer-vars.scss";
+@import "uswds/_uswds-customer-vars.scss";
 @import "node_modules/uswds/src/stylesheets/all.scss";
 
 // HDMA customizations to USWDS
-@import "uswds/header.scss";
-@import "uswds/alert.scss";
-@import "uswds/footer.scss";
-@import "uswds/fixes.scss";
+@import "uswds/_header.scss";
+@import "uswds/_alert.scss";
+@import "uswds/_footer.scss";
 
 // HMDA specific
-@import "hmda.scss";
+@import "_hmda.scss";
 
 @import "node_modules/react-select/dist/react-select";
 
 // Components
-@import "components/WIP.scss";
-@import "components/LoadingIcon.scss";
-@import "components/UploadForm.scss";
-@import "components/ParseErrors.scss";
+@import "components/_LoadingIcon.scss";
+@import "components/_UploadForm.scss";
+@import "components/_ParseErrors.scss";
