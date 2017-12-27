@@ -82,7 +82,10 @@ class Form extends Component {
         'Content-Type': 'application/json'
       }
     }).then(response => {
-      return response.json()
+      return new Promise(resolve => {
+        if (response.status > 399) return resolve(response)
+        resolve(response.json())
+      })
     })
   }
 

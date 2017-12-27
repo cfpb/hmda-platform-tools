@@ -9,6 +9,7 @@ import Footer from './Footer.jsx'
 
 const defaultState = {
   isFetching: false,
+  error: false,
   rateSpread: ''
 }
 
@@ -21,10 +22,16 @@ export default class App extends Component {
   }
 
   onFetch() {
-    this.setState({ isFetching: true })
+    this.setState({ isFetching: true, error: false })
   }
 
   onCalculated(response) {
+    if (response.status) {
+      return this.setState({
+        isFetching: false,
+        error: true
+      })
+    }
     this.setState({
       isFetching: false,
       rateSpread: response.rateSpread
@@ -37,8 +44,16 @@ export default class App extends Component {
       <div key={2} className="usa-grid" id="main-content">
         <AppIntro />
         <Form onFetch={this.onFetch} onCalculated={this.onCalculated} />
-        {this.state.isFetching ? <LoadingIcon /> : null}
-        {this.state.rateSpread && !this.state.isFetching ? (
+        {this.state.isFetching ? (
+          <LoadingIcon />
+        ) : this.state.error ? (
+          <Alert type="error" heading="Sorry, an error has occured.">
+            <p>
+              Please try again later. If the problem persists, contact{' '}
+              <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+            </p>
+          </Alert>
+        ) : this.state.rateSpread ? (
           <Alert type="success" heading="Rate Spread">
             <p>{this.state.rateSpread}</p>
           </Alert>
