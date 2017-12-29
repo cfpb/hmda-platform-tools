@@ -127,7 +127,7 @@ class Form extends Component {
   prepareBodyFromState() {
     return JSON.stringify({
       actionTakenType: asNumber(this.state.actionTaken),
-      amortizationType: asNumber(this.state.loanTerm),
+      amortizationType: asNumber(this.state.loanTerm) - 1 || 1,
       reverseMortgage: asNumber(this.state.reverse),
       rateType: this.state.amortization + 'Rate',
       apr: getNumericAPR(this.state.APR),
@@ -261,7 +261,7 @@ class Form extends Component {
           <label htmlFor="loanTerm">Loan Term</label>
           {loanTermError ? (
             <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.APR.text}
+              {validatedInput.loanTerm.text}
             </h4>
           ) : null}
           <input
