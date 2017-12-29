@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Alert from './Alert.jsx'
-import isomorphicFetch from 'isomorphic-fetch'
 
 const defaultState = {
   actionTaken: '1',
@@ -73,22 +72,6 @@ class Form extends Component {
     this.loanTermValidator = this.makeValidator('loanTerm')
   }
 
-  runFetch(url, body) {
-    this.props.onFetch()
-    return isomorphicFetch(url, {
-      method: 'POST',
-      body: body,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => {
-      return new Promise(resolve => {
-        if (response.status > 399) return resolve(response)
-        resolve(response.json())
-      })
-    })
-  }
-
   makeChangeHandler(target) {
     return event => {
       if (this.state.errors[target]) {
@@ -118,8 +101,9 @@ class Form extends Component {
   handleFormSubmit(event) {
     event.preventDefault()
 
+    this.props.onFetch()
     const API_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread'
-    this.runFetch(API_URL, this.prepareBodyFromState()).then(res => {
+    this.props.runFetch(API_URL, this.prepareBodyFromState()).then(res => {
       this.props.onCalculated(res)
     })
   }

@@ -1,0 +1,17 @@
+.AppIntro{
+  #csvfile {
+    width: 106px;
+    height: 30px;
+    margin: -4px 0 0 2px;
+    padding: 0;
+    display: inline;
+    position: absolute;
+    z-index: -1;
+    border: none;
+  }
+  .csvLabel {
+    display: inline;
+    padding: 0.35em 0.5em;
+    margin: 0;
+  } 
+}
