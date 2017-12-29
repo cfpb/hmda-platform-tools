@@ -9,8 +9,10 @@ const App = () => {
   return [
     <Header key={1} />,
     <div key={2} className="usa-grid" id="main-content">
-      <AppIntro />
-      <Form />
+      <div className="usa-width-two-thirds">
+        <AppIntro />
+        <Form />
+      </div>
       <CSVUpload />
     </div>,
     <Footer key={3} />

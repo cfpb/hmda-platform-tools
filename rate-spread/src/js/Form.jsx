@@ -146,7 +146,7 @@ class Form extends Component {
     const loanTermError = this.state.validationErrors.loanTerm
 
     return (
-      <div className="usa-grid usa-width-two-thirds">
+      <div>
         <form className="Form" onSubmit={this.handleFormSubmit}>
           <fieldset>
             <legend>
