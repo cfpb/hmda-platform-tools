@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import LoadingIcon from './LoadingIcon.jsx'
 import Alert from './Alert.jsx'
+import runFetch from './runFetch.js'
 
 const defaultState = {
   actionTaken: '1',
@@ -10,7 +10,10 @@ const defaultState = {
   rateSetDate: '',
   APR: '',
   loanTerm: null,
-  errors: {}
+  validationErrors: {},
+  isFetching: false,
+  error: false,
+  rateSpread: ''
 }
 
 const startDate = new Date('01/02/2017').getTime()
@@ -73,39 +76,56 @@ class Form extends Component {
     this.loanTermValidator = this.makeValidator('loanTerm')
   }
 
+  onFetch() {
+    this.setState({ isFetching: true, error: false })
+  }
+
+  onCalculated(response) {
+    if (response.status) {
+      return this.setState({
+        isFetching: false,
+        error: true
+      })
+    }
+    this.setState({
+      isFetching: false,
+      rateSpread: response.rateSpread
+    })
+  }
+
   makeChangeHandler(target) {
     return event => {
-      if (this.state.errors[target]) {
+      if (this.state.validationErrors[target]) {
         if (
           validatedInput[target].validate(event.target.value) !==
-          this.state.errors[target]
+          this.state.validationErrors[target]
         )
-          this.setError(target, event)
+          this.setValidationErrors(target, event)
       }
       this.setState({ [target]: event.target.value })
     }
   }
 
-  setError(target, event) {
+  setValidationErrors(target, event) {
     this.setState({
-      errors: {
-        ...this.state.errors,
+      validationErrors: {
+        ...this.state.validationErrors,
         [target]: validatedInput[target].validate(event.target.value)
       }
     })
   }
 
   makeValidator(target) {
-    return event => this.setError(target, event)
+    return event => this.setValidationErrors(target, event)
   }
 
   handleFormSubmit(event) {
     event.preventDefault()
 
-    this.props.onFetch()
+    this.onFetch()
     const API_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread'
-    this.props.runFetch(API_URL, this.prepareBodyFromState()).then(res => {
-      this.props.onCalculated(res)
+    runFetch(API_URL, this.prepareBodyFromState()).then(res => {
+      this.onCalculated(res)
     })
   }
 
@@ -121,9 +141,9 @@ class Form extends Component {
   }
 
   render() {
-    const rateSetError = this.state.errors.rateSetDate
-    const APRError = this.state.errors.APR
-    const loanTermError = this.state.errors.loanTerm
+    const rateSetError = this.state.validationErrors.rateSetDate
+    const APRError = this.state.validationErrors.APR
+    const loanTermError = this.state.validationErrors.loanTerm
 
     return (
       <div className="usa-grid usa-width-two-thirds">
@@ -261,9 +281,9 @@ class Form extends Component {
             value="Calculate rate spread"
           />
         </form>
-        {this.props.isFetching ? (
+        {this.state.isFetching ? (
           <LoadingIcon />
-        ) : this.props.error ? (
+        ) : this.state.error ? (
           <Alert
             className="usa-width-two-thirds"
             type="error"
@@ -274,22 +294,18 @@ class Form extends Component {
               <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
             </p>
           </Alert>
-        ) : this.props.rateSpread ? (
+        ) : this.state.rateSpread ? (
           <Alert
             className="usa-width-two-thirds"
             type="success"
             heading="Rate Spread"
           >
-            <p>{this.props.rateSpread}</p>
+            <p>{this.state.rateSpread}</p>
           </Alert>
         ) : null}
       </div>
     )
   }
-}
-
-Form.propTypes = {
-  onCalculated: PropTypes.func.isRequired
 }
 
 export default Form

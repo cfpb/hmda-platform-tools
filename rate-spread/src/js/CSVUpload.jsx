@@ -1,11 +1,45 @@
 import React, { Component } from 'react'
+import fileSaver from 'file-saver'
 import LoadingIcon from './LoadingIcon.jsx'
 import Alert from './Alert.jsx'
+import runFetch from './runFetch.js'
+
+const defaultState = {
+  isFetching: false,
+  filename: '',
+  error: false
+}
 
 class CSVUpload extends Component {
   constructor(props) {
     super(props)
+    this.state = defaultState
     this.handleCSVSelect = this.handleCSVSelect.bind(this)
+  }
+
+  onCSVFetch() {
+    this.setState({ isFetching: true, error: false })
+  }
+
+  onCSVCalculated(response, file) {
+    if (response.status) {
+      return this.setState({
+        isFetching: false,
+        error: true
+      })
+    }
+
+    const filename = 'calculated-' + file.name
+
+    this.setState({
+      isFetching: false,
+      filename: filename
+    })
+
+    return fileSaver.saveAs(
+      new Blob([response], { type: 'text/csv;charset=utf-16' }),
+      filename
+    )
   }
 
   handleCSVSelect(event) {
@@ -15,10 +49,10 @@ class CSVUpload extends Component {
 
     event.target.value = null
 
-    this.props.onCSVFetch()
+    this.onCSVFetch()
     const CSV_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread/csv'
-    this.props.runFetch(CSV_URL, this.prepareCSVBody(file), true).then(res => {
-      this.props.onCSVCalculated(res, file)
+    runFetch(CSV_URL, this.prepareCSVBody(file), true).then(res => {
+      this.onCSVCalculated(res, file)
     })
   }
 
@@ -52,9 +86,9 @@ class CSVUpload extends Component {
             for information on csv formatting.
           </p>
         </div>
-        {this.props.isCSVFetching ? (
+        {this.state.isFetching ? (
           <LoadingIcon />
-        ) : this.props.csvError ? (
+        ) : this.state.error ? (
           <Alert
             type="error"
             heading="Sorry, an error has occured processing your file."
@@ -66,17 +100,15 @@ class CSVUpload extends Component {
               </a>.
             </p>
           </Alert>
-        ) : this.props.csvFilename ? (
+        ) : this.state.filename ? (
           <Alert
             type="success"
             heading="Batch rate spread calculation complete"
           >
             <p>
               Downloaded{' '}
-              <h4 style={{ display: 'inline' }}>
-                {this.props.csvFilename}
-              </h4>{' '}
-              with your batch results.
+              <h4 style={{ display: 'inline' }}>{this.state.filename}</h4> with
+              your batch results.
             </p>
           </Alert>
         ) : null}
