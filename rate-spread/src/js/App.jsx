@@ -4,7 +4,6 @@ import AppIntro from './AppIntro.jsx'
 import CSVUpload from './CSVUpload.jsx'
 import Form from './Form.jsx'
 import Footer from './Footer.jsx'
-import runFetch from './runFetch.js'
 
 const App = () => {
   return [
