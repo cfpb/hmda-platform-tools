@@ -1,8 +1,8 @@
-.AppIntro{
+.CSVUpload{
   #csvfile {
-    width: 106px;
-    height: 30px;
-    margin: -4px 0 0 2px;
+    width: 130px;
+    height: 33px;
+    margin: 2px 0 0 2px;
     padding: 0;
     display: inline;
     position: absolute;
@@ -10,8 +10,10 @@
     border: none;
   }
   .csvLabel {
-    display: inline;
-    padding: 0.35em 0.5em;
     margin: 0;
   } 
+
+  .LoadingIconWrapper {
+    margin-top: 1em;
+  }
 }

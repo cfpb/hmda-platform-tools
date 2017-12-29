@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import LoadingIcon from './LoadingIcon.jsx'
 import Alert from './Alert.jsx'
 
 const defaultState = {
@@ -125,144 +126,164 @@ class Form extends Component {
     const loanTermError = this.state.errors.loanTerm
 
     return (
-      <form
-        className="Form usa-grid"
-        id="main-content"
-        onSubmit={this.handleFormSubmit}
-      >
-        <fieldset>
-          <legend>
-            Action Taken Type<span className="usa-text-small">
-              If Action Taken Type is 3, 4, 5, 6, or 7, report Rate Spread as{' '}
-              <strong>NA</strong>
-            </span>
-          </legend>
-          <input
-            type="radio"
-            id="actionTaken1"
-            name="actionTaken"
-            value="1"
-            onChange={this.actionTakenHandler}
-            checked={this.state.actionTaken === '1'}
-          />
-          <label htmlFor="actionTaken1">1</label>
-          <input
-            type="radio"
-            id="actionTaken2"
-            name="actionTaken"
-            value="2"
-            onChange={this.actionTakenHandler}
-            checked={this.state.actionTaken === '2'}
-          />
-          <label htmlFor="actionTaken2">2</label>
-          <input
-            type="radio"
-            id="actionTaken8"
-            name="actionTaken"
-            value="8"
-            onChange={this.actionTakenHandler}
-            checked={this.state.actionTaken === '8'}
-          />
-          <label htmlFor="actionTaken8">8</label>
-        </fieldset>
-        <fieldset>
-          <legend>
-            Reverse Mortgage<span className="usa-text-small">
-              If Reverse Mortgage is 1, report Rate Spread as{' '}
-              <strong>NA</strong>
-            </span>
-          </legend>
+      <div className="usa-grid usa-width-two-thirds">
+        <form className="Form" onSubmit={this.handleFormSubmit}>
+          <fieldset>
+            <legend>
+              Action Taken Type<span className="usa-text-small">
+                If Action Taken Type is 3, 4, 5, 6, or 7, report Rate Spread as{' '}
+                <strong>NA</strong>
+              </span>
+            </legend>
+            <input
+              type="radio"
+              id="actionTaken1"
+              name="actionTaken"
+              value="1"
+              onChange={this.actionTakenHandler}
+              checked={this.state.actionTaken === '1'}
+            />
+            <label htmlFor="actionTaken1">1</label>
+            <input
+              type="radio"
+              id="actionTaken2"
+              name="actionTaken"
+              value="2"
+              onChange={this.actionTakenHandler}
+              checked={this.state.actionTaken === '2'}
+            />
+            <label htmlFor="actionTaken2">2</label>
+            <input
+              type="radio"
+              id="actionTaken8"
+              name="actionTaken"
+              value="8"
+              onChange={this.actionTakenHandler}
+              checked={this.state.actionTaken === '8'}
+            />
+            <label htmlFor="actionTaken8">8</label>
+          </fieldset>
+          <fieldset>
+            <legend>
+              Reverse Mortgage<span className="usa-text-small">
+                If Reverse Mortgage is 1, report Rate Spread as{' '}
+                <strong>NA</strong>
+              </span>
+            </legend>
 
-          <input
-            type="radio"
-            id="reverse2"
-            name="reverse"
-            value="2"
-            onChange={this.reverseHandler}
-            checked={this.state.reverse === '2'}
-          />
-          <label htmlFor="reverse2">2</label>
-        </fieldset>
-        <fieldset>
-          <legend>Amortization Type</legend>
-          <input
-            type="radio"
-            id="amortizationFixed"
-            name="amortization"
-            value="Fixed"
-            onChange={this.amortizationHandler}
-            checked={this.state.amortization === 'Fixed'}
-          />
-          <label htmlFor="amortizationFixed">Fixed</label>
-          <input
-            type="radio"
-            id="amortizationVariable"
-            name="amortization"
-            value="Variable"
-            onChange={this.amortizationHandler}
-            checked={this.state.amortization === 'Variable'}
-          />
-          <label htmlFor="amortizationVariable">Variable</label>
-        </fieldset>
+            <input
+              type="radio"
+              id="reverse2"
+              name="reverse"
+              value="2"
+              onChange={this.reverseHandler}
+              checked={this.state.reverse === '2'}
+            />
+            <label htmlFor="reverse2">2</label>
+          </fieldset>
+          <fieldset>
+            <legend>Amortization Type</legend>
+            <input
+              type="radio"
+              id="amortizationFixed"
+              name="amortization"
+              value="Fixed"
+              onChange={this.amortizationHandler}
+              checked={this.state.amortization === 'Fixed'}
+            />
+            <label htmlFor="amortizationFixed">Fixed</label>
+            <input
+              type="radio"
+              id="amortizationVariable"
+              name="amortization"
+              value="Variable"
+              onChange={this.amortizationHandler}
+              checked={this.state.amortization === 'Variable'}
+            />
+            <label htmlFor="amortizationVariable">Variable</label>
+          </fieldset>
 
-        <div className={rateSetError ? 'usa-input-error' : ''}>
-          <label htmlFor="rateSetDate">
-            Rate Set Date<span className="usa-text-small">
-              Rate set date must be between 01/02/2017 and today&#39;s date
-            </span>
-          </label>
-          {rateSetError ? (
-            <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.rateSetDate.text}
-            </h4>
-          ) : null}
+          <div className={rateSetError ? 'usa-input-error' : ''}>
+            <label htmlFor="rateSetDate">
+              Rate Set Date<span className="usa-text-small">
+                Rate set date must be between 01/02/2017 and today&#39;s date
+              </span>
+            </label>
+            {rateSetError ? (
+              <h4 className="usa-input-error-message" role="alert">
+                {validatedInput.rateSetDate.text}
+              </h4>
+            ) : null}
+            <input
+              type="input"
+              value={this.state.rateSetDate}
+              onChange={this.rateSetDateHandler}
+              onBlur={this.rateSetValidator}
+              id="rateSetDate"
+              placeholder="mm/dd/yyyy"
+            />
+          </div>
+          <div className={APRError ? 'usa-input-error' : ''}>
+            <label htmlFor="APR">APR%</label>
+            {APRError ? (
+              <h4 className="usa-input-error-message" role="alert">
+                {validatedInput.APR.text}
+              </h4>
+            ) : null}
+            <input
+              type="input"
+              value={this.state.APR}
+              onChange={this.APRHandler}
+              onBlur={this.APRValidator}
+              id="APR"
+              placeholder="0.000%"
+            />
+          </div>
+          <div className={loanTermError ? 'usa-input-error' : ''}>
+            <label htmlFor="loanTerm">Loan Term</label>
+            {loanTermError ? (
+              <h4 className="usa-input-error-message" role="alert">
+                {validatedInput.APR.text}
+              </h4>
+            ) : null}
+            <input
+              type="input"
+              value={this.state.loanTerm}
+              onChange={this.loanTermHandler}
+              onBlur={this.loanTermValidator}
+              id="loanTerm"
+              placeholder="(1-50 years)"
+            />
+          </div>
           <input
-            type="input"
-            value={this.state.rateSetDate}
-            onChange={this.rateSetDateHandler}
-            onBlur={this.rateSetValidator}
-            id="rateSetDate"
-            placeholder="mm/dd/yyyy"
+            disabled={rateSetError || APRError || loanTermError}
+            type="submit"
+            value="Calculate rate spread"
           />
-        </div>
-        <div className={APRError ? 'usa-input-error' : ''}>
-          <label htmlFor="APR">APR%</label>
-          {APRError ? (
-            <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.APR.text}
-            </h4>
-          ) : null}
-          <input
-            type="input"
-            value={this.state.APR}
-            onChange={this.APRHandler}
-            onBlur={this.APRValidator}
-            id="APR"
-            placeholder="0.000%"
-          />
-        </div>
-        <div className={loanTermError ? 'usa-input-error' : ''}>
-          <label htmlFor="loanTerm">Loan Term</label>
-          {loanTermError ? (
-            <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.APR.text}
-            </h4>
-          ) : null}
-          <input
-            type="input"
-            value={this.state.loanTerm}
-            onChange={this.loanTermHandler}
-            onBlur={this.loanTermValidator}
-            id="loanTerm"
-            placeholder="(1-50 years)"
-          />
-        </div>
-        <input
-          disabled={rateSetError || APRError || loanTermError}
-          type="submit"
-          value="Calculate rate spread"
-        />
-      </form>
+        </form>
+        {this.props.isFetching ? (
+          <LoadingIcon />
+        ) : this.props.error ? (
+          <Alert
+            className="usa-width-two-thirds"
+            type="error"
+            heading="Sorry, an error has occured."
+          >
+            <p>
+              Please try again later. If the problem persists, contact{' '}
+              <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+            </p>
+          </Alert>
+        ) : this.props.rateSpread ? (
+          <Alert
+            className="usa-width-two-thirds"
+            type="success"
+            heading="Rate Spread"
+          >
+            <p>{this.props.rateSpread}</p>
+          </Alert>
+        ) : null}
+      </div>
     )
   }
 }

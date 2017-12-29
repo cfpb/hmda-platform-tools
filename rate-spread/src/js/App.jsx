@@ -3,10 +3,10 @@ import isomorphicFetch from 'isomorphic-fetch'
 import fileSaver from 'file-saver'
 import Header from './Header.jsx'
 import AppIntro from './AppIntro.jsx'
+import CSVUpload from './CSVUpload.jsx'
 import InputError from './InputError.jsx'
 import Form from './Form.jsx'
 import Alert from './Alert.jsx'
-import LoadingIcon from './LoadingIcon.jsx'
 import Footer from './Footer.jsx'
 
 const defaultState = {
@@ -96,31 +96,23 @@ export default class App extends Component {
     return [
       <Header key={1} />,
       <div key={2} className="usa-grid" id="main-content">
-        <AppIntro
-          onCSVFetch={this.onCSVFetch}
-          onCSVCalculated={this.onCSVCalculated}
-          runFetch={this.runFetch}
-          {...this.state}
-        />
+        <AppIntro />
         <Form
           onFetch={this.onFetch}
           onCalculated={this.onCalculated}
           runFetch={this.runFetch}
+          isFetching={this.state.isFetching}
+          rateSpread={this.state.rateSpread}
+          error={this.state.error}
         />
-        {this.state.isFetching ? (
-          <LoadingIcon />
-        ) : this.state.error ? (
-          <Alert type="error" heading="Sorry, an error has occured.">
-            <p>
-              Please try again later. If the problem persists, contact{' '}
-              <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
-            </p>
-          </Alert>
-        ) : this.state.rateSpread ? (
-          <Alert type="success" heading="Rate Spread">
-            <p>{this.state.rateSpread}</p>
-          </Alert>
-        ) : null}
+        <CSVUpload
+          onCSVFetch={this.onCSVFetch}
+          onCSVCalculated={this.onCSVCalculated}
+          runFetch={this.runFetch}
+          isCSVFetching={this.state.isCSVFetching}
+          csvFilename={this.state.csvFilename}
+          csvError={this.state.csvError}
+        />
       </div>,
       <Footer key={3} />
     ]
