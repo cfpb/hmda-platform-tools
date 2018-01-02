@@ -127,7 +127,7 @@ class Form extends Component {
   prepareBodyFromState() {
     return JSON.stringify({
       actionTakenType: asNumber(this.state.actionTaken),
-      amortizationType: asNumber(this.state.loanTerm) - 1 || 1,
+      amortizationType: asNumber(this.state.loanTerm),
       reverseMortgage: asNumber(this.state.reverse),
       rateType: this.state.amortization + 'Rate',
       apr: getNumericAPR(this.state.APR),
