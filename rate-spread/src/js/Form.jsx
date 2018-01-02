@@ -127,11 +127,11 @@ class Form extends Component {
   prepareBodyFromState() {
     return JSON.stringify({
       actionTakenType: asNumber(this.state.actionTaken),
-      amortizationType: asNumber(this.state.loanTerm),
+      loanTerm: asNumber(this.state.loanTerm),
       reverseMortgage: asNumber(this.state.reverse),
-      rateType: this.state.amortization + 'Rate',
+      amortizationType: this.state.amortization + 'Rate',
       apr: getNumericAPR(this.state.APR),
-      lockinDate: parseDate(this.state.rateSetDate)
+      lockInDate: parseDate(this.state.rateSetDate)
     })
   }
 
