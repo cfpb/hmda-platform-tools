@@ -1,0 +1,17 @@
+.CSVUpload{
+  #csvfile {
+    width: 130px;
+    height: 33px;
+    margin: 2px 0 0 2px;
+    padding: 0;
+    display: inline;
+    position: absolute;
+    z-index: 2;
+    border: none;
+  }
+  .csvLabel {
+    margin: 0;
+    position: relative;
+    z-index: 3;
+  } 
+}

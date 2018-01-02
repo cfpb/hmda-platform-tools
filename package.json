@@ -33,6 +33,7 @@
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
     "detect-browser": "2.0.0",
+    "file-saver": "1.3.3",
     "filereader-stream": "1.0.0",
     "gh-pages": "0.12.0",
     "hmda-file-parser": "1.18.0",
