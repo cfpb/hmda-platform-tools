@@ -5,6 +5,7 @@ import InputError from './InputError.jsx'
 import Form from './Form.jsx'
 import Answer from './Answer.jsx'
 import Footer from './Footer.jsx'
+import CSVUpload from './CSVUpload.jsx'
 import isomorphicFetch from 'isomorphic-fetch'
 import { isUliValid, isLoanIdValid } from './utils/index.js'
 
@@ -139,27 +140,30 @@ export default class App extends Component {
     return [
       <Header key={1} />,
       <div key={2} className="usa-grid" id="main-content">
-        <AppIntro />
-        <InputError errors={errors} isSubmitted={isSubmitted} />
-        <Form
-          inputValue={inputValue}
-          onSubmit={this.handleSubmit}
-          onInputChange={this.handleInputChange}
-          validateInput={this.validateInput}
-          errors={errors}
-          onRadioChange={this.handleRadioChange}
-          whichApp={whichApp}
-          isSubmitted={isSubmitted}
-          uli={uli}
-          isValidUli={isValidUli}
-        />
-        <Answer
-          uli={uli}
-          isValidUli={isValidUli}
-          checkDigit={checkDigit}
-          isSubmitted={isSubmitted}
-          errors={errors}
-        />
+        <div className="usa-width-two-thirds">
+          <AppIntro />
+          <InputError errors={errors} isSubmitted={isSubmitted} />
+          <Form
+            inputValue={inputValue}
+            onSubmit={this.handleSubmit}
+            onInputChange={this.handleInputChange}
+            validateInput={this.validateInput}
+            errors={errors}
+            onRadioChange={this.handleRadioChange}
+            whichApp={whichApp}
+            isSubmitted={isSubmitted}
+            uli={uli}
+            isValidUli={isValidUli}
+          />
+          <Answer
+            uli={uli}
+            isValidUli={isValidUli}
+            checkDigit={checkDigit}
+            isSubmitted={isSubmitted}
+            errors={errors}
+          />
+        </div>
+        <CSVUpload />
       </div>,
       <Footer key={3} />
     ]
