@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import LoadingIcon from './LoadingIcon.jsx'
 import Alert from './Alert.jsx'
-import isomorphicFetch from 'isomorphic-fetch'
+import runFetch from './runFetch.js'
 
 const defaultState = {
   actionTaken: '1',
@@ -10,7 +10,11 @@ const defaultState = {
   rateSetDate: '',
   APR: '',
   loanTerm: null,
-  errors: {}
+  validationErrors: {},
+  isFetching: false,
+  error: false,
+  errorText: '',
+  rateSpread: ''
 }
 
 const startDate = new Date('01/02/2017').getTime()
@@ -73,54 +77,57 @@ class Form extends Component {
     this.loanTermValidator = this.makeValidator('loanTerm')
   }
 
-  runFetch(url, body) {
-    this.props.onFetch()
-    return isomorphicFetch(url, {
-      method: 'POST',
-      body: body,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => {
-      return new Promise(resolve => {
-        if (response.status > 399) return resolve(response)
-        resolve(response.json())
+  onFetch() {
+    this.setState({ isFetching: true, error: false, errorText: '' })
+  }
+
+  onCalculated(response) {
+    if (response.status) {
+      return this.setState({
+        isFetching: false,
+        error: true,
+        errorText: response.status === 404 ? response.statusText : ''
       })
+    }
+    this.setState({
+      isFetching: false,
+      rateSpread: response.rateSpread
     })
   }
 
   makeChangeHandler(target) {
     return event => {
-      if (this.state.errors[target]) {
+      if (this.state.validationErrors[target]) {
         if (
           validatedInput[target].validate(event.target.value) !==
-          this.state.errors[target]
+          this.state.validationErrors[target]
         )
-          this.setError(target, event)
+          this.setValidationErrors(target, event)
       }
       this.setState({ [target]: event.target.value })
     }
   }
 
-  setError(target, event) {
+  setValidationErrors(target, event) {
     this.setState({
-      errors: {
-        ...this.state.errors,
+      validationErrors: {
+        ...this.state.validationErrors,
         [target]: validatedInput[target].validate(event.target.value)
       }
     })
   }
 
   makeValidator(target) {
-    return event => this.setError(target, event)
+    return event => this.setValidationErrors(target, event)
   }
 
   handleFormSubmit(event) {
     event.preventDefault()
 
+    this.onFetch()
     const API_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread'
-    this.runFetch(API_URL, this.prepareBodyFromState()).then(res => {
-      this.props.onCalculated(res)
+    runFetch(API_URL, this.prepareBodyFromState()).then(res => {
+      this.onCalculated(res)
     })
   }
 
@@ -136,155 +143,175 @@ class Form extends Component {
   }
 
   render() {
-    const rateSetError = this.state.errors.rateSetDate
-    const APRError = this.state.errors.APR
-    const loanTermError = this.state.errors.loanTerm
+    const rateSetError = this.state.validationErrors.rateSetDate
+    const APRError = this.state.validationErrors.APR
+    const loanTermError = this.state.validationErrors.loanTerm
 
     return (
-      <form
-        className="Form usa-grid"
-        id="main-content"
-        onSubmit={this.handleFormSubmit}
-      >
-        <fieldset>
-          <legend>
-            Action Taken Type<span className="usa-text-small">
-              If Action Taken Type is 3, 4, 5, 6, or 7, report Rate Spread as{' '}
-              <strong>NA</strong>
-            </span>
-          </legend>
-          <input
-            type="radio"
-            id="actionTaken1"
-            name="actionTaken"
-            value="1"
-            onChange={this.actionTakenHandler}
-            checked={this.state.actionTaken === '1'}
-          />
-          <label htmlFor="actionTaken1">1</label>
-          <input
-            type="radio"
-            id="actionTaken2"
-            name="actionTaken"
-            value="2"
-            onChange={this.actionTakenHandler}
-            checked={this.state.actionTaken === '2'}
-          />
-          <label htmlFor="actionTaken2">2</label>
-          <input
-            type="radio"
-            id="actionTaken8"
-            name="actionTaken"
-            value="8"
-            onChange={this.actionTakenHandler}
-            checked={this.state.actionTaken === '8'}
-          />
-          <label htmlFor="actionTaken8">8</label>
-        </fieldset>
-        <fieldset>
-          <legend>
-            Reverse Mortgage<span className="usa-text-small">
-              If Reverse Mortgage is 1, report Rate Spread as{' '}
-              <strong>NA</strong>
-            </span>
-          </legend>
+      <div>
+        <form className="Form" onSubmit={this.handleFormSubmit}>
+          <fieldset>
+            <legend>
+              Action Taken Type<span className="usa-text-small">
+                If Action Taken Type is 3, 4, 5, 6, or 7, report Rate Spread as{' '}
+                <strong>NA</strong>
+              </span>
+            </legend>
+            <input
+              type="radio"
+              id="actionTaken1"
+              name="actionTaken"
+              value="1"
+              onChange={this.actionTakenHandler}
+              checked={this.state.actionTaken === '1'}
+            />
+            <label htmlFor="actionTaken1">1</label>
+            <input
+              type="radio"
+              id="actionTaken2"
+              name="actionTaken"
+              value="2"
+              onChange={this.actionTakenHandler}
+              checked={this.state.actionTaken === '2'}
+            />
+            <label htmlFor="actionTaken2">2</label>
+            <input
+              type="radio"
+              id="actionTaken8"
+              name="actionTaken"
+              value="8"
+              onChange={this.actionTakenHandler}
+              checked={this.state.actionTaken === '8'}
+            />
+            <label htmlFor="actionTaken8">8</label>
+          </fieldset>
+          <fieldset>
+            <legend>
+              Reverse Mortgage<span className="usa-text-small">
+                If Reverse Mortgage is 1, report Rate Spread as{' '}
+                <strong>NA</strong>
+              </span>
+            </legend>
 
-          <input
-            type="radio"
-            id="reverse2"
-            name="reverse"
-            value="2"
-            onChange={this.reverseHandler}
-            checked={this.state.reverse === '2'}
-          />
-          <label htmlFor="reverse2">2</label>
-        </fieldset>
-        <fieldset>
-          <legend>Amortization Type</legend>
-          <input
-            type="radio"
-            id="amortizationFixed"
-            name="amortization"
-            value="Fixed"
-            onChange={this.amortizationHandler}
-            checked={this.state.amortization === 'Fixed'}
-          />
-          <label htmlFor="amortizationFixed">Fixed</label>
-          <input
-            type="radio"
-            id="amortizationVariable"
-            name="amortization"
-            value="Variable"
-            onChange={this.amortizationHandler}
-            checked={this.state.amortization === 'Variable'}
-          />
-          <label htmlFor="amortizationVariable">Variable</label>
-        </fieldset>
+            <input
+              type="radio"
+              id="reverse2"
+              name="reverse"
+              value="2"
+              onChange={this.reverseHandler}
+              checked={this.state.reverse === '2'}
+            />
+            <label htmlFor="reverse2">2</label>
+          </fieldset>
+          <fieldset>
+            <legend>Amortization Type</legend>
+            <input
+              type="radio"
+              id="amortizationFixed"
+              name="amortization"
+              value="Fixed"
+              onChange={this.amortizationHandler}
+              checked={this.state.amortization === 'Fixed'}
+            />
+            <label htmlFor="amortizationFixed">Fixed</label>
+            <input
+              type="radio"
+              id="amortizationVariable"
+              name="amortization"
+              value="Variable"
+              onChange={this.amortizationHandler}
+              checked={this.state.amortization === 'Variable'}
+            />
+            <label htmlFor="amortizationVariable">Variable</label>
+          </fieldset>
 
-        <div className={rateSetError ? 'usa-input-error' : ''}>
-          <label htmlFor="rateSetDate">
-            Rate Set Date<span className="usa-text-small">
-              Rate set date must be between 01/02/2017 and today&#39;s date
-            </span>
-          </label>
-          {rateSetError ? (
-            <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.rateSetDate.text}
-            </h4>
-          ) : null}
+          <div className={rateSetError ? 'usa-input-error' : ''}>
+            <label htmlFor="rateSetDate">
+              Rate Set Date<span className="usa-text-small">
+                Rate set date must be between 01/02/2017 and today&#39;s date
+              </span>
+            </label>
+            {rateSetError ? (
+              <h4 className="usa-input-error-message" role="alert">
+                {validatedInput.rateSetDate.text}
+              </h4>
+            ) : null}
+            <input
+              type="input"
+              value={this.state.rateSetDate}
+              onChange={this.rateSetDateHandler}
+              onBlur={this.rateSetValidator}
+              id="rateSetDate"
+              placeholder="mm/dd/yyyy"
+            />
+          </div>
+          <div className={APRError ? 'usa-input-error' : ''}>
+            <label htmlFor="APR">APR%</label>
+            {APRError ? (
+              <h4 className="usa-input-error-message" role="alert">
+                {validatedInput.APR.text}
+              </h4>
+            ) : null}
+            <input
+              type="input"
+              value={this.state.APR}
+              onChange={this.APRHandler}
+              onBlur={this.APRValidator}
+              id="APR"
+              placeholder="0.000%"
+            />
+          </div>
+          <div className={loanTermError ? 'usa-input-error' : ''}>
+            <label htmlFor="loanTerm">Loan Term</label>
+            {loanTermError ? (
+              <h4 className="usa-input-error-message" role="alert">
+                {validatedInput.loanTerm.text}
+              </h4>
+            ) : null}
+            <input
+              type="input"
+              value={this.state.loanTerm}
+              onChange={this.loanTermHandler}
+              onBlur={this.loanTermValidator}
+              id="loanTerm"
+              placeholder="(1-50 years)"
+            />
+          </div>
           <input
-            type="input"
-            value={this.state.rateSetDate}
-            onChange={this.rateSetDateHandler}
-            onBlur={this.rateSetValidator}
-            id="rateSetDate"
-            placeholder="mm/dd/yyyy"
+            disabled={rateSetError || APRError || loanTermError}
+            type="submit"
+            value="Calculate rate spread"
           />
-        </div>
-        <div className={APRError ? 'usa-input-error' : ''}>
-          <label htmlFor="APR">APR%</label>
-          {APRError ? (
-            <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.APR.text}
-            </h4>
-          ) : null}
-          <input
-            type="input"
-            value={this.state.APR}
-            onChange={this.APRHandler}
-            onBlur={this.APRValidator}
-            id="APR"
-            placeholder="0.000%"
-          />
-        </div>
-        <div className={loanTermError ? 'usa-input-error' : ''}>
-          <label htmlFor="loanTerm">Loan Term</label>
-          {loanTermError ? (
-            <h4 className="usa-input-error-message" role="alert">
-              {validatedInput.loanTerm.text}
-            </h4>
-          ) : null}
-          <input
-            type="input"
-            value={this.state.loanTerm}
-            onChange={this.loanTermHandler}
-            onBlur={this.loanTermValidator}
-            id="loanTerm"
-            placeholder="(1-50 years)"
-          />
-        </div>
-        <input
-          disabled={rateSetError || APRError || loanTermError}
-          type="submit"
-          value="Calculate rate spread"
-        />
-      </form>
+        </form>
+        {this.state.isFetching ? (
+          <LoadingIcon />
+        ) : this.state.error ? (
+          <Alert
+            className="usa-width-two-thirds"
+            type="error"
+            heading="Sorry, an error has occured."
+          >
+            {this.state.errorText ? (
+              <p>{this.state.errorText}</p>
+            ) : (
+              <p>
+                Please try again later. If the problem persists, contact{' '}
+                <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+              </p>
+            )}
+          </Alert>
+        ) : this.state.rateSpread ? (
+          <Alert
+            className="usa-width-two-thirds"
+            type="success"
+            heading="Rate Spread"
+          >
+            <p>{this.state.rateSpread}</p>
+          </Alert>
+        ) : null}
+      </div>
     )
   }
-}
-
-Form.propTypes = {
-  onCalculated: PropTypes.func.isRequired
 }
 
 export default Form
