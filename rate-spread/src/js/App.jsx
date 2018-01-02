@@ -10,6 +10,7 @@ import Footer from './Footer.jsx'
 const defaultState = {
   isFetching: false,
   error: false,
+  errorText: '',
   rateSpread: ''
 }
 
@@ -22,14 +23,15 @@ export default class App extends Component {
   }
 
   onFetch() {
-    this.setState({ isFetching: true, error: false })
+    this.setState({ isFetching: true, error: false, errorText: '' })
   }
 
   onCalculated(response) {
     if (response.status) {
       return this.setState({
         isFetching: false,
-        error: true
+        error: true,
+        errorText: response.status === 404 ? response.statusText : ''
       })
     }
     this.setState({
@@ -48,10 +50,14 @@ export default class App extends Component {
           <LoadingIcon />
         ) : this.state.error ? (
           <Alert type="error" heading="Sorry, an error has occured.">
-            <p>
-              Please try again later. If the problem persists, contact{' '}
-              <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
-            </p>
+            {this.state.errorText ? (
+              <p>{this.state.errorText}</p>
+            ) : (
+              <p>
+                Please try again later. If the problem persists, contact{' '}
+                <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+              </p>
+            )}
           </Alert>
         ) : this.state.rateSpread ? (
           <Alert type="success" heading="Rate Spread">
