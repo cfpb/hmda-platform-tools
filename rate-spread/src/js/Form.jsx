@@ -9,7 +9,7 @@ const defaultState = {
   reverse: '2',
   rateSetDate: '',
   APR: '',
-  loanTerm: null,
+  loanTerm: '',
   validationErrors: {},
   isFetching: false,
   error: false,
@@ -166,9 +166,14 @@ class Form extends Component {
   }
 
   render() {
-    const rateSetError = this.state.validationErrors.rateSetDate
-    const APRError = this.state.validationErrors.APR
-    const loanTermError = this.state.validationErrors.loanTerm
+    const errs = this.state.validationErrors
+    const rateSetError = errs.rateSetDate
+    const APRError = errs.APR
+    const loanTermError = errs.loanTerm
+    const hasEmptyInputs =
+      this.state.rateSetDate === '' ||
+      this.state.APR === '' ||
+      this.state.loanTerm === ''
 
     return (
       <div>
@@ -301,7 +306,9 @@ class Form extends Component {
             />
           </div>
           <input
-            disabled={rateSetError || APRError || loanTermError}
+            disabled={
+              hasEmptyInputs || rateSetError || APRError || loanTermError
+            }
             type="submit"
             value="Calculate rate spread"
           />
