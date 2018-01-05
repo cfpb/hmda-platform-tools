@@ -5,7 +5,9 @@ import {
   BEGIN_PARSE,
   END_PARSE,
   SET_PAGE,
-  ERRORS_PER_PAGE
+  ERRORS_PER_PAGE,
+  PAGINATION_FADE_IN,
+  PAGINATION_FADE_OUT
 } from '../constants'
 
 const defaultUpload = {
@@ -28,7 +30,9 @@ const defaultParseErrors = {
 
 const defaultPagination = {
   page: 1,
-  total: 1
+  previousPage: 1,
+  total: 1,
+  fade: 0
 }
 
 //empty action logger, temporary / for debugging
@@ -87,12 +91,24 @@ export const pagination = (state = defaultPagination, action) => {
     case SET_PAGE:
       return {
         ...state,
-        page: action.page
+        page: action.page,
+        previousPage: state.page
       }
     case END_PARSE:
       return {
         page: 1,
-        total: ((action.larErrors.length / ERRORS_PER_PAGE) >> 0) + 1
+        total: ((action.larErrors.length / ERRORS_PER_PAGE) >> 0) + 1,
+        fade: 0
+      }
+    case PAGINATION_FADE_IN:
+      return {
+        ...state,
+        fade: 0
+      }
+    case PAGINATION_FADE_OUT:
+      return {
+        ...state,
+        fade: 1
       }
     default:
       return state

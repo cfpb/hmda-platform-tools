@@ -69,3 +69,15 @@ export function setPage(page) {
     page
   }
 }
+
+export function paginationFadeIn() {
+  return {
+    type: types.PAGINATION_FADE_IN
+  }
+}
+
+export function paginationFadeOut() {
+  return {
+    type: types.PAGINATION_FADE_OUT
+  }
+}
