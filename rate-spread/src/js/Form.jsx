@@ -9,7 +9,7 @@ const defaultState = {
   reverse: '2',
   rateSetDate: '',
   APR: '',
-  loanTerm: null,
+  loanTerm: '',
   validationErrors: {},
   isFetching: false,
   error: false,
@@ -28,6 +28,7 @@ const parseDate = date => {
 
 const getNumericAPR = apr => {
   if (apr.match(/%$/)) apr = apr.slice(0, -1)
+  if (apr === '') return NaN
   return +apr
 }
 
@@ -61,7 +62,6 @@ const validatedInput = {
 class Form extends Component {
   constructor(props) {
     super(props)
-
     this.state = defaultState
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.actionTakenHandler = this.makeChangeHandler('actionTaken')
@@ -115,6 +115,20 @@ class Form extends Component {
     })
   }
 
+  validateAllInput(cb) {
+    const newState = {}
+    const validated = ['rateSetDate', 'APR', 'loanTerm']
+    validated.forEach(v => {
+      newState[v] = validatedInput[v].validate(this.state[v])
+    })
+    this.setState(
+      {
+        validationErrors: newState
+      },
+      cb
+    )
+  }
+
   makeValidator(target) {
     return event => this.setValidationErrors(target, event)
   }
@@ -122,10 +136,15 @@ class Form extends Component {
   handleFormSubmit(event) {
     event.preventDefault()
 
-    this.onFetch()
-    const API_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread'
-    runFetch(API_URL, this.prepareBodyFromState()).then(res => {
-      this.onCalculated(res)
+    this.validateAllInput(() => {
+      const errs = this.state.validationErrors
+      if (errs.rateSetDate || errs.APR || errs.loanTerm) return
+
+      this.onFetch()
+      const API_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread'
+      runFetch(API_URL, this.prepareBodyFromState()).then(res => {
+        this.onCalculated(res)
+      })
     })
   }
 
@@ -141,9 +160,14 @@ class Form extends Component {
   }
 
   render() {
-    const rateSetError = this.state.validationErrors.rateSetDate
-    const APRError = this.state.validationErrors.APR
-    const loanTermError = this.state.validationErrors.loanTerm
+    const errs = this.state.validationErrors
+    const rateSetError = errs.rateSetDate
+    const APRError = errs.APR
+    const loanTermError = errs.loanTerm
+    const hasEmptyInputs =
+      this.state.rateSetDate === '' ||
+      this.state.APR === '' ||
+      this.state.loanTerm === ''
 
     return (
       <div>
@@ -276,7 +300,9 @@ class Form extends Component {
             />
           </div>
           <input
-            disabled={rateSetError || APRError || loanTermError}
+            disabled={
+              hasEmptyInputs || rateSetError || APRError || loanTermError
+            }
             type="submit"
             value="Calculate rate spread"
           />
