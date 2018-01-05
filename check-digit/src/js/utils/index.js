@@ -62,12 +62,12 @@ export const isLoanIdValid = loanId => {
   /*
     LEI alone is 20 characters
     loanId = LEI + loan/application id from the institution
-    so the loadId.length has to be >= 20
+    so the loadId.length has to be >= 21
     */
-  if (loanId.length > 0 && loanId.length < 20) {
+  if (loanId.length > 0 && loanId.length < 21) {
     const characters = loanId.length === 1 ? 'character' : 'characters'
     errors.push(
-      'A valid LEI and Loan/Application ID has a minimum of 20 characters. You have entered ' +
+      'A valid LEI and Loan/Application ID has a minimum of 21 characters. You have entered ' +
         loanId.length +
         ' ' +
         characters +
