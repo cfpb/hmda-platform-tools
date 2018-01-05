@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import LoadingIcon from '../components/LoadingIcon.jsx'
+import { ERRORS_PER_PAGE } from '../constants'
 
 let scrollHeight
 let scrollDiff
@@ -35,12 +36,12 @@ class Pagination extends Component {
     this._setScrollValues()
 
     let val = parseInt(this.state.value, 10)
-    const last = this._getLastPage(this.props)
+    const total = this._getTotalPages(this.props)
 
     if (isNaN(val)) return this._setFromProps()
 
     if (val < 1) val = 1
-    if (val > last) val = last
+    if (val > total) val = total
 
     this.props.getPage(val)
   }
@@ -49,8 +50,8 @@ class Pagination extends Component {
     return this.props.pagination.page
   }
 
-  _getLastPage() {
-    return this.props.pagination.last
+  _getTotalPages() {
+    return this.props.pagination.total
   }
 
   _getInput() {
@@ -74,7 +75,7 @@ class Pagination extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.pagination || nextProps.isFetching) return
-    this.setState({ value: this._getPaginationValue(nextProps) })
+    this.setState({ value: nextProps.pagination.page })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -91,10 +92,9 @@ class Pagination extends Component {
   render() {
     const pagination = this.props.pagination
     const page = this._getCurrentPage()
-    // we've decided that 20 is the default for pagination
-    if (pagination.total < 21) return null
+    if (pagination.total <= ERRORS_PER_PAGE) return null
     const firstPage = page === 1
-    const lastPage = page === pagination.last
+    const lastPage = page === pagination.total
 
     return (
       <div className="PaginationControls">
@@ -110,7 +110,7 @@ class Pagination extends Component {
           Previous
         </button>
         <div>
-          Page {this._getInput()} of {Math.ceil(pagination.total / 20)}
+          Page {this._getInput()} of {pagination.total}
         </div>
         <button
           className={lastPage ? 'usa-button-disabled' : ''}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import paginationFadeIn from '../actions/paginationFadeIn.js'
-import paginationFadeOut from '../actions/paginationFadeOut.js'
-import setPage from '../actions/setPage.js'
+//import paginationFadeIn from '../actions/paginationFadeIn.js'
+//import paginationFadeOut from '../actions/paginationFadeOut.js'
+import { setPage } from '../actions'
 import Pagination from '../components/Pagination.jsx'
 
 class PaginationContainer extends Component {
@@ -16,21 +16,21 @@ class PaginationContainer extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const { parseErrors } = state.app
+function mapStateToProps(state) {
+  const { pagination } = state.app
 
   return {
-    parseErrors
+    pagination
   }
 }
 
 function fadeAndSet(dispatch, page) {
   const fadeIn = () => {
-    return dispatch(paginationFadeIn())
+    //return dispatch(paginationFadeIn())
   }
 
   setTimeout(fadeIn, 300)
-  dispatch(paginationFadeOut())
+  //dispatch(paginationFadeOut())
   dispatch(setPage(page))
 }
 

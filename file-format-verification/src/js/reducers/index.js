@@ -3,7 +3,9 @@ import {
   SELECT_FILE,
   UPDATE_STATUS,
   BEGIN_PARSE,
-  END_PARSE
+  END_PARSE,
+  SET_PAGE,
+  ERRORS_PER_PAGE
 } from '../constants'
 
 const defaultUpload = {
@@ -24,6 +26,10 @@ const defaultParseErrors = {
   larErrors: []
 }
 
+const defaultPagination = {
+  page: 1,
+  total: 1
+}
 
 //empty action logger, temporary / for debugging
 export const empty = (state = {}, action) => {
@@ -35,19 +41,19 @@ export const empty = (state = {}, action) => {
  */
 export const upload = (state = defaultUpload, action) => {
   switch (action.type) {
-  case SELECT_FILE:
-    return {
-      ...state,
-      file: action.file,
-      errors: action.errors
-    }
-  default:
-    return state
+    case SELECT_FILE:
+      return {
+        ...state,
+        file: action.file,
+        errors: action.errors
+      }
+    default:
+      return state
   }
 }
 
 export const status = (state = defaultStatus, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case UPDATE_STATUS:
       return action.status
     default:
@@ -56,7 +62,7 @@ export const status = (state = defaultStatus, action) => {
 }
 
 export const parseErrors = (state = defaultParseErrors, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case BEGIN_PARSE:
       return {
         ...state,
@@ -76,9 +82,27 @@ export const parseErrors = (state = defaultParseErrors, action) => {
   }
 }
 
+export const pagination = (state = defaultPagination, action) => {
+  switch (action.type) {
+    case SET_PAGE:
+      return {
+        ...state,
+        page: action.page
+      }
+    case END_PARSE:
+      return {
+        page: 1,
+        total: ((action.larErrors.length / ERRORS_PER_PAGE) >> 0) + 1
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   empty,
   upload,
   status,
-  parseErrors
+  parseErrors,
+  pagination
 })
