@@ -21,9 +21,14 @@ const today = Date.now()
 
 const asNumber = val => +val
 
+const ensureTwoDigits = s => {
+  if (s.length === 2) return s
+  return '0' + s
+}
+
 const parseDate = date => {
   const parts = date.split('/')
-  return `${parts[2]}-${parts[0]}-${parts[1]}`
+  return `${parts[2]}-${ensureTwoDigits(parts[0])}-${ensureTwoDigits(parts[1])}`
 }
 
 const getNumericAPR = apr => {
@@ -38,7 +43,8 @@ const validatedInput = {
       const parts = date.split('/')
       if (parts.length !== 3) return true
       const numericDate = new Date(date).getTime()
-      if (numericDate < startDate || numericDate > today) return true
+      if (isNaN(numericDate) || numericDate < startDate || numericDate > today)
+        return true
       return false
     },
     text:
