@@ -13,6 +13,7 @@ const defaultState = {
   validationErrors: {},
   isFetching: false,
   error: false,
+  errorText: '',
   rateSpread: ''
 }
 
@@ -83,14 +84,15 @@ class Form extends Component {
   }
 
   onFetch() {
-    this.setState({ isFetching: true, error: false })
+    this.setState({ isFetching: true, error: false, errorText: '' })
   }
 
   onCalculated(response) {
     if (response.status) {
       return this.setState({
         isFetching: false,
-        error: true
+        error: true,
+        errorText: response.status === 404 ? response.statusText : ''
       })
     }
     this.setState({
@@ -157,11 +159,11 @@ class Form extends Component {
   prepareBodyFromState() {
     return JSON.stringify({
       actionTakenType: asNumber(this.state.actionTaken),
-      amortizationType: asNumber(this.state.loanTerm) - 1 || 1,
+      loanTerm: asNumber(this.state.loanTerm),
       reverseMortgage: asNumber(this.state.reverse),
-      rateType: this.state.amortization + 'Rate',
+      amortizationType: this.state.amortization + 'Rate',
       apr: getNumericAPR(this.state.APR),
-      lockinDate: parseDate(this.state.rateSetDate)
+      lockInDate: parseDate(this.state.rateSetDate)
     })
   }
 
@@ -321,10 +323,14 @@ class Form extends Component {
             type="error"
             heading="Sorry, an error has occured."
           >
-            <p>
-              Please try again later. If the problem persists, contact{' '}
-              <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
-            </p>
+            {this.state.errorText ? (
+              <p>{this.state.errorText}</p>
+            ) : (
+              <p>
+                Please try again later. If the problem persists, contact{' '}
+                <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+              </p>
+            )}
           </Alert>
         ) : this.state.rateSpread ? (
           <Alert
