@@ -21,11 +21,14 @@ function mapStateToProps(state) {
     larErrors
   } = state.app.parseErrors
 
+  const { pagination } = state.app
+
   return {
     isParsing,
     parsed,
     transmittalSheetErrors,
-    larErrors
+    larErrors,
+    pagination
   }
 }
 

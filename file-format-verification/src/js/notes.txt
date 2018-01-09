@@ -1,0 +1,6 @@
+pagination key in reducer
+currentPage, max pages, etc
+  - set on parse complete
+  - dispatch action to update page
+  - might need actions for fade stuff (yuck)
+  - pagination fade is its own thing?
