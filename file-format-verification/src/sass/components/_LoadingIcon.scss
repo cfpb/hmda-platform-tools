@@ -1,12 +1,11 @@
 .LoadingIconWrapper {
   -webkit-transform: rotateX(180deg);
   width: 3em;
-  margin: 0 auto;
+  margin: 0;
   transform: rotateX(180deg);
 }
 
 .LoadingIcon {
-  background-image:url('/img/LoadingIcon.png');
   width: 3em;
   animation: loading-spin 2s infinite linear;
 }
