@@ -5,6 +5,7 @@ then
   exit 1
 fi
 
+(export PATH_PREFIX=/hmda-platform-tools; yarn run "$1")
 mkdir "$1/dist/$1"
 mv $1/dist/* "$1/dist/$1" 2>/dev/null
 yarn run deploy -- -a -d "$1/dist"
