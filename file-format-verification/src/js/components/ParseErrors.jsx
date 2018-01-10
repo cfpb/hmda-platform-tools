@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Pagination from '../containers/Pagination.jsx'
-import LoadingIcon from './LoadingIcon.jsx'
+import LoadingIcon from '../../../../shared-components/LoadingIcon.jsx'
 import { ERRORS_PER_PAGE } from '../constants'
 
 const renderLarErrors = (larErrors, pagination) => {

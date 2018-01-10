@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import fileSaver from 'file-saver'
-import LoadingIcon from './LoadingIcon.jsx'
-import Alert from './Alert.jsx'
+import LoadingIcon from '../../../shared-components/LoadingIcon.jsx'
+import Alert from '../../../shared-components/Alert.jsx'
 import runFetch from './utils/runFetch.js'
 
 const defaultState = {
