@@ -292,7 +292,11 @@ class Form extends Component {
             />
           </div>
           <div className={loanTermError ? 'usa-input-error' : ''}>
-            <label htmlFor="loanTerm">Loan Term</label>
+            <label htmlFor="loanTerm">
+              {this.state.amortization === 'Fixed'
+                ? 'Loan Term'
+                : 'Years to First Adjustment'}
+            </label>
             {loanTermError ? (
               <h4 className="usa-input-error-message" role="alert">
                 {validatedInput.loanTerm.text}
