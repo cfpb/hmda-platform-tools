@@ -33,6 +33,18 @@ const AppIntro = () => {
       mortgage.
     </p>,
     <p key={4}>
+      <a
+        href="https://s3.amazonaws.com/cfpb-hmda-public/prod/apor/SurveyTable.csv"
+        download
+      >
+        Mortgage rate survey data
+      </a>{' '}
+      used to calculate rate spreads for loans reportable under HMDA is
+      available for download. The data source for the 1 year ARM product is CFPB
+      market research. The data source for all other products in mortgage rate
+      survey data is the Freddie Mac Primary Mortgage Market Survey®
+    </p>,
+    <p key={5}>
       <a href="./requirements.html">Data requirements</a> for the rate spread
       calculator are provided in accordance with Regulation C effective January
       1st, 2018.
