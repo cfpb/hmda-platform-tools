@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import LoadingIcon from './LoadingIcon.jsx'
-import Alert from './Alert.jsx'
+import LoadingIcon from '../../../shared-components/LoadingIcon.jsx'
+import Alert from '../../../shared-components/Alert.jsx'
 import runFetch from './runFetch.js'
 
 const defaultState = {

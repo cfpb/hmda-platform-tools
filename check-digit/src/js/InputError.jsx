@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Alert from './Alert.jsx'
+import Alert from '../../../shared-components/Alert.jsx'
 
 const InputError = ({ isSubmitted, errors }) => {
   if (isSubmitted && errors.length > 0) {

@@ -10,7 +10,9 @@
     "rate-spread": "(export PROJ=rate-spread; yarn run build-with-env)",
     "check-digit": "(export PROJ=check-digit; yarn run build-with-env)",
     "file-format-verification": "(export PROJ=file-format-verification; yarn run build-with-env)",
-    "build-with-env": "webpack --progress && node-sass --quiet --output-style=compressed $PROJ/src/sass/app.scss $PROJ/dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* $PROJ/dist/fonts && cp $PROJ/src/*.html $PROJ/dist/ && html-minifier --collapse-whitespace $PROJ/src/index.html -o $PROJ/dist/index.html && cp ./img/* $PROJ/dist/img && cp -r ./node_modules/uswds/dist/img/* $PROJ/dist/img"
+    "clear": "rimraf ${PROJ:-~}/dist && mkdirp ${PROJ:-~}/dist ${PROJ:-~}/dist/fonts",
+    "env": "sed -i '' s@##PATH_PREFIX##@$PATH_PREFIX@g ${PROJ:-~}/dist/js/app.min.js",
+    "build-with-env": "yarn run clear && webpack --progress && node-sass --quiet --output-style=compressed $PROJ/src/sass/app.scss $PROJ/dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* $PROJ/dist/fonts && cp $PROJ/src/*.html $PROJ/dist/ && html-minifier --collapse-whitespace $PROJ/src/index.html -o $PROJ/dist/index.html && yarn run env"
   },
   "repository": {
     "type": "git",
