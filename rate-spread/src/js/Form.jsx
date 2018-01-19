@@ -27,9 +27,16 @@ const ensureTwoDigits = s => {
   return '0' + s
 }
 
+const ensureFourDigits = s => {
+  if (s.length === 4) return s
+  return '20' + s
+}
+
 const parseDate = date => {
   const parts = date.split('/')
-  return `${parts[2]}-${ensureTwoDigits(parts[0])}-${ensureTwoDigits(parts[1])}`
+  return `${ensureFourDigits(parts[2])}-${ensureTwoDigits(
+    parts[0]
+  )}-${ensureTwoDigits(parts[1])}`
 }
 
 const getNumericAPR = apr => {
