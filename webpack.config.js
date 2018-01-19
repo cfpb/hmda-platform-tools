@@ -23,7 +23,10 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        include: [path.resolve(__dirname, process.env.PROJ, 'src/js')],
+        include: [
+          path.resolve(__dirname, process.env.PROJ, 'src/js'),
+          path.resolve(__dirname, 'shared-components')
+        ],
         exclude: [path.resolve(__dirname, 'node_modules')],
         use: {
           loader: 'babel-loader',
