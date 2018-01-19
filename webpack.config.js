@@ -14,7 +14,9 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify(
+          process.env.TOOLS_ENV ? process.env.TOOLS_ENV : 'production'
+        )
       }
     }),
     new UglifyJSPlugin({ sourceMap: true })
