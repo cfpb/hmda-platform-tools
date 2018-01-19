@@ -1,3 +1,5 @@
 node_modules/
-__tests__/
+npm-packages-offline-cache/
+*/__tests__/
+*/src/
 *.md
