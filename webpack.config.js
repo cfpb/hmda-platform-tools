@@ -7,7 +7,7 @@ module.exports = {
     main: path.resolve(__dirname, process.env.PROJ, 'src/js/index.js')
   },
   output: {
-    path: path.resolve(__dirname, process.env.PROJ, 'dist/js'),
+    path: path.resolve(__dirname, 'tools', `${process.env.PROJ}/js`),
     filename: 'app.min.js'
   },
   plugins: [
