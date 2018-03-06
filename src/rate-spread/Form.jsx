@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LoadingIcon from '../shared-components/LoadingIcon.jsx'
 import Alert from '../shared-components/Alert.jsx'
+import Header from '../shared-components/Header.jsx'
 import runFetch from './runFetch.js'
 
 const defaultState = {
@@ -187,13 +188,28 @@ class Form extends Component {
     return (
       <div>
         <form className="Form" onSubmit={this.handleFormSubmit}>
+          <header className="header">
+            <h3>Enter data manually</h3>
+            <p>
+              You can manually enter loan data to calculate the rate spread for
+              a single loan.
+            </p>
+          </header>
+          <div className="info">
+            <p style={{ marginTop: '0' }}>
+              You should report Rate Spread as <strong>NA</strong> if
+            </p>
+            <ul style={{ marginBottom: '0' }}>
+              <li>
+                <strong>Action Taken Type</strong> is 3, 4, 5, 6, or 7; or if
+              </li>
+              <li>
+                <strong>Reverse Mortgage</strong> is 1.
+              </li>
+            </ul>
+          </div>
           <fieldset>
-            <legend>
-              Action Taken Type<span className="usa-text-small">
-                If Action Taken Type is 3, 4, 5, 6, or 7, report Rate Spread as{' '}
-                <strong>NA</strong>
-              </span>
-            </legend>
+            <legend>Action Taken Type</legend>
             <input
               type="radio"
               id="actionTaken1"
@@ -223,12 +239,7 @@ class Form extends Component {
             <label htmlFor="actionTaken8">8</label>
           </fieldset>
           <fieldset>
-            <legend>
-              Reverse Mortgage<span className="usa-text-small">
-                If Reverse Mortgage is 1, report Rate Spread as{' '}
-                <strong>NA</strong>
-              </span>
-            </legend>
+            <legend>Reverse Mortgage</legend>
 
             <input
               type="radio"
@@ -263,15 +274,11 @@ class Form extends Component {
           </fieldset>
 
           <div className={rateSetError ? 'usa-input-error' : ''}>
-            <label htmlFor="rateSetDate">
-              Rate Set Date<span className="usa-text-small">
-                Rate set date must be between 01/02/2017 and today&#39;s date
-              </span>
-            </label>
+            <label htmlFor="rateSetDate">Rate Set Date</label>
             {rateSetError ? (
-              <h4 className="usa-input-error-message" role="alert">
+              <span className="usa-input-error-message" role="alert">
                 {validatedInput.rateSetDate.text}
-              </h4>
+              </span>
             ) : null}
             <input
               type="input"
@@ -285,9 +292,9 @@ class Form extends Component {
           <div className={APRError ? 'usa-input-error' : ''}>
             <label htmlFor="APR">APR%</label>
             {APRError ? (
-              <h4 className="usa-input-error-message" role="alert">
+              <span className="usa-input-error-message" role="alert">
                 {validatedInput.APR.text}
-              </h4>
+              </span>
             ) : null}
             <input
               type="input"
@@ -307,9 +314,9 @@ class Form extends Component {
               )}
             </label>
             {loanTermError ? (
-              <h4 className="usa-input-error-message" role="alert">
+              <span className="usa-input-error-message" role="alert">
                 {validatedInput.loanTerm.text}
-              </h4>
+              </span>
             ) : null}
             <input
               type="input"
@@ -331,11 +338,7 @@ class Form extends Component {
         {this.state.isFetching ? (
           <LoadingIcon />
         ) : this.state.error ? (
-          <Alert
-            className="usa-width-two-thirds"
-            type="error"
-            heading="Sorry, an error has occured."
-          >
+          <Alert type="error" heading="Sorry, an error has occured.">
             {this.state.errorText ? (
               <p>{this.state.errorText}</p>
             ) : (
@@ -346,11 +349,7 @@ class Form extends Component {
             )}
           </Alert>
         ) : this.state.rateSpread ? (
-          <Alert
-            className="usa-width-two-thirds"
-            type="success"
-            heading="Rate Spread"
-          >
+          <Alert type="success" heading="Rate Spread">
             <p>{this.state.rateSpread}</p>
           </Alert>
         ) : null}

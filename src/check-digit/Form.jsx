@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Alert from '../shared-components/Alert.jsx'
+import Header from '../shared-components/Header.jsx'
 import LoadingIcon from '../shared-components/LoadingIcon.jsx'
 
 class Form extends Component {
@@ -78,11 +79,15 @@ class Form extends Component {
     const errorClass = errors.length !== 0 ? 'usa-input-error' : ''
 
     return (
-      <form
-        className="Form usa-grid"
-        id="main-content"
-        onSubmit={this.handleFormSubmit}
-      >
+      <form className="Form" onSubmit={this.handleFormSubmit}>
+        <header className="header">
+          <h3>Enter data manually</h3>
+          <p>
+            You can manually enter a LEI and Loan/Application ID to generate a
+            check digit -or- you can manually enter a ULI to validate a check
+            digit.
+          </p>
+        </header>
         <ul className="usa-unstyled-list">
           <li>
             <input

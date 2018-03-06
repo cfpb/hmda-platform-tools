@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import fileSaver from 'file-saver'
 import LoadingIcon from '../shared-components/LoadingIcon.jsx'
+import Header from '../shared-components/Header.jsx'
 import Alert from '../shared-components/Alert.jsx'
 import runFetch from './utils/runFetch.js'
 
@@ -67,12 +68,15 @@ class CSVUpload extends Component {
 
   render() {
     return (
-      <div className="CSVUpload usa-width-one-third">
-        <div className="usa-alert">
-          <p>
-            You can also upload a csv to generate or validate many check digits
-            at once.
-          </p>
+      <div className="CSVUpload">
+        <div className="Form">
+          <header className="header">
+            <h3>Upload a CSV file</h3>
+            <p>
+              You can also upload a csv to generate or validate many check
+              digits at once.
+            </p>
+          </header>
           <input
             onChange={this.makeSelectHandler(
               'https://ffiec-api.cfpb.gov/public/uli/checkDigit/csv',
@@ -101,7 +105,7 @@ class CSVUpload extends Component {
               Validate check digits
             </label>
           </p>
-          <p>
+          <p className="usa-text-small">
             Please see{' '}
             <a href="http://cfpb.github.io/hmda-platform/uli/#generate-batch">
               the batch section of the API documentation

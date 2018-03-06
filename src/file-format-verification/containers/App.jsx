@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Header from '../../shared-components/Header.jsx'
+import AppHeader from '../../shared-components/AppHeader.jsx'
 import Footer from '../../shared-components/Footer.jsx'
 
 export class AppContainer extends Component {
@@ -11,7 +11,6 @@ export class AppContainer extends Component {
   render() {
     return (
       <div className="AppContainer">
-        <Header />
         {this.props.children}
         <Footer />
       </div>

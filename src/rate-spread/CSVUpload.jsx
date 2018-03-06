@@ -64,21 +64,26 @@ class CSVUpload extends Component {
 
   render() {
     return (
-      <div className="CSVUpload usa-width-one-third">
-        <div className="usa-alert">
+      <div className="CSVUpload">
+        <div className="Form">
+          <header className="header">
+            <h3>Upload a CSV file</h3>
+            <p>
+              You can also upload a csv to calculate many rate spreads at once.
+            </p>
+          </header>
           <p>
-            You can also upload a csv to calculate many rate spreads at once.
+            <input
+              onChange={this.handleCSVSelect}
+              type="file"
+              href="#"
+              id="csvfile"
+            />
+            <label className="usa-button csvLabel" htmlFor="csvfile">
+              Upload a csv
+            </label>
           </p>
-          <input
-            onChange={this.handleCSVSelect}
-            type="file"
-            href="#"
-            id="csvfile"
-          />
-          <label className="usa-button csvLabel" htmlFor="csvfile">
-            Upload a csv
-          </label>{' '}
-          <p>
+          <p className="usa-text-small">
             Please see{' '}
             <a href="http://cfpb.github.io/hmda-platform/rate-spread/#batch">
               the batch section of the API documentation

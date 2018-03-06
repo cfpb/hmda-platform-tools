@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Pagination from '../containers/Pagination.jsx'
+import Alert from '../../shared-components/Alert.jsx'
 import LoadingIcon from '../../shared-components/LoadingIcon.jsx'
 import { ERRORS_PER_PAGE } from '../constants'
 
@@ -77,36 +78,28 @@ const renderTSErrors = transmittalSheetErrors => {
 }
 
 const renderParseResults = count => {
-  const successCopy = 'Your file meets the specified formatting requirements.'
-  const failCopy = (
-    <span>
-      Your file has formatting errors.<br />Please fix the following errors and
-      try again.
-    </span>
-  )
-  const numberOfFieldsWarning = (
-    <p>
-      Rows with incorrect number of fields will need to be fixed and the file
-      will need to be reuploaded before the remaining formatting requirements
-      can be checked.
-    </p>
-  )
-  const errorText = count === 1 ? 'Error' : 'Errors'
   const noErrors = count === 0
 
+  if (noErrors) {
+    return (
+      <Alert type="success" heading="Congratulations! No Formatting Errors">
+        <p>Your file meets the specified formatting requirements.</p>
+      </Alert>
+    )
+  }
+
+  const errorText = count === 1 ? 'Error' : 'Errors'
+  const heading = `${count} Formatting ${errorText}`
+
   return (
-    <div
-      className={
-        'ParseResults ' + (noErrors ? 'usa-alert-success' : 'usa-alert-error')
-      }
-    >
-      <h2 className={noErrors ? 'text-green' : 'text-secondary'}>
-        {noErrors ? 'No' : count} Formatting {errorText}
-      </h2>
-      {noErrors ? <h3>Congratulations!</h3> : null}
-      <p className="usa-font-lead">{noErrors ? successCopy : failCopy}</p>
-      {noErrors ? null : numberOfFieldsWarning}
-    </div>
+    <Alert type="error" heading={heading}>
+      <p>
+        Your file has formatting errors.<br />Please fix the following errors
+        and try again.<br />Rows with incorrect number of fields will need to be
+        fixed and the file will need to be reuploaded before the remaining
+        formatting requirements can be checked.
+      </p>
+    </Alert>
   )
 }
 

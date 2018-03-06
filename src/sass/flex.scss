@@ -1,0 +1,17 @@
+.flex-row {
+  align-items: stretch;
+  display: flex;
+  margin: 0 auto;
+  max-width: $site-max-width;
+  padding: 0 3rem;
+}
+.flex-item {
+  flex: 1;
+  margin: 0 40px;
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}

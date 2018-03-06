@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
+import Header from '../shared-components/Header.jsx'
 import AppContainer from './containers/App.jsx'
 import UploadContainer from './containers/UploadForm.jsx'
 import ParseErrorsContainer from './containers/ParseErrors.jsx'
@@ -27,16 +28,20 @@ class FFVT extends React.Component {
       <Provider store={store}>
         <AppContainer>
           <div id="main-content" className="usa-grid">
-            <div className="usa-width-two-thirds padding-left-1 padding-right-1">
-              <h2>File Format Verification Tool</h2>
-              <p>
-                Select a HMDA file from your computer and test whether it meets
+            <div className="usa-width-one-whole">
+              <Header
+                heading="File Format Verification Tool"
+                lead="Select a HMDA file from your computer and test whether it meets
                 certain formatting requirements needed to submit HMDA data
                 collected in 2017 to the HMDA Platform. The File Format
                 Verification Tool does not test for compliance with edits. No
                 data, HMDA or otherwise, is transmitted from your computer to
-                the CFPB.
-              </p>
+                the CFPB."
+              />
+            </div>
+          </div>
+          <div id="main-content" className="usa-grid">
+            <div className="usa-width-two-thirds">
               <UploadContainer />
               <ParseErrorsContainer />
             </div>

@@ -138,10 +138,15 @@ export default class App extends Component {
     } = this.state
 
     return [
-      <Header key={1} />,
-      <div key={2} className="usa-grid" id="main-content">
-        <div className="usa-width-two-thirds">
-          <AppIntro />
+      <div key={1} id="main-content">
+        <div className="usa-grid">
+          <div className="usa-width-one-whole">
+            <AppIntro />
+          </div>
+        </div>
+      </div>,
+      <div className="flex-row">
+        <div className="flex-item">
           <InputError errors={errors} isSubmitted={isSubmitted} />
           <Form
             inputValue={inputValue}
@@ -163,9 +168,11 @@ export default class App extends Component {
             errors={errors}
           />
         </div>
-        <CSVUpload />
+        <div className="flex-item">
+          <CSVUpload />
+        </div>
       </div>,
-      <Footer key={3} />
+      <Footer key={2} />
     ]
   }
 }
