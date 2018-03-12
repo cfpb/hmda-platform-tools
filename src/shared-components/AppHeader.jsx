@@ -28,7 +28,7 @@ const AppHeader = () => {
                 </a>
               </li>
               <li>
-                <a href="/reports">Reports</a>
+                <a href="/reports/">Reports</a>
               </li>
               <li>
                 <Link className="usa-nav-link" to="/">
