@@ -27,9 +27,7 @@ class Home extends Component {
               whether your file meets certain formatting requirements specified
               in the HMDA Filing Instructions Guide.
             </p>
-            <Link to="/file-format-verification" className="usa-button">
-              Test your file
-            </Link>
+            <Link to="/file-format-verification">Test your file</Link>
           </div>
 
           <div className="card">
@@ -42,12 +40,9 @@ class Home extends Component {
               and applications, to create an electronic file that can be
               submitted to the HMDA Platform.
             </p>
-            <Link to="/lar-formatting" className="usa-button">
-              Download the tool
-            </Link>
+            <Link to="/lar-formatting">Download the tool</Link>
           </div>
-        </div>
-        <div className="card-container">
+
           <div className="card">
             <h4>
               <Link to="/rate-spread">Rate Spread</Link>
@@ -60,9 +55,7 @@ class Home extends Component {
               </a>{' '}
               for loans with a final action date before January 1st, 2018.
             </p>
-            <Link to="/rate-spread" className="usa-button">
-              Get rate spreads
-            </Link>
+            <Link to="/rate-spread">Get rate spreads</Link>
           </div>
 
           <div className="card">
@@ -76,9 +69,7 @@ class Home extends Component {
               validate that a check digit is calculated correctly for any
               complete Universal Loan Identifier (ULI) you enter.
             </p>
-            <Link to="/check-digit" className="usa-button">
-              Get and validate check digits
-            </Link>
+            <Link to="/check-digit">Get and validate check digits</Link>
           </div>
         </div>
       </div>

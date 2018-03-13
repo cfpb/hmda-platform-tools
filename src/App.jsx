@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import BannerUSA from './shared-components/BannerUSA.jsx'
 import AppHeader from './shared-components/AppHeader.jsx'
+import Footer from './shared-components/Footer.jsx'
 import Home from './Home.jsx'
 import CheckDigit from './check-digit/index.jsx'
 import RateSpread from './rate-spread/index.jsx'
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/file-format-verification" component={FFVT} />
         <Route path="/lar-formatting" component={LARFormatting} />
       </Switch>
+      <Footer />
     </React.Fragment>
   )
 }

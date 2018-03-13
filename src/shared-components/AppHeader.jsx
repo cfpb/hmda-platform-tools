@@ -28,8 +28,8 @@ const AppHeader = () => {
                 </a>
               </li>
               <li>
-                <a className="usa-nav-link" href="/reports/">
-                  Reports
+                <a className="usa-nav-link" href="/publication/">
+                  Publication
                 </a>
               </li>
               <li>
