@@ -6,6 +6,7 @@ import Home from './Home.jsx'
 import CheckDigit from './check-digit/index.jsx'
 import RateSpread from './rate-spread/index.jsx'
 import FFVT from './file-format-verification/index.jsx'
+import LARFormatting from './lar-formatting/index.jsx'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/check-digit" component={CheckDigit} />
         <Route path="/rate-spread" component={RateSpread} />
         <Route path="/file-format-verification" component={FFVT} />
+        <Route path="/lar-formatting" component={LARFormatting} />
       </Switch>
     </React.Fragment>
   )
