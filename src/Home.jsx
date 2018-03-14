@@ -17,11 +17,7 @@ class Home extends Component {
 
         <div className="card-container">
           <div className="card">
-            <h4>
-              <Link to="/file-format-verification">
-                File Format Verification
-              </Link>
-            </h4>
+            <h4>File Format Verification</h4>
             <p>
               The File Format Verification Tool (FFVT) is a resource for testing
               whether your file meets certain formatting requirements specified
@@ -31,9 +27,7 @@ class Home extends Component {
           </div>
 
           <div className="card">
-            <h4>
-              <Link to="/lar-formatting">LAR formatting</Link>
-            </h4>
+            <h4>LAR formatting</h4>
             <p>
               The LAR Formatting Tool is intended to help financial
               institutions, typically those with small volumes of covered loans
@@ -44,9 +38,7 @@ class Home extends Component {
           </div>
 
           <div className="card">
-            <h4>
-              <Link to="/rate-spread">Rate Spread</Link>
-            </h4>
+            <h4>Rate Spread</h4>
             <p>
               This calculator provides rate spreads for HMDA reportable loans
               with a final action date on or after January 1st, 2018. Use the{' '}
@@ -59,9 +51,7 @@ class Home extends Component {
           </div>
 
           <div className="card">
-            <h4>
-              <Link to="/check-digit">Check Digit</Link>
-            </h4>
+            <h4>Check Digit</h4>
             <p>
               You can use this tool for two functions. The first is to generate
               a two character check digit when you enter a Legal Entity
