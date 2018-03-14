@@ -1,16 +1,16 @@
 .header {
-  margin-bottom: 3em !important;
   h1,
-  h3 {
+  h4 {
     margin-bottom: 0;
   }
   .usa-font-lead {
     color: $color-gray;
     margin-top: 0;
-    margin-bottom: 2em;
   }
   p {
-    margin-top: 0;
     max-width: 77rem;
+  }
+  p:first-of-type {
+    margin-top: 0;
   }
 }

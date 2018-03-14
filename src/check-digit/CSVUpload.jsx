@@ -70,13 +70,12 @@ class CSVUpload extends Component {
     return (
       <div className="CSVUpload">
         <div className="Form">
-          <header className="header">
-            <h3>Upload a CSV file</h3>
-            <p>
-              You can also upload a csv to generate or validate many check
-              digits at once.
-            </p>
-          </header>
+          <Header
+            type="sub"
+            headingText="Upload a CSV file"
+            paragraphText="You can also upload a csv to generate or validate many check
+              digits at once."
+          />
           <input
             onChange={this.makeSelectHandler(
               'https://ffiec-api.cfpb.gov/public/uli/checkDigit/csv',

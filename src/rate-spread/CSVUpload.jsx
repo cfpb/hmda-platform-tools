@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import fileSaver from 'file-saver'
 import LoadingIcon from '../shared-components/LoadingIcon.jsx'
 import Alert from '../shared-components/Alert.jsx'
+import Header from '../shared-components/Header.jsx'
 import runFetch from './runFetch.js'
 
 const defaultState = {
@@ -66,12 +67,11 @@ class CSVUpload extends Component {
     return (
       <div className="CSVUpload">
         <div className="Form">
-          <header className="header">
-            <h3>Upload a CSV file</h3>
-            <p>
-              You can also upload a csv to calculate many rate spreads at once.
-            </p>
-          </header>
+          <Header
+            type="sub"
+            headingText="Upload a CSV file"
+            paragraphText="You can also upload a csv to calculate many rate spreads at once."
+          />
           <p>
             <input
               onChange={this.handleCSVSelect}

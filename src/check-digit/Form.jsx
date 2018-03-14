@@ -80,14 +80,13 @@ class Form extends Component {
 
     return (
       <form className="Form" onSubmit={this.handleFormSubmit}>
-        <header className="header">
-          <h3>Enter data manually</h3>
-          <p>
-            You can manually enter a LEI and Loan/Application ID to generate a
+        <Header
+          type="sub"
+          headingText="Enter data manually"
+          paragraphText="You can manually enter a LEI and Loan/Application ID to generate a
             check digit -or- you can manually enter a ULI to validate a check
-            digit.
-          </p>
-        </header>
+            digit."
+        />
         <ul className="usa-unstyled-list">
           <li>
             <input

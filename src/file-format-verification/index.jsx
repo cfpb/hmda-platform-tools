@@ -30,8 +30,9 @@ class FFVT extends React.Component {
           <div id="main-content" className="usa-grid">
             <div className="usa-width-one-whole">
               <Header
-                heading="File Format Verification Tool"
-                lead="Select a HMDA file from your computer and test whether it meets
+                type="main"
+                headingText="File Format Verification Tool"
+                paragraphText="Select a HMDA file from your computer and test whether it meets
                 certain formatting requirements needed to submit HMDA data
                 collected in 2017 to the HMDA Platform. The File Format
                 Verification Tool does not test for compliance with edits. No

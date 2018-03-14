@@ -188,26 +188,26 @@ class Form extends Component {
     return (
       <div>
         <form className="Form" onSubmit={this.handleFormSubmit}>
-          <header className="header">
-            <h3>Enter data manually</h3>
-            <p>
-              You can manually enter loan data to calculate the rate spread for
-              a single loan.
-            </p>
-          </header>
-          <div className="info">
-            <p style={{ marginTop: '0' }}>
-              You should report Rate Spread as <strong>NA</strong> if
-            </p>
-            <ul style={{ marginBottom: '0' }}>
-              <li>
-                <strong>Action Taken Type</strong> is 3, 4, 5, 6, or 7; or if
-              </li>
-              <li>
-                <strong>Reverse Mortgage</strong> is 1.
-              </li>
-            </ul>
-          </div>
+          <Header
+            type="sub"
+            headingText="Enter data manually"
+            paragraphText="You can manually enter loan data to calculate the rate spread for
+              a single loan."
+          >
+            <div className="info">
+              <p style={{ marginTop: '0' }}>
+                You should report Rate Spread as <strong>NA</strong> if
+              </p>
+              <ul style={{ marginBottom: '0' }}>
+                <li>
+                  <strong>Action Taken Type</strong> is 3, 4, 5, 6, or 7; or if
+                </li>
+                <li>
+                  <strong>Reverse Mortgage</strong> is 1.
+                </li>
+              </ul>
+            </div>
+          </Header>
           <fieldset>
             <legend>Action Taken Type</legend>
             <input

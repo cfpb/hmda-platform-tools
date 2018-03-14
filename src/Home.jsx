@@ -9,56 +9,57 @@ class Home extends Component {
         <div className="usa-grid">
           <div className="usa-width-one-whole">
             <Header
-              heading="HMDA tools"
-              lead="Here you can find various tools to assist you in getting your HMDA LAR ready for filing."
+              type="main"
+              headingText="HMDA tools"
+              paragraphText="Here you can find various tools to assist you in getting your HMDA LAR ready for filing."
             />
           </div>
         </div>
 
         <div className="card-container">
           <div className="card">
-            <h4>File Format Verification</h4>
-            <p>
-              The File Format Verification Tool (FFVT) is a resource for testing
+            <Header
+              type="sub"
+              headingText="File Format Verification"
+              paragraphText="The File Format Verification Tool (FFVT) is a resource for testing
               whether your file meets certain formatting requirements specified
-              in the HMDA Filing Instructions Guide.
-            </p>
+              in the HMDA Filing Instructions Guide."
+            />
             <Link to="/file-format-verification">Test your file</Link>
           </div>
 
           <div className="card">
-            <h4>LAR formatting</h4>
-            <p>
-              The LAR Formatting Tool is intended to help financial
+            <Header
+              type="sub"
+              headingText="LAR formatting"
+              paragraphText="The LAR Formatting Tool is intended to help financial
               institutions, typically those with small volumes of covered loans
               and applications, to create an electronic file that can be
-              submitted to the HMDA Platform.
-            </p>
+              submitted to the HMDA Platform."
+            />
             <Link to="/lar-formatting">Download the tool</Link>
           </div>
 
           <div className="card">
-            <h4>Rate Spread</h4>
-            <p>
-              This calculator provides rate spreads for HMDA reportable loans
-              with a final action date on or after January 1st, 2018. Use the{' '}
-              <a href="https://www.ffiec.gov/ratespread/newcalc.aspx">
-                prior rate spread calculator
-              </a>{' '}
-              for loans with a final action date before January 1st, 2018.
-            </p>
+            <Header
+              type="sub"
+              headingText="Rate Spread"
+              paragraphText="This calculator provides rate spreads for HMDA reportable loans
+              with a final action date on or after January 1st, 2018."
+            />
             <Link to="/rate-spread">Get rate spreads</Link>
           </div>
 
           <div className="card">
-            <h4>Check Digit</h4>
-            <p>
-              You can use this tool for two functions. The first is to generate
+            <Header
+              type="sub"
+              headingText="Check Digit"
+              paragraphText="You can use this tool for two functions. The first is to generate
               a two character check digit when you enter a Legal Entity
               Identifier (LEI) and loan or application ID. The second is to
               validate that a check digit is calculated correctly for any
-              complete Universal Loan Identifier (ULI) you enter.
-            </p>
+              complete Universal Loan Identifier (ULI) you enter."
+            />
             <Link to="/check-digit">Get and validate check digits</Link>
           </div>
         </div>
