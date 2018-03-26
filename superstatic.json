@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/tools/**", "destination": "/tools/index.html" }]
+}
