@@ -9,10 +9,24 @@
     }
   }
   #generateCSV {
+    width: 188px;
+    height: 33px;
+    margin: 2px 0 0 2px;
+    padding: 0;
+    display: inline;
     position: absolute;
+    z-index: 2;
+    border: none;
   }
   #validateCSV {
+    width: 182px;
+    height: 33px;
+    margin: 2px 0 0 2px;
+    padding: 0;
+    display: inline;
     position: absolute;
+    z-index: 2;
+    border: none;
   }
   .csvLabel {
     margin: 0;
