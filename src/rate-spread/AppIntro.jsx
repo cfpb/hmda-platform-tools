@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../shared-components/Header.jsx'
 
 const AppIntro = () => {
@@ -46,9 +47,9 @@ const AppIntro = () => {
         rate survey data is the Freddie Mac Primary Mortgage Market Survey®.
       </p>
       <p>
-        <a href="./requirements.html">Data requirements</a> for the rate spread
-        calculator are provided in accordance with Regulation C effective
-        January 1st, 2018.
+        <Link to="/rate-spread/requirements">Data requirements</Link> for the
+        rate spread calculator are provided in accordance with Regulation C
+        effective January 1st, 2018.
       </p>
     </Header>
   )
