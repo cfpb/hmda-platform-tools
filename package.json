@@ -1,0 +1,95 @@
+{
+  "name": "hmda-platform-tools",
+  "version": "0.0.0",
+  "description": "Constellation of tools to assist with submitting HMDA files",
+  "engines": {
+    "node": ">=8.x"
+  },
+  "scripts": {
+    "postinstall": "yarn run clearDist && yarn run build",
+    "clearDist":
+      "rimraf ./tools && mkdirp ./tools ./tools/js ./tools/css ./tools/fonts ./tools/img ./tools/static",
+    "clearBackup": "rimraf ./tools/js/app.min.js.bak",
+    "env": "./env.sh",
+    "js": "(export NODE_ENV=build; webpack --progress)",
+    "js:dev":
+      "export NODE_ENV=build && webpack --config webpack.dev.js --progress",
+    "sass":
+      "node-sass --quiet --output-style=compressed ./src/app.scss ./tools/css/app.min.css && yarn run sass:prefix",
+    "fonts": "cp node_modules/uswds/src/fonts/sourcesanspro-* ./tools/fonts",
+    "sass:prefix": "postcss -u autoprefixer -r ./tools/css/*.css",
+    "html":
+      "html-minifier --collapse-whitespace ./src/index.html -o ./tools/index.html",
+    "img":
+      "cp -r ./node_modules/uswds/dist/img/* ./tools/img && cp ./src/img/* ./tools/img",
+    "build":
+      "yarn run js && yarn run sass && yarn run fonts && yarn run html && yarn run img && yarn run static",
+    "pretty":
+      "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
+    "lint": "eslint --ext .js,.jsx ./src",
+    "static": "cp -r ./src/static/* ./tools/static",
+    "start": "superstatic -c superstatic.json --port 8081"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cfpb/hmda-platform-tools.git"
+  },
+  "keywords": ["HMDA"],
+  "author": "Consumer Financial Protection Bureau",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/cfpb/hmda-platform-tools/issues"
+  },
+  "homepage": "https://github.com/cfpb/hmda-platform-tools#readme",
+  "devDependencies": {
+    "@babel/core": "7.0.0-beta.34",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.34",
+    "@babel/polyfill": "7.0.0-beta.34",
+    "@babel/preset-env": "7.0.0-beta.34",
+    "@babel/preset-react": "7.0.0-beta.34",
+    "autoprefixer": "8.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "7.2.3",
+    "babel-jest": "21.2.0",
+    "babel-loader": "8.0.0-beta.0",
+    "eslint": "4.18.2",
+    "eslint-config-react-app": "2.1.0",
+    "eslint-plugin-flowtype": "2.46.1",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.7.0",
+    "gh-pages": "0.12.0",
+    "html-minifier": "3.5.5",
+    "imagemin": "5.3.1",
+    "imagemin-cli": "3.0.0",
+    "jest-cli": "21.2.1",
+    "mkdirp": "0.5.1",
+    "node-sass": "4.5.3",
+    "postcss-cli": "^5.0.0",
+    "rimraf": "2.6.2",
+    "superstatic": "5.0.1",
+    "webpack": "3.7.1",
+    "webpack-merge": "4.1.2",
+    "webpack-shell-plugin": "0.5.0",
+    "why-did-you-update": "0.1.1"
+  },
+  "dependencies": {
+    "detect-browser": "2.1.0",
+    "file-saver": "1.3.3",
+    "filereader-stream": "1.0.0",
+    "hmda-file-parser": "1.18.0",
+    "isomorphic-fetch": "2.2.1",
+    "prop-types": "15.6.1",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-dropzone": "4.2.8",
+    "react-redux": "5.0.7",
+    "react-router-dom": "4.2.2",
+    "react-select": "1.2.1",
+    "redux": "3.7.2",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.2.0",
+    "split2": "2.2.0",
+    "uswds": "1.5.0"
+  }
+}
