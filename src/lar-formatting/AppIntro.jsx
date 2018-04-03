@@ -21,7 +21,10 @@ const AppIntro = () => {
         </p>
         <p>
           Please review Section 2 of the{' '}
-          <a href="/tools/static/hmda-tools-instructions.pdf" download={true}>
+          <a
+            href="https://s3.amazonaws.com/cfpb-hmda-public/prod/tools/HMDA-Tools-Instructions.pdf"
+            download={true}
+          >
             HMDA Tools Instructions
           </a>{' '}
           guide prior to downloading the tool.
@@ -34,7 +37,7 @@ const AppIntro = () => {
     <ul key={3}>
       <li>
         <a
-          href="/tools/static/2017/2017-hmda-lar-formatting-tool.xlsm"
+          href="https://s3.amazonaws.com/cfpb-hmda-public/prod/larft/2017/HMDA_2017_LAR_Formatting_Tool.xlsm"
           download={true}
         >
           2017 LAR Formatting Tool
@@ -42,7 +45,7 @@ const AppIntro = () => {
       </li>
       <li>
         <a
-          href="/tools/static/2018/2018-hmda-lar-formatting-tool.xlsm"
+          href="https://s3.amazonaws.com/cfpb-hmda-public/prod/larft/2018/HMDA_2018_LAR_Formatting_Tool.xlsm"
           download={true}
         >
           2018 LAR Formatting Tool
