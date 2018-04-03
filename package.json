@@ -8,7 +8,7 @@
   "scripts": {
     "postinstall": "yarn run clearDist && yarn run build",
     "clearDist":
-      "rimraf ./tools && mkdirp ./tools ./tools/js ./tools/css ./tools/fonts ./tools/img ./tools/static",
+      "rimraf ./tools && mkdirp ./tools ./tools/js ./tools/css ./tools/fonts ./tools/img",
     "clearBackup": "rimraf ./tools/js/app.min.js.bak",
     "env": "./env.sh",
     "js": "(export NODE_ENV=build; webpack --progress)",
@@ -23,11 +23,10 @@
     "img":
       "cp -r ./node_modules/uswds/dist/img/* ./tools/img && cp ./src/img/* ./tools/img",
     "build":
-      "yarn run js && yarn run sass && yarn run fonts && yarn run html && yarn run img && yarn run static",
+      "yarn run js && yarn run sass && yarn run fonts && yarn run html && yarn run img",
     "pretty":
       "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
     "lint": "eslint --ext .js,.jsx ./src",
-    "static": "cp -r ./src/static/* ./tools/static",
     "start": "superstatic -c superstatic.json --port 8081"
   },
   "repository": {
