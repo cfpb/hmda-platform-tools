@@ -129,7 +129,7 @@ class CSVUpload extends Component {
         ) : this.state.filename ? (
           <Alert
             type="success"
-            heading="Batch rate spread calculation complete"
+            heading="Batch check digit calculation complete"
           >
             <p>
               Downloaded{' '}
