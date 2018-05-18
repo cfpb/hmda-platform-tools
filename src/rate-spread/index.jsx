@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
-import AppHeader from '../shared-components/AppHeader.jsx'
+import React from 'react'
 import AppIntro from './AppIntro.jsx'
 import CSVUpload from './CSVUpload.jsx'
 import Form from './Form.jsx'
-import Footer from '../shared-components/Footer.jsx'
 
 const App = () => {
   return [
@@ -39,8 +37,7 @@ const App = () => {
           </a>.
         </p>
       </div>
-    </div>,
-    <Footer key={4} />
+    </div>
   ]
 }
 

@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import Header from '../shared-components/Header.jsx'
 import AppIntro from './AppIntro.jsx'
 import InputError from './InputError.jsx'
 import Form from './Form.jsx'
 import Answer from './Answer.jsx'
-import Footer from '../shared-components/Footer.jsx'
 import CSVUpload from './CSVUpload.jsx'
 import isomorphicFetch from 'isomorphic-fetch'
 import { isUliValid, isLoanIdValid } from './utils/index.js'
@@ -171,8 +169,7 @@ export default class App extends Component {
         <div className="flex-item">
           <CSVUpload />
         </div>
-      </div>,
-      <Footer key={2} />
+      </div>
     ]
   }
 }
