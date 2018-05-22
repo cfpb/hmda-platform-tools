@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-import AppHeader from '../shared-components/AppHeader.jsx'
+import React from 'react'
 import AppIntro from './AppIntro.jsx'
-import Footer from '../shared-components/Footer.jsx'
 
 const App = () => {
   return [
@@ -9,8 +7,7 @@ const App = () => {
       <div className="usa-width-one-whole">
         <AppIntro />
       </div>
-    </div>,
-    <Footer key={2} />
+    </div>
   ]
 }
 

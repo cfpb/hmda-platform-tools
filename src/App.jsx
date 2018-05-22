@@ -1,8 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import BannerUSA from './shared-components/BannerUSA.jsx'
-import AppHeader from './shared-components/AppHeader.jsx'
-import Footer from './shared-components/Footer.jsx'
+import { Header, Footer } from 'hmda-ui'
 import Home from './Home.jsx'
 import CheckDigit from './check-digit/index.jsx'
 import RateSpread from './rate-spread/index.jsx'
@@ -13,7 +11,7 @@ import LARFormatting from './lar-formatting/index.jsx'
 const App = () => {
   return (
     <React.Fragment>
-      <AppHeader />
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/check-digit" component={CheckDigit} />
