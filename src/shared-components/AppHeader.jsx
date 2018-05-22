@@ -17,14 +17,19 @@ const AppHeader = () => {
         <div className="usa-nav-container">
           <div className="usa-logo" id="logo">
             <em className="usa-logo-text">
-              <img src="/tools/img/ffiec-logo.png" width="125px" />
+              <img alt="ffiec" src="/tools/img/ffiec-logo.png" width="125px" />
             </em>
           </div>
           <nav className="usa-nav">
             <ul className="usa-nav-primary">
               <li>
-                <a href={window.HMDA_ENV.APP_URL} className="usa-nav-link">
+                <a href={window.HMDA_ENV.HOMEPAGE_URL} className="usa-nav-link">
                   Home
+                </a>
+              </li>
+              <li>
+                <a href="/filing/" className="usa-nav-link">
+                  Filing
                 </a>
               </li>
               <li>
