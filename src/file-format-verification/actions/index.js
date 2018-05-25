@@ -8,6 +8,14 @@ export function updateStatus(status) {
   }
 }
 
+export function setFilingPeriod(filingPeriod) {
+  console.log('setFilingPeriod', filingPeriod)
+  return {
+    type: types.SET_FILING_PERIOD,
+    filingPeriod: filingPeriod
+  }
+}
+
 function checkErrors(file) {
   const errors = []
   if (file) {
@@ -52,14 +60,32 @@ export function endParse(data) {
   }
 }
 
-export function triggerParse(file) {
+// TODO: can update here to handle 2018!
+export function triggerParse(file, filingPeriod) {
+  console.log('triggerParse', filingPeriod)
   return dispatch => {
     dispatch(beginParse())
-    return parseFile(file)
-      .then(json => {
-        dispatch(endParse(json))
+
+    if (filingPeriod === '2017') {
+      console.log('its 2017!')
+      return parseFile(file)
+        .then(json => {
+          dispatch(endParse(json))
+        })
+        .catch(err => console.error(err))
+    }
+
+    if (filingPeriod === '2018') {
+      console.log('its 2018!')
+      // api stuff here
+      fetch('http://192.168.99.100:8082/hmda/parse', {
+        method: 'POST',
+        body: file
       })
-      .catch(err => console.error(err))
+        .then(response => console.log(response.json()))
+        .then(success => console.log('success', success))
+        .catch(error => console.log('error', error))
+    }
   }
 }
 

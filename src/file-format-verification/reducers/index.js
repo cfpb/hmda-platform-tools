@@ -7,7 +7,8 @@ import {
   SET_PAGE,
   ERRORS_PER_PAGE,
   PAGINATION_FADE_IN,
-  PAGINATION_FADE_OUT
+  PAGINATION_FADE_OUT,
+  SET_FILING_PERIOD
 } from '../constants'
 
 const defaultUpload = {
@@ -35,6 +36,8 @@ const defaultPagination = {
   fade: 0
 }
 
+const defaultFilingPeriod = '2018'
+
 //empty action logger, temporary / for debugging
 export const empty = (state = {}, action) => {
   return state
@@ -51,6 +54,15 @@ export const upload = (state = defaultUpload, action) => {
         file: action.file,
         errors: action.errors
       }
+    default:
+      return state
+  }
+}
+
+export const filingPeriod = (state = defaultFilingPeriod, action) => {
+  switch (action.type) {
+    case SET_FILING_PERIOD:
+      return action.filingPeriod
     default:
       return state
   }
@@ -120,5 +132,6 @@ export default combineReducers({
   upload,
   status,
   parseErrors,
-  pagination
+  pagination,
+  filingPeriod
 })

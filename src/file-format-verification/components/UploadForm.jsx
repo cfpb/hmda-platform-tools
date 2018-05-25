@@ -42,7 +42,13 @@ export default class Upload extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.file !== nextProps.file) return true
+    return false
+  }
+
   render() {
+    console.log(this.props.filingPeriod)
     const inputError = this.props.errors.length === 0 ? '' : 'input-error'
     // don't do anything if submission is in progress
     const setFile = this.props.code > 1 ? null : this.props.setFile
@@ -83,7 +89,8 @@ Upload.propTypes = {
   uploading: PropTypes.bool,
   file: PropTypes.object,
   code: PropTypes.number,
-  errors: PropTypes.array
+  errors: PropTypes.array,
+  filingPeriod: PropTypes.string
 }
 
 Upload.defaultProps = {

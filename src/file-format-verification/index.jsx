@@ -9,6 +9,7 @@ import Header from '../shared-components/Header.jsx'
 import AppContainer from './containers/App.jsx'
 import UploadContainer from './containers/UploadForm.jsx'
 import ParseErrorsContainer from './containers/ParseErrors.jsx'
+import FilingPeriodSelectorContainer from './containers/FilingPeriodSelector.jsx'
 import appReducer from './reducers'
 
 const middleware = [thunkMiddleware]
@@ -28,6 +29,7 @@ class FFVT extends React.Component {
         <AppContainer>
           <div id="main-content" className="usa-grid">
             <div className="usa-width-one-whole">
+              <FilingPeriodSelectorContainer />
               <Header
                 type="main"
                 headingText="File Format Verification Tool"
