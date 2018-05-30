@@ -1,5 +1,6 @@
-import parseFile from '../helpers/parseFile.js'
+import parseFile, { concatErrors } from '../helpers/parseFile.js'
 import * as types from '../constants'
+import isomorphicFetch from 'isomorphic-fetch'
 
 export function updateStatus(status) {
   return {
@@ -53,6 +54,7 @@ export function beginParse() {
 }
 
 export function endParse(data) {
+  console.log('endParse', data)
   return {
     type: types.END_PARSE,
     transmittalSheetErrors: data.transmittalSheetErrors,
@@ -62,12 +64,10 @@ export function endParse(data) {
 
 // TODO: can update here to handle 2018!
 export function triggerParse(file, filingPeriod) {
-  console.log('triggerParse', filingPeriod)
   return dispatch => {
     dispatch(beginParse())
 
     if (filingPeriod === '2017') {
-      console.log('its 2017!')
       return parseFile(file)
         .then(json => {
           dispatch(endParse(json))
@@ -76,15 +76,31 @@ export function triggerParse(file, filingPeriod) {
     }
 
     if (filingPeriod === '2018') {
-      console.log('its 2018!')
-      // api stuff here
-      fetch('http://192.168.99.100:8082/hmda/parse', {
+      var formData = new FormData()
+      formData.append('file', file)
+
+      isomorphicFetch('http://192.168.99.100:8082/hmda/parse', {
         method: 'POST',
-        body: file
+        body: formData
       })
-        .then(response => console.log(response.json()))
-        .then(success => console.log('success', success))
-        .catch(error => console.log('error', error))
+        .then(response => {
+          return response.json()
+        })
+        .then(success => {
+          let data = { transmittalSheetErrors: [], larErrors: [] }
+          success.validated.forEach(error => {
+            if (error.lineNumber === 1) {
+              data.transmittalSheetErrors.push(error.errors)
+            } else {
+              data.larErrors.push({
+                error: error.errors,
+                row: error.lineNumber
+              })
+            }
+          })
+          dispatch(endParse(data))
+        })
+        .catch(error => console.error(error))
     }
   }
 }
