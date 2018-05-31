@@ -77,9 +77,10 @@ const renderTSErrors = transmittalSheetErrors => {
   )
 }
 
-const renderParseResults = count => {
-  const noErrors = count === 0
+const renderParseResults = (count, errors) => {
+  if (errors.length > 0) return null
 
+  const noErrors = count === 0
   if (noErrors) {
     return (
       <Alert type="success" heading="Congratulations! No Formatting Errors">
@@ -90,7 +91,6 @@ const renderParseResults = count => {
 
   const errorText = count === 1 ? 'Error' : 'Errors'
   const heading = `${count} Formatting ${errorText}`
-
   return (
     <Alert type="error" heading={heading}>
       <p>
@@ -109,7 +109,8 @@ const ParseErrors = props => {
     isParsing,
     transmittalSheetErrors,
     larErrors,
-    pagination
+    pagination,
+    errors
   } = props
   const count = transmittalSheetErrors.length + larErrors.length
 
@@ -118,7 +119,7 @@ const ParseErrors = props => {
 
   return (
     <div className="ParseErrors usa-grid-full" id="parseErrors">
-      {renderParseResults(count)}
+      {renderParseResults(count, errors)}
       {renderTSErrors(transmittalSheetErrors)}
       {renderLarErrors(larErrors, pagination)}
       <Pagination />

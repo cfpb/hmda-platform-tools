@@ -8,7 +8,8 @@ import {
   ERRORS_PER_PAGE,
   PAGINATION_FADE_IN,
   PAGINATION_FADE_OUT,
-  SET_FILING_PERIOD
+  SET_FILING_PERIOD,
+  UPLOAD_ERROR
 } from '../constants'
 
 const defaultUpload = {
@@ -56,6 +57,12 @@ export const upload = (state = defaultUpload, action) => {
       }
     case SET_FILING_PERIOD:
       return defaultUpload
+    case UPLOAD_ERROR:
+      return {
+        ...state,
+        errors: action.errors,
+        uploading: false
+      }
     default:
       return state
   }
@@ -95,6 +102,13 @@ export const parseErrors = (state = defaultParseErrors, action) => {
         isParsing: false,
         transmittalSheetErrors: action.transmittalSheetErrors,
         larErrors: action.larErrors
+      }
+    case UPLOAD_ERROR:
+      return {
+        ...state,
+        isParsing: false,
+        transmittalSheetErrors: [],
+        larErrors: []
       }
     case SET_FILING_PERIOD:
       return defaultParseErrors

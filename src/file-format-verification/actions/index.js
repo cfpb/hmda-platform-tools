@@ -46,6 +46,13 @@ export function selectFile(file) {
   }
 }
 
+export function uploadError(error) {
+  return {
+    type: types.UPLOAD_ERROR,
+    errors: error
+  }
+}
+
 export function beginParse() {
   return {
     type: types.BEGIN_PARSE
@@ -82,6 +89,14 @@ export function triggerParse(file, filingPeriod) {
         body: formData
       })
         .then(response => {
+          if (response.status >= 400) {
+            dispatch(
+              uploadError([
+                'Sorry, something went wrong with the upload. Please try again.'
+              ])
+            )
+            throw new Error('Bad response from server.')
+          }
           return response.json()
         })
         .then(success => {
@@ -98,7 +113,7 @@ export function triggerParse(file, filingPeriod) {
           })
           dispatch(endParse(data))
         })
-        .catch(error => console.error(error))
+        .catch(error => console.log(error))
     }
   }
 }
