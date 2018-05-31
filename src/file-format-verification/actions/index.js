@@ -10,7 +10,6 @@ export function updateStatus(status) {
 }
 
 export function setFilingPeriod(filingPeriod) {
-  console.log('setFilingPeriod', filingPeriod)
   return {
     type: types.SET_FILING_PERIOD,
     filingPeriod: filingPeriod
@@ -54,7 +53,6 @@ export function beginParse() {
 }
 
 export function endParse(data) {
-  console.log('endParse', data)
   return {
     type: types.END_PARSE,
     transmittalSheetErrors: data.transmittalSheetErrors,

@@ -7,18 +7,26 @@
   },
   "scripts": {
     "postinstall": "yarn run clearDist && yarn run build",
-    "clearDist": "rimraf ./tools && mkdirp ./tools ./tools/js ./tools/css ./tools/fonts ./tools/img",
+    "clearDist":
+      "rimraf ./tools && mkdirp ./tools ./tools/js ./tools/css ./tools/fonts ./tools/img",
     "clearBackup": "rimraf ./tools/js/app.min.js.bak",
     "env": "./env.sh",
     "js": "(export NODE_ENV=build; webpack --progress)",
-    "js:dev": "export NODE_ENV=build && webpack --config webpack.dev.js --progress",
-    "sass": "node-sass --quiet --output-style=compressed ./src/app.scss ./tools/css/app.min.css && yarn run sass:prefix",
+    "js:dev":
+      "export NODE_ENV=build && webpack --config webpack.dev.js --progress",
+    "sass":
+      "node-sass --quiet --output-style=compressed --source-map-embed=true ./src/app.scss ./tools/css/app.min.scss && yarn run sass:prefix",
     "fonts": "cp node_modules/uswds/src/fonts/sourcesanspro-* ./tools/fonts",
-    "sass:prefix": "postcss -u autoprefixer -r ./tools/css/*.css",
-    "html": "html-minifier --collapse-whitespace ./src/index.html -o ./tools/index.html",
-    "img": "cp -r ./node_modules/uswds/dist/img/* ./tools/img && cp ./src/img/* ./tools/img",
-    "build": "yarn run js && yarn run sass && yarn run fonts && yarn run html && yarn run img",
-    "pretty": "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
+    "sass:prefix":
+      "postcss ./tools/css/app.min.scss -u autoprefixer -m -o ./tools/css/app.min.css && rimraf ./tools/css/app.min.scss",
+    "html":
+      "html-minifier --collapse-whitespace ./src/index.html -o ./tools/index.html",
+    "img":
+      "cp -r ./node_modules/uswds/dist/img/* ./tools/img && cp ./src/img/* ./tools/img",
+    "build":
+      "yarn run js && yarn run sass && yarn run fonts && yarn run html && yarn run img",
+    "pretty":
+      "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
     "lint": "eslint --ext .js,.jsx ./src",
     "start": "superstatic -c superstatic.json --port 8081"
   },
@@ -26,9 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/cfpb/hmda-platform-tools.git"
   },
-  "keywords": [
-    "HMDA"
-  ],
+  "keywords": ["HMDA"],
   "author": "Consumer Financial Protection Bureau",
   "license": "CC0-1.0",
   "bugs": {

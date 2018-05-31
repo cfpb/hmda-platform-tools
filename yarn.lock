@@ -3558,9 +3558,15 @@ hmda-file-parser@1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/hmda-file-parser/-/hmda-file-parser-1.18.0.tgz#968f507246671a52883b3653f1518d6dbbea0e31"
 
+<<<<<<< HEAD
 "hmda-ui@git://github.com/cfpb/hmda-ui-modules#filing-period-selector":
   version "0.0.7"
   resolved "git://github.com/cfpb/hmda-ui-modules#876ce3ed3c683599ca7835e961abfe26b35af1b8"
+=======
+hmda-ui@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/hmda-ui/-/hmda-ui-0.0.9.tgz#d1292f538014e3b2ee990baf95dbc83fd4ae7698"
+>>>>>>> master
 
 hoek@2.x.x:
   version "2.16.3"

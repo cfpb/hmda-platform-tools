@@ -54,6 +54,8 @@ export const upload = (state = defaultUpload, action) => {
         file: action.file,
         errors: action.errors
       }
+    case SET_FILING_PERIOD:
+      return defaultUpload
     default:
       return state
   }
@@ -72,6 +74,8 @@ export const status = (state = defaultStatus, action) => {
   switch (action.type) {
     case UPDATE_STATUS:
       return action.status
+    case SET_FILING_PERIOD:
+      return defaultStatus
     default:
       return state
   }
@@ -92,7 +96,8 @@ export const parseErrors = (state = defaultParseErrors, action) => {
         transmittalSheetErrors: action.transmittalSheetErrors,
         larErrors: action.larErrors
       }
-
+    case SET_FILING_PERIOD:
+      return defaultParseErrors
     default:
       return state
   }
@@ -122,6 +127,8 @@ export const pagination = (state = defaultPagination, action) => {
         ...state,
         fade: 1
       }
+    case SET_FILING_PERIOD:
+      return defaultPagination
     default:
       return state
   }

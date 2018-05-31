@@ -22,7 +22,9 @@ export function mapStateToProps(state) {
 function setAndParseFile(file) {
   return (dispatch, getState) => {
     dispatch(selectFile(file))
-    dispatch(triggerParse(file, getState().app.filingPeriod))
+    if (getState().app.upload.errors.length === 0) {
+      dispatch(triggerParse(file, getState().app.filingPeriod))
+    }
   }
 }
 
