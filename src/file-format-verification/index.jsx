@@ -24,12 +24,12 @@ const store = createStore(
 
 class FFVT extends React.Component {
   render() {
+    const selector = <FilingPeriodSelectorContainer />
     return (
       <Provider store={store}>
         <AppContainer>
           <div id="main-content" className="usa-grid">
             <div className="usa-width-one-whole">
-              <FilingPeriodSelectorContainer />
               <Header
                 type="main"
                 headingText="File Format Verification Tool"
@@ -39,6 +39,7 @@ class FFVT extends React.Component {
                 Verification Tool does not test for compliance with edits. No
                 data, HMDA or otherwise, is transmitted from your computer to
                 the CFPB."
+                selector={selector}
               />
             </div>
           </div>
