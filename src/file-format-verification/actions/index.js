@@ -84,11 +84,15 @@ export function triggerParse(file, filingPeriod) {
       var formData = new FormData()
       formData.append('file', file)
 
-      isomorphicFetch('http://192.168.99.100:8082/hmda/parse', {
-        method: 'POST',
-        body: formData
-      })
+      isomorphicFetch(
+        'https://hmda4-kgudel-api.demo.cfpb.gov/v2/public/hmda/parse',
+        {
+          method: 'POST',
+          body: formData
+        }
+      )
         .then(response => {
+          console.log(response.status)
           if (response.status >= 400) {
             dispatch(
               uploadError([
@@ -113,7 +117,7 @@ export function triggerParse(file, filingPeriod) {
           })
           dispatch(endParse(data))
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log('ERROR', error))
     }
   }
 }
