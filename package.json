@@ -15,7 +15,7 @@
     "fonts": "cp node_modules/uswds/src/fonts/sourcesanspro-* ./dist/fonts",
     "sass:prefix": "postcss ./dist/css/app.min.scss -u autoprefixer -m -o ./dist/css/app.min.css && rimraf ./dist/css/app.min.scss",
     "img": "cp -r ./node_modules/uswds/dist/img/* ./dist/img && cp ./src/img/* ./dist/img",
-    "build": "yarn run clearDist && yarn run sass && yarn run fonts && yarn run img && yarn run js",
+    "build": "yarn cache clean && yarn run clearDist && yarn run sass && yarn run fonts && yarn run img && yarn run js",
     "pretty": "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
     "lint": "eslint --ext .js,.jsx ./src",
     "start": "superstatic -c superstatic.json --port 8081"
