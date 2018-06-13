@@ -228,7 +228,7 @@ class Form extends Component {
               checked={this.state.actionTaken === '2'}
             />
             <label htmlFor="actionTaken2">
-              2 - Application approved but not Accepted
+              2 - Application approved but not accepted
             </label>
             <input
               type="radio"
@@ -239,7 +239,7 @@ class Form extends Component {
               checked={this.state.actionTaken === '8'}
             />
             <label htmlFor="actionTaken8">
-              8 - Pre-approval request approved but not Accepted
+              8 - Pre-approval request approved but not accepted
             </label>
           </fieldset>
           <fieldset>
