@@ -227,7 +227,9 @@ class Form extends Component {
               onChange={this.actionTakenHandler}
               checked={this.state.actionTaken === '2'}
             />
-            <label htmlFor="actionTaken2">2 - Approved Not Accepted</label>
+            <label htmlFor="actionTaken2">
+              2 - Application approved but not Accepted
+            </label>
             <input
               type="radio"
               id="actionTaken8"
