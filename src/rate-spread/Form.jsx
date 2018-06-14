@@ -85,7 +85,6 @@ class Form extends Component {
     this.rateSetDateHandler = this.makeChangeHandler('rateSetDate')
     this.APRHandler = this.makeChangeHandler('APR')
     this.loanTermHandler = this.makeChangeHandler('loanTerm')
-
     this.rateSetValidator = this.makeValidator('rateSetDate')
     this.APRValidator = this.makeValidator('APR')
     this.loanTermValidator = this.makeValidator('loanTerm')
@@ -118,7 +117,12 @@ class Form extends Component {
         )
           this.setValidationErrors(target, event)
       }
-      this.setState({ [target]: event.target.value })
+      this.setState({
+        [target]: event.target.value,
+        rateSpread: '',
+        error: false,
+        errorText: ''
+      })
     }
   }
 
