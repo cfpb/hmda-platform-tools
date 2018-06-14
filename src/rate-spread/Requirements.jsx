@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../shared-components/Header.jsx'
 
 const Requirements = () => {
@@ -11,7 +12,11 @@ const Requirements = () => {
         rate spread for HMDA reporting. The required data include the action
         taken type, reverse mortgage code, amortization type, rate-set date,
         annual percentage rate, and loan term."
-      />
+      >
+        <p>
+          <Link to="/rate-spread">Go back to the Rate Spread Calculator</Link>
+        </p>
+      </Header>
 
       <h3>Action Taken Type</h3>
       <p>
