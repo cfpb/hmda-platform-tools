@@ -27,6 +27,17 @@ export default class App extends Component {
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.validateInput = this.validateInput.bind(this)
     this.getResponse = this.getResponse.bind(this)
+
+    this.refAnswer = React.createRef()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate', this.refAnswer.current)
+    console.log('offsetTop', this.refAnswer.current.offsetTop)
+    if (this.state.checkDigit || this.state.isValidUli) {
+      console.log('should scroll')
+      window.scrollTo(0, this.refAnswer.current.offsetTop)
+    }
   }
 
   handleRadioChange(app) {
@@ -164,6 +175,7 @@ export default class App extends Component {
             checkDigit={checkDigit}
             isSubmitted={isSubmitted}
             errors={errors}
+            ref={this.refAnswer}
           />
         </div>
         <div className="flex-item">
