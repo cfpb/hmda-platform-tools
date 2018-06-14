@@ -51,6 +51,10 @@ const AppIntro = () => {
         rate spread calculator are provided in accordance with Regulation C
         effective January 1st, 2018.
       </p>
+      <p>
+        The <Link to="/rate-spread/methodology">methodology</Link> for
+        determining Average Prime Offer Rates is provided.
+      </p>
     </Header>
   )
 }

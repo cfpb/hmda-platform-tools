@@ -5,6 +5,7 @@ import Home from './Home.jsx'
 import CheckDigit from './check-digit/index.jsx'
 import RateSpread from './rate-spread/index.jsx'
 import RateSpreadRequirements from './rate-spread/Requirements.jsx'
+import RateSpreadMethodology from './rate-spread/Methodology.jsx'
 import FFVT from './file-format-verification/index.jsx'
 import LARFormatting from './lar-formatting/index.jsx'
 
@@ -18,6 +19,10 @@ const App = () => {
         <Route
           path="/rate-spread/requirements"
           component={RateSpreadRequirements}
+        />
+        <Route
+          path="/rate-spread/methodology"
+          component={RateSpreadMethodology}
         />
         <Route path="/rate-spread" component={RateSpread} />
         <Route path="/file-format-verification" component={FFVT} />
