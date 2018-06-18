@@ -115,10 +115,6 @@ export default class App extends Component {
           } else {
             this.setState({ isValidUli: json.isValid })
           }
-          /*window.scrollTo({
-            top: this.refScrollTo.current.offsetTop,
-            behavior: 'smooth'
-          })*/
         })
     }
   }
