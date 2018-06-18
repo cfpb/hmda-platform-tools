@@ -132,9 +132,8 @@ class CSVUpload extends PureComponent {
             heading="Batch check digit calculation complete"
           >
             <p>
-              Downloaded{' '}
-              <h4 style={{ display: 'inline' }}>{this.state.filename}</h4> with
-              your batch results.
+              Downloaded <strong>{this.state.filename}</strong> with your batch
+              results.
             </p>
           </Alert>
         ) : null}
