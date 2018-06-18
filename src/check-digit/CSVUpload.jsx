@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import fileSaver from 'file-saver'
 import LoadingIcon from '../shared-components/LoadingIcon.jsx'
 import Header from '../shared-components/Header.jsx'
@@ -11,7 +11,7 @@ const defaultState = {
   error: false
 }
 
-class CSVUpload extends Component {
+class CSVUpload extends PureComponent {
   constructor(props) {
     super(props)
     this.state = defaultState
