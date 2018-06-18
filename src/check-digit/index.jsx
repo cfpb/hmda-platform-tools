@@ -31,6 +31,15 @@ export default class App extends Component {
     this.refScrollTo = React.createRef()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.checkDigit || this.state.isValidUli !== null) {
+      window.scrollTo({
+        top: this.refScrollTo.current.offsetTop,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   handleRadioChange(app) {
     /*
     when the radio button changes (the app) between get and validate
@@ -106,10 +115,10 @@ export default class App extends Component {
           } else {
             this.setState({ isValidUli: json.isValid })
           }
-          window.scrollTo({
+          /*window.scrollTo({
             top: this.refScrollTo.current.offsetTop,
             behavior: 'smooth'
-          })
+          })*/
         })
     }
   }
@@ -150,7 +159,7 @@ export default class App extends Component {
         </div>
       </div>,
       <div className="flex-row">
-        <div className="flex-item" ref={this.refScrollTo}>
+        <div className="flex-item">
           <InputError errors={errors} isSubmitted={isSubmitted} />
           <Form
             inputValue={inputValue}
@@ -164,14 +173,15 @@ export default class App extends Component {
             uli={uli}
             isValidUli={isValidUli}
           />
-
-          <Answer
-            uli={uli}
-            isValidUli={isValidUli}
-            checkDigit={checkDigit}
-            isSubmitted={isSubmitted}
-            errors={errors}
-          />
+          <div ref={this.refScrollTo}>
+            <Answer
+              uli={uli}
+              isValidUli={isValidUli}
+              checkDigit={checkDigit}
+              isSubmitted={isSubmitted}
+              errors={errors}
+            />
+          </div>
         </div>
         <div className="flex-item">
           <CSVUpload />
