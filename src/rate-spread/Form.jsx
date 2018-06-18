@@ -88,6 +88,17 @@ class Form extends Component {
     this.rateSetValidator = this.makeValidator('rateSetDate')
     this.APRValidator = this.makeValidator('APR')
     this.loanTermValidator = this.makeValidator('loanTerm')
+
+    this.refScrollTo = React.createRef()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.isFetching) {
+      window.scrollTo({
+        top: this.refScrollTo.current.offsetTop,
+        behavior: 'smooth'
+      })
+    }
   }
 
   onFetch() {
@@ -343,24 +354,26 @@ class Form extends Component {
             value="Calculate rate spread"
           />
         </form>
-        {this.state.isFetching ? (
-          <LoadingIcon />
-        ) : this.state.error ? (
-          <Alert type="error" heading="Sorry, an error has occured.">
-            {this.state.errorText ? (
-              <p>{this.state.errorText}</p>
-            ) : (
-              <p>
-                Please try again later. If the problem persists, contact{' '}
-                <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
-              </p>
-            )}
-          </Alert>
-        ) : this.state.rateSpread ? (
-          <Alert type="success" heading="Rate Spread">
-            <p>{this.state.rateSpread}</p>
-          </Alert>
-        ) : null}
+        <div ref={this.refScrollTo}>
+          {this.state.isFetching ? (
+            <LoadingIcon />
+          ) : this.state.error ? (
+            <Alert type="error" heading="Sorry, an error has occured.">
+              {this.state.errorText ? (
+                <p>{this.state.errorText}</p>
+              ) : (
+                <p>
+                  Please try again later. If the problem persists, contact{' '}
+                  <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+                </p>
+              )}
+            </Alert>
+          ) : this.state.rateSpread ? (
+            <Alert type="success" heading="Rate Spread">
+              <p>{this.state.rateSpread}</p>
+            </Alert>
+          ) : null}
+        </div>
       </div>
     )
   }

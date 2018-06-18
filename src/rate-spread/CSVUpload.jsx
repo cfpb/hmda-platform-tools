@@ -16,6 +16,17 @@ class CSVUpload extends Component {
     super(props)
     this.state = defaultState
     this.handleCSVSelect = this.handleCSVSelect.bind(this)
+
+    this.refScrollTo = React.createRef()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.isFetching) {
+      window.scrollTo({
+        top: this.refScrollTo.current.offsetTop,
+        behavior: 'smooth'
+      })
+    }
   }
 
   onCSVFetch() {
@@ -91,32 +102,32 @@ class CSVUpload extends Component {
             for information on csv formatting.
           </p>
         </div>
-        {this.state.isFetching ? (
-          <LoadingIcon />
-        ) : this.state.error ? (
-          <Alert
-            type="error"
-            heading="Sorry, an error has occured processing your file."
-          >
-            <p>
-              Please check your file format and try again later. If the problem
-              persists, contact <a href="mailto:hmdahelp@cfpb.gov">
-                HMDA Help
-              </a>.
-            </p>
-          </Alert>
-        ) : this.state.filename ? (
-          <Alert
-            type="success"
-            heading="Batch rate spread calculation complete"
-          >
-            <p>
-              Downloaded{' '}
-              <h4 style={{ display: 'inline' }}>{this.state.filename}</h4> with
-              your batch results.
-            </p>
-          </Alert>
-        ) : null}
+        <div ref={this.refScrollTo}>
+          {this.state.isFetching ? (
+            <LoadingIcon />
+          ) : this.state.error ? (
+            <Alert
+              type="error"
+              heading="Sorry, an error has occured processing your file."
+            >
+              <p>
+                Please check your file format and try again later. If the
+                problem persists, contact{' '}
+                <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
+              </p>
+            </Alert>
+          ) : this.state.filename ? (
+            <Alert
+              type="success"
+              heading="Batch rate spread calculation complete"
+            >
+              <p>
+                Downloaded <strong>{this.state.filename}</strong> with your
+                batch results.
+              </p>
+            </Alert>
+          ) : null}
+        </div>
       </div>
     )
   }
