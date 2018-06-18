@@ -28,16 +28,7 @@ export default class App extends Component {
     this.validateInput = this.validateInput.bind(this)
     this.getResponse = this.getResponse.bind(this)
 
-    this.refAnswer = React.createRef()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate', this.refAnswer.current)
-    console.log('offsetTop', this.refAnswer.current.offsetTop)
-    if (this.state.checkDigit || this.state.isValidUli) {
-      console.log('should scroll')
-      window.scrollTo(0, this.refAnswer.current.offsetTop)
-    }
+    this.refScrollTo = React.createRef()
   }
 
   handleRadioChange(app) {
@@ -115,6 +106,10 @@ export default class App extends Component {
           } else {
             this.setState({ isValidUli: json.isValid })
           }
+          window.scrollTo({
+            top: this.refScrollTo.current.offsetTop,
+            behavior: 'smooth'
+          })
         })
     }
   }
@@ -155,7 +150,7 @@ export default class App extends Component {
         </div>
       </div>,
       <div className="flex-row">
-        <div className="flex-item">
+        <div className="flex-item" ref={this.refScrollTo}>
           <InputError errors={errors} isSubmitted={isSubmitted} />
           <Form
             inputValue={inputValue}
@@ -169,13 +164,13 @@ export default class App extends Component {
             uli={uli}
             isValidUli={isValidUli}
           />
+
           <Answer
             uli={uli}
             isValidUli={isValidUli}
             checkDigit={checkDigit}
             isSubmitted={isSubmitted}
             errors={errors}
-            ref={this.refAnswer}
           />
         </div>
         <div className="flex-item">
