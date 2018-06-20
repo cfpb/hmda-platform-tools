@@ -46,11 +46,9 @@ const Header = props => {
 
   return (
     <header className="header" style={style}>
-      {props.selector ? (
-        renderHeadingWithSelector(props.type, heading, props.selector)
-      ) : (
-        renderHeading(props.type, heading)
-      )}
+      {props.selector
+        ? renderHeadingWithSelector(props.type, heading, props.selector)
+        : renderHeading(props.type, heading)}
       {paragraphText}
       {props.children}
     </header>
