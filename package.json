@@ -7,16 +7,24 @@
   },
   "scripts": {
     "postinstall": "yarn run clearDist && yarn run build",
-    "clearDist": "rimraf ./dist && mkdirp ./dist ./dist/js ./dist/css ./dist/fonts ./dist/img",
+    "clearDist":
+      "rimraf ./dist && mkdirp ./dist ./dist/js ./dist/css ./dist/fonts ./dist/img",
     "env": "./env.sh",
-    "js": "(export NODE_ENV=build; webpack --config node_modules/hmda-ui/webpack.config.js --progress)",
-    "js:dev": "export NODE_ENV=build && webpack --config node_modules/hmda-ui/webpack.dev.js --progress",
-    "sass": "node-sass --quiet --output-style=compressed --source-map-embed=true ./src/app.scss ./dist/css/app.min.scss && yarn run sass:prefix",
+    "js":
+      "(export NODE_ENV=build; webpack --config node_modules/hmda-ui/webpack.config.js --progress)",
+    "js:dev":
+      "export NODE_ENV=build && webpack --config node_modules/hmda-ui/webpack.dev.js --progress",
+    "sass":
+      "node-sass --quiet --output-style=compressed --source-map-embed=true ./src/app.scss ./dist/css/app.min.scss && yarn run sass:prefix",
     "fonts": "cp node_modules/uswds/src/fonts/sourcesanspro-* ./dist/fonts",
-    "sass:prefix": "postcss ./dist/css/app.min.scss -u autoprefixer -m -o ./dist/css/app.min.css && rimraf ./dist/css/app.min.scss",
-    "img": "cp -r ./node_modules/uswds/dist/img/* ./dist/img && cp ./src/img/* ./dist/img",
-    "build": "yarn cache clean && yarn run clearDist && yarn run sass && yarn run fonts && yarn run img && yarn run js",
-    "pretty": "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
+    "sass:prefix":
+      "postcss ./dist/css/app.min.scss -u autoprefixer -m -o ./dist/css/app.min.css && rimraf ./dist/css/app.min.scss",
+    "img":
+      "cp -r ./node_modules/uswds/dist/img/* ./dist/img && cp ./src/img/* ./dist/img",
+    "build":
+      "yarn cache clean && yarn run clearDist && yarn run sass && yarn run fonts && yarn run img && yarn run js",
+    "pretty":
+      "yarn run prettier --config ./.prettierrc --write './{src,__tests__}/**/*.{js*,scss}'",
     "lint": "eslint --ext .js,.jsx ./src",
     "start": "superstatic -c superstatic.json --port 8081"
   },
@@ -64,11 +72,7 @@
     "file-saver": "1.3.3",
     "filereader-stream": "1.0.0",
     "hmda-file-parser": "1.18.0",
-<<<<<<< HEAD
-    "hmda-ui": "git://github.com/cfpb/hmda-ui-modules#filing-period-selector",
-=======
     "hmda-ui": "0.0.15",
->>>>>>> master
     "isomorphic-fetch": "2.2.1",
     "prop-types": "15.6.1",
     "react": "16.2.0",
