@@ -33,12 +33,13 @@ class FFVT extends React.Component {
               <Header
                 type="main"
                 headingText="File Format Verification Tool"
-                paragraphText="Select a HMDA file from your computer and test whether it meets
-                certain formatting requirements needed to submit HMDA data
-                collected in 2017 to the HMDA Platform. The File Format
-                Verification Tool does not test for compliance with edits. No
-                data, HMDA or otherwise, is transmitted from your computer to
-                the CFPB."
+                paragraphText="Select a HMDA file from your computer and 
+                test whether it meets certain formatting requirements needed 
+                to submit HMDA data to the HMDA Platform. There is a unique 
+                File Format Verification Tool for each HMDA data collection 
+                year, so please select the relevant year before uploading a 
+                file. The File Format Verification Tool does not test for 
+                compliance with edits."
                 selector={selector}
               />
             </div>
@@ -53,31 +54,32 @@ class FFVT extends React.Component {
                 The File Format Verification Tool (FFVT) is a resource for
                 testing whether your file meets certain formatting requirements
                 specified in the HMDA Filing Instructions Guide, specifically
-                that the file (1) is pipe-delimited; (2) has the proper number
-                of data fields; and (3) has data fields formatted as integers,
-                where necessary. The FFVT does not allow you to submit HMDA
-                data.
+                that the file{' '}
+                <ol>
+                  <li>is pipe-delimited;</li>
+                  <li>has the proper number of data fields; and</li>
+                  <li>
+                    has data fields formatted as integers, where necessary.
+                  </li>
+                </ol>
+                The FFVT does not allow you to submit HMDA data.
               </p>
+
               <p>
-                The FFVT uses “client-side testing” which runs on the user’s
-                computer and does not transmit any HMDA data over the internet.
-                Thus, no Federal agency will receive or be able to view the
-                files you test using it. The FFVT was developed with no server
-                logging technology, no login functions, and does not log
+                The FFVT was developed with no login functions, and does not log
                 identifying information about you or your files. The FFVT simply
-                allows HMDA filers to test the formatting of their files.
+                allows HMDA filers to test the formatting of their files. Thus,
+                no Federal agency will receive or be able to view the files you
+                test using it.
               </p>
+
               <p>
                 The FFVT will run efficiently for most files, but it will run
                 more slowly for larger files (e.g., containing more than 20,000
-                entries).
-              </p>
-              <p>
-                This website essentially runs on the same software as the HMDA
-                Platform. This means that if your file passes all the checks on
-                this website, then your file will be in the correct format
-                required to be uploaded to the HMDA Platform. The FFVT does not
-                check for compliance with HMDA edits.
+                entries). This website essentially runs on the same software as
+                the HMDA Platform. This means that if your file passes all the
+                checks on this website, then your file will be in the correct
+                format required to be uploaded to the HMDA Platform.
               </p>
             </div>
           </div>
