@@ -3565,8 +3565,8 @@ globals@^10.0.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-10.4.0.tgz#5c477388b128a9e4c5c5d01c7a2aca68c68b2da7"
 
 globals@^11.0.1:
-  version "11.6.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-11.6.0.tgz#7e4d12ffd6b8d174851ff5a246bfb2b8b002a6c7"
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-11.7.0.tgz#a583faa43055b1aca771914bf68258e2fc125673"
 
 globals@^9.18.0:
   version "9.18.0"
@@ -3864,9 +3864,9 @@ hmda-file-parser@1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/hmda-file-parser/-/hmda-file-parser-1.18.0.tgz#968f507246671a52883b3653f1518d6dbbea0e31"
 
-hmda-ui@0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/hmda-ui/-/hmda-ui-0.0.15.tgz#a9647e834cfc4a58d8388d9957365cb02bf91ebb"
+hmda-ui@0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/hmda-ui/-/hmda-ui-0.0.17.tgz#0a95277e2f9c59dca6c473f11c2e7adc52b1da47"
   dependencies:
     babel-loader "8.0.0-beta.0"
     file-loader "1.1.11"
@@ -3874,7 +3874,6 @@ hmda-ui@0.0.15:
     webpack "4.10.2"
     webpack-command "0.2.0"
     webpack-merge "4.1.1"
-    webpack-shell-plugin "0.5.0"
 
 hoek@2.x.x:
   version "2.16.3"
@@ -6257,9 +6256,13 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
 
-path-browserify@0.0.0, path-browserify@~0.0.0:
+path-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/path-browserify/-/path-browserify-0.0.0.tgz#a0b870729aae214005b7d5032ec2cbbb0fb4451a"
+
+path-browserify@~0.0.0:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/path-browserify/-/path-browserify-0.0.1.tgz#e6c4ddd7ed3aa27c68a20cc4e50e1a4ee83bbc4a"
 
 path-dirname@^1.0.0:
   version "1.0.2"
@@ -8094,8 +8097,8 @@ uglify-to-browserify@~1.0.0:
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
 uglifyjs-webpack-plugin@^1.2.4:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.2.5.tgz#2ef8387c8f1a903ec5e44fa36f9f3cbdcea67641"
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.2.6.tgz#f4bb44f02431e82b301d8d4624330a6a35729381"
   dependencies:
     cacache "^10.0.4"
     find-cache-dir "^1.0.0"
@@ -8173,8 +8176,8 @@ unique-string@^1.0.0:
     crypto-random-string "^1.0.0"
 
 universalify@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.1.tgz#fa71badd4437af4c148841e3b3b165f9e9e590b7"
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
 
 unpipe@~1.0.0:
   version "1.0.0"
@@ -8531,10 +8534,6 @@ webpack-merge@4.1.1:
   resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.1.tgz#f1197a0a973e69c6fbeeb6d658219aa8c0c13555"
   dependencies:
     lodash "^4.17.4"
-
-webpack-shell-plugin@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/webpack-shell-plugin/-/webpack-shell-plugin-0.5.0.tgz#29b8a1d80ddeae0ddb10e729667f728653c2c742"
 
 webpack-sources@^1.0.1, webpack-sources@^1.1.0:
   version "1.1.0"
