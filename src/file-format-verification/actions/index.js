@@ -83,7 +83,7 @@ export function triggerParse(file, filingPeriod) {
       var formData = new FormData()
       formData.append('file', file)
 
-      isomorphicFetch('https://ffiec.cfpb.gov/v2/public/hmda/parse', {
+      isomorphicFetch('https://ffiec-api.cfpb.gov/v2/public/hmda/parse', {
         method: 'POST',
         body: formData
       })
