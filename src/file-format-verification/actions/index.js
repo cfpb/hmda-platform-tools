@@ -1,4 +1,4 @@
-import parseFile, { concatErrors } from '../helpers/parseFile.js'
+import parseFile from '../helpers/parseFile.js'
 import * as types from '../constants'
 import isomorphicFetch from 'isomorphic-fetch'
 
@@ -67,7 +67,6 @@ export function endParse(data) {
   }
 }
 
-// TODO: can update here to handle 2018!
 export function triggerParse(file, filingPeriod) {
   return dispatch => {
     dispatch(beginParse())
@@ -89,7 +88,6 @@ export function triggerParse(file, filingPeriod) {
         body: formData
       })
         .then(response => {
-          console.log(response.status)
           if (response.status >= 400) {
             dispatch(
               uploadError([
