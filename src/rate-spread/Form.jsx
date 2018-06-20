@@ -85,7 +85,6 @@ class Form extends Component {
     this.rateSetDateHandler = this.makeChangeHandler('rateSetDate')
     this.APRHandler = this.makeChangeHandler('APR')
     this.loanTermHandler = this.makeChangeHandler('loanTerm')
-
     this.rateSetValidator = this.makeValidator('rateSetDate')
     this.APRValidator = this.makeValidator('APR')
     this.loanTermValidator = this.makeValidator('loanTerm')
@@ -118,7 +117,12 @@ class Form extends Component {
         )
           this.setValidationErrors(target, event)
       }
-      this.setState({ [target]: event.target.value })
+      this.setState({
+        [target]: event.target.value,
+        rateSpread: '',
+        error: false,
+        errorText: ''
+      })
     }
   }
 
@@ -218,7 +222,7 @@ class Form extends Component {
               onChange={this.actionTakenHandler}
               checked={this.state.actionTaken === '1'}
             />
-            <label htmlFor="actionTaken1">1</label>
+            <label htmlFor="actionTaken1">1 - Originated</label>
             <input
               type="radio"
               id="actionTaken2"
@@ -227,7 +231,9 @@ class Form extends Component {
               onChange={this.actionTakenHandler}
               checked={this.state.actionTaken === '2'}
             />
-            <label htmlFor="actionTaken2">2</label>
+            <label htmlFor="actionTaken2">
+              2 - Application approved but not accepted
+            </label>
             <input
               type="radio"
               id="actionTaken8"
@@ -236,7 +242,9 @@ class Form extends Component {
               onChange={this.actionTakenHandler}
               checked={this.state.actionTaken === '8'}
             />
-            <label htmlFor="actionTaken8">8</label>
+            <label htmlFor="actionTaken8">
+              8 - Pre-approval request approved but not accepted
+            </label>
           </fieldset>
           <fieldset>
             <legend>Reverse Mortgage</legend>
@@ -249,7 +257,7 @@ class Form extends Component {
               onChange={this.reverseHandler}
               checked={this.state.reverse === '2'}
             />
-            <label htmlFor="reverse2">2</label>
+            <label htmlFor="reverse2">2 - Not a reverse mortgage</label>
           </fieldset>
           <fieldset>
             <legend>Amortization Type</legend>
