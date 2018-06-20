@@ -54,16 +54,14 @@ class FFVT extends React.Component {
                 The File Format Verification Tool (FFVT) is a resource for
                 testing whether your file meets certain formatting requirements
                 specified in the HMDA Filing Instructions Guide, specifically
-                that the file{' '}
-                <ol>
-                  <li>is pipe-delimited;</li>
-                  <li>has the proper number of data fields; and</li>
-                  <li>
-                    has data fields formatted as integers, where necessary.
-                  </li>
-                </ol>
-                The FFVT does not allow you to submit HMDA data.
+                that the file
               </p>
+              <ol>
+                <li>is pipe-delimited;</li>
+                <li>has the proper number of data fields; and</li>
+                <li>has data fields formatted as integers, where necessary.</li>
+              </ol>
+              <p>The FFVT does not allow you to submit HMDA data.</p>
 
               <p>
                 The FFVT was developed with no login functions, and does not log
