@@ -84,13 +84,10 @@ export function triggerParse(file, filingPeriod) {
       var formData = new FormData()
       formData.append('file', file)
 
-      isomorphicFetch(
-        'https://hmda4-kgudel-api.demo.cfpb.gov/v2/public/hmda/parse',
-        {
-          method: 'POST',
-          body: formData
-        }
-      )
+      isomorphicFetch('https://ffiec.cfpb.gov/v2/public/hmda/parse', {
+        method: 'POST',
+        body: formData
+      })
         .then(response => {
           console.log(response.status)
           if (response.status >= 400) {
