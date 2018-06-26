@@ -27,6 +27,17 @@ export default class App extends Component {
     this.handleRadioChange = this.handleRadioChange.bind(this)
     this.validateInput = this.validateInput.bind(this)
     this.getResponse = this.getResponse.bind(this)
+
+    this.refScrollTo = React.createRef()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.checkDigit || this.state.isValidUli !== null) {
+      window.scrollTo({
+        top: this.refScrollTo.current.offsetTop,
+        behavior: 'smooth'
+      })
+    }
   }
 
   handleRadioChange(app) {
@@ -158,13 +169,15 @@ export default class App extends Component {
             uli={uli}
             isValidUli={isValidUli}
           />
-          <Answer
-            uli={uli}
-            isValidUli={isValidUli}
-            checkDigit={checkDigit}
-            isSubmitted={isSubmitted}
-            errors={errors}
-          />
+          <div ref={this.refScrollTo}>
+            <Answer
+              uli={uli}
+              isValidUli={isValidUli}
+              checkDigit={checkDigit}
+              isSubmitted={isSubmitted}
+              errors={errors}
+            />
+          </div>
         </div>
         <div className="flex-item">
           <CSVUpload />

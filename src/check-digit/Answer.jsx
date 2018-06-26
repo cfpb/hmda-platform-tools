@@ -45,7 +45,7 @@ export default class Answer extends Component {
 Answer.propTypes = {
   uli: PropTypes.string,
   isValidUli: PropTypes.bool,
-  checkDigit: PropTypes.number,
+  checkDigit: PropTypes.string,
   isSubmitted: PropTypes.bool,
   errors: PropTypes.array
 }
