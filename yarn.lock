@@ -4006,9 +4006,9 @@ hmda-file-parser@1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/hmda-file-parser/-/hmda-file-parser-1.18.0.tgz#968f507246671a52883b3653f1518d6dbbea0e31"
 
-hmda-ui@0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/hmda-ui/-/hmda-ui-0.0.17.tgz#0a95277e2f9c59dca6c473f11c2e7adc52b1da47"
+hmda-ui@0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/hmda-ui/-/hmda-ui-0.0.18.tgz#0f701b4382f2beabdd8f237f5f9d768c83075023"
   dependencies:
     babel-loader "8.0.0-beta.0"
     file-loader "1.1.11"
