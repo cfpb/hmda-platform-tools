@@ -23,23 +23,30 @@ export default class Upload extends Component {
     super(props)
   }
 
-  updateDropArea() {
-    let message =
-      'Drag another LAR file into this area or click in this box to select a LAR file to test.'
-    let check = this.props.errors.length === 0 ? 'Check' : "Can't check"
-    this.dropzoneContent.innerHTML = `<p>${check} "${this.props.file
-      .name}".</p><p>${message}</p>`
-  }
-
-  componentDidUpdate() {
-    this.updateDropArea()
-  }
-
-  // keeps the info about the file after leaving /upload and coming back
-  componentDidMount() {
-    if (this.props.file && 'name' in this.props.file) {
-      this.updateDropArea()
+  updateDropArea(props) {
+    let content = (
+      <p>
+        Drag your LAR file into this area or click in this box to select a LAR
+        file to test.
+      </p>
+    )
+    if (props.file && 'name' in props.file) {
+      let check =
+        props.errors.length === 0 ? 'Checked' : "Sorry, we can't check"
+      content = (
+        <React.Fragment>
+          <p>
+            {check} <strong>{props.file.name}</strong>.
+          </p>
+          <p>
+            Drag another LAR file into this area or click in this box to select
+            a LAR file to test.
+          </p>
+        </React.Fragment>
+      )
     }
+
+    return content
   }
 
   render() {
@@ -65,10 +72,7 @@ export default class Upload extends Component {
                 }}
                 className="usa-text-small"
               >
-                <p>
-                  Drag your LAR file into this area or click in this box to
-                  select a LAR file to test.
-                </p>
+                {this.updateDropArea(this.props)}
               </button>
             </Dropzone>
           </div>
@@ -83,7 +87,8 @@ Upload.propTypes = {
   uploading: PropTypes.bool,
   file: PropTypes.object,
   code: PropTypes.number,
-  errors: PropTypes.array
+  errors: PropTypes.array,
+  filingPeriod: PropTypes.string
 }
 
 Upload.defaultProps = {

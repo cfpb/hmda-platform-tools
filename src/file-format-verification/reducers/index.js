@@ -7,7 +7,9 @@ import {
   SET_PAGE,
   ERRORS_PER_PAGE,
   PAGINATION_FADE_IN,
-  PAGINATION_FADE_OUT
+  PAGINATION_FADE_OUT,
+  SET_FILING_PERIOD,
+  UPLOAD_ERROR
 } from '../constants'
 
 const defaultUpload = {
@@ -35,6 +37,8 @@ const defaultPagination = {
   fade: 0
 }
 
+const defaultFilingPeriod = '2018'
+
 //empty action logger, temporary / for debugging
 export const empty = (state = {}, action) => {
   return state
@@ -51,6 +55,23 @@ export const upload = (state = defaultUpload, action) => {
         file: action.file,
         errors: action.errors
       }
+    case SET_FILING_PERIOD:
+      return defaultUpload
+    case UPLOAD_ERROR:
+      return {
+        ...state,
+        errors: action.errors,
+        uploading: false
+      }
+    default:
+      return state
+  }
+}
+
+export const filingPeriod = (state = defaultFilingPeriod, action) => {
+  switch (action.type) {
+    case SET_FILING_PERIOD:
+      return action.filingPeriod
     default:
       return state
   }
@@ -60,6 +81,8 @@ export const status = (state = defaultStatus, action) => {
   switch (action.type) {
     case UPDATE_STATUS:
       return action.status
+    case SET_FILING_PERIOD:
+      return defaultStatus
     default:
       return state
   }
@@ -80,7 +103,15 @@ export const parseErrors = (state = defaultParseErrors, action) => {
         transmittalSheetErrors: action.transmittalSheetErrors,
         larErrors: action.larErrors
       }
-
+    case UPLOAD_ERROR:
+      return {
+        ...state,
+        isParsing: false,
+        transmittalSheetErrors: [],
+        larErrors: []
+      }
+    case SET_FILING_PERIOD:
+      return defaultParseErrors
     default:
       return state
   }
@@ -110,6 +141,8 @@ export const pagination = (state = defaultPagination, action) => {
         ...state,
         fade: 1
       }
+    case SET_FILING_PERIOD:
+      return defaultPagination
     default:
       return state
   }
@@ -120,5 +153,6 @@ export default combineReducers({
   upload,
   status,
   parseErrors,
-  pagination
+  pagination,
+  filingPeriod
 })

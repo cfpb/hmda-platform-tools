@@ -19,13 +19,21 @@ export function mapStateToProps(state) {
   }
 }
 
+function setAndParseFile(file) {
+  return (dispatch, getState) => {
+    dispatch(selectFile(file))
+    if (getState().app.upload.errors.length === 0) {
+      dispatch(triggerParse(file, getState().app.filingPeriod))
+    }
+  }
+}
+
 export function mapDispatchToProps(dispatch) {
   return {
     setFile: (acceptedFiles, rejectedFiles) => {
       if (!acceptedFiles || !rejectedFiles) return
       let file = acceptedFiles[0] || rejectedFiles[0]
-      dispatch(selectFile(file))
-      dispatch(triggerParse(file))
+      dispatch(setAndParseFile(file))
     }
   }
 }

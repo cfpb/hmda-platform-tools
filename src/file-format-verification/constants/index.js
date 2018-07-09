@@ -5,5 +5,7 @@ export const END_PARSE = 'END_PARSE'
 export const SET_PAGE = 'SET_PAGE'
 export const PAGINATION_FADE_IN = 'PAGINATION_FADE_IN'
 export const PAGINATION_FADE_OUT = 'PAGINATION_FADE_OUT'
+export const SET_FILING_PERIOD = 'SET_FILING_PERIOD'
+export const UPLOAD_ERROR = 'UPLOAD_ERROR'
 
 export const ERRORS_PER_PAGE = 10
