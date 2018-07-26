@@ -92,7 +92,7 @@ class Pagination extends Component {
   render() {
     const pagination = this.props.pagination
     const page = this._getCurrentPage()
-    if (pagination.total <= ERRORS_PER_PAGE) return null
+    if (pagination.total === 1) return null
     const firstPage = page === 1
     const lastPage = page === pagination.total
 
