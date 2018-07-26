@@ -128,7 +128,7 @@ export const pagination = (state = defaultPagination, action) => {
     case END_PARSE:
       return {
         page: 1,
-        total: ((action.larErrors.length / ERRORS_PER_PAGE) >> 0) + 1,
+        total: Math.ceil(action.larErrors.length / ERRORS_PER_PAGE) || 1,
         fade: 0
       }
     case PAGINATION_FADE_IN:
