@@ -28,7 +28,7 @@ const renderHeadingWithSelector = (type, heading, selector) => {
 }
 
 const renderParagraph = (type, paragraphText) => {
-  if (type === 'main') return <p className="usa-font-lead">{paragraphText}</p>
+  if (type === 'main') return <p className="font-lead">{paragraphText}</p>
   if (type === 'sub') return <p>{paragraphText}</p>
 }
 

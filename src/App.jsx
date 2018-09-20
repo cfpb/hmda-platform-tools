@@ -11,6 +11,8 @@ import RateSpreadMethodology from './rate-spread/Methodology'
 import FFVT from './file-format-verification/index'
 import LARFormatting from './lar-formatting/index'
 
+import './App.css'
+
 const App = () => {
   return (
     <React.Fragment>
