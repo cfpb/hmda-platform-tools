@@ -19,10 +19,6 @@ export const renderErrors = errors => {
 }
 
 export default class Upload extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   updateDropArea(props) {
     let content = (
       <p>
@@ -50,7 +46,6 @@ export default class Upload extends Component {
   }
 
   render() {
-    const inputError = this.props.errors.length === 0 ? '' : 'input-error'
     // don't do anything if submission is in progress
     const setFile = this.props.code > 1 ? null : this.props.setFile
     const dropzoneDisabled = this.props.code > 1 ? 'dropzone-disabled' : ''

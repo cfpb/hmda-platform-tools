@@ -1,13 +1,15 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Header, Footer } from 'hmda-ui'
-import Home from './Home.jsx'
-import CheckDigit from './check-digit/index.jsx'
-import RateSpread from './rate-spread/index.jsx'
-import RateSpreadRequirements from './rate-spread/Requirements.jsx'
-import RateSpreadMethodology from './rate-spread/Methodology.jsx'
-import FFVT from './file-format-verification/index.jsx'
-import LARFormatting from './lar-formatting/index.jsx'
+
+import Header from './Header'
+import Footer from './Footer'
+import Home from './Home'
+import CheckDigit from './check-digit/index'
+import RateSpread from './rate-spread/index'
+import RateSpreadRequirements from './rate-spread/Requirements'
+import RateSpreadMethodology from './rate-spread/Methodology'
+import FFVT from './file-format-verification/index'
+import LARFormatting from './lar-formatting/index'
 
 const App = () => {
   return (

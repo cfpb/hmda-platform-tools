@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Pagination from '../containers/Pagination.jsx'
 import Alert from '../../shared-components/Alert.jsx'

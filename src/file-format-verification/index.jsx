@@ -1,15 +1,14 @@
 import React from 'react'
-import '@babel/polyfill'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
-import Header from '../shared-components/Header.jsx'
-import AppContainer from './containers/App.jsx'
-import UploadContainer from './containers/UploadForm.jsx'
-import ParseErrorsContainer from './containers/ParseErrors.jsx'
-import FilingPeriodSelectorContainer from './containers/FilingPeriodSelector.jsx'
+import Header from '../shared-components/Header'
+import AppContainer from './containers/App'
+import UploadContainer from './containers/UploadForm'
+import ParseErrorsContainer from './containers/ParseErrors'
+import FilingPeriodSelectorContainer from './containers/FilingPeriodSelector'
 import appReducer from './reducers'
 
 const middleware = [thunkMiddleware]
