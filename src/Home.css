@@ -8,11 +8,6 @@
   margin-bottom: 0;
   margin-top: 1.5em;
 }
-.home .font-lead {
-  font-size: 2rem;
-  line-height: 1.7;
-  margin-top: 0;
-}
 .home .card-container {
   align-items: stretch;
   display: flex;

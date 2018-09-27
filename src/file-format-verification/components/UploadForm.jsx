@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
 
+import './UploadForm.css'
+
 export const renderErrors = errors => {
   if (errors.length === 0) return null
 
   return (
-    <div className="usa-alert usa-alert-error" role="alert">
-      <div className="usa-alert-body">
-        <ul className="usa-alert-text">
+    <div className="alert alert-error" role="alert">
+      <div className="alert-body">
+        <ul className="alert-text">
           {errors.map((error, i) => {
             return <li key={i}>{error}</li>
           })}
@@ -65,7 +67,7 @@ export default class Upload extends Component {
                 ref={node => {
                   this.dropzoneContent = node
                 }}
-                className="usa-text-small"
+                className="text-small"
               >
                 {this.updateDropArea(this.props)}
               </button>

@@ -16,9 +16,6 @@
   display: inline-block;
   margin-right: 0.5em;
 }
-select {
-  appearance: none;
-}
 .header form select {
   background-position: right 0.5rem center;
   font-size: 4rem;

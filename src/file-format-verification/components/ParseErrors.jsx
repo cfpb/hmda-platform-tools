@@ -5,6 +5,8 @@ import Alert from '../../shared-components/Alert.jsx'
 import LoadingIcon from '../../shared-components/LoadingIcon.jsx'
 import { ERRORS_PER_PAGE } from '../constants'
 
+import './ParseErrors.css'
+
 const renderLarErrors = (larErrors, pagination) => {
   if (larErrors.length === 0) return null
   const currentErrs = []

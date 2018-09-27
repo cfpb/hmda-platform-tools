@@ -1,0 +1,22 @@
+.FilingPeriodSelector {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.FilingPeriodSelector select {
+  appearance: none;
+  background-image: url(../../images/arrow-both.svg);
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  border: 0.1rem solid #5b616b;
+  border-radius: 0;
+  box-sizing: border-box;
+  font-family: SourceSansProBold;
+  font-size: 4rem;
+  font-weight: bold;
+  height: auto;
+  line-height: 1;
+  margin: 0 0 -2px;
+  padding: 0 2.5rem 0 0.5rem;
+}

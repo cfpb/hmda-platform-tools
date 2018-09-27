@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './FilingPeriodSelector.css'
+
 const filingPeriods = ['2018', '2017']
 
 const FilingPeriodSelector = props => {
