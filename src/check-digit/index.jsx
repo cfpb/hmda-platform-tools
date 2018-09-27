@@ -7,6 +7,8 @@ import CSVUpload from './CSVUpload.jsx'
 import isomorphicFetch from 'isomorphic-fetch'
 import { isUliValid, isLoanIdValid } from './utils/index.js'
 
+import './index.css'
+
 const defaultState = {
   inputValue: '',
   checkDigit: null,
@@ -146,43 +148,40 @@ export default class App extends Component {
       isSubmitted
     } = this.state
 
-    return [
-      <div key={1} id="main-content">
-        <div className="usa-grid">
-          <div className="usa-width-one-whole">
-            <AppIntro />
-          </div>
-        </div>
-      </div>,
-      <div className="flex-row">
-        <div className="flex-item">
-          <InputError errors={errors} isSubmitted={isSubmitted} />
-          <Form
-            inputValue={inputValue}
-            onSubmit={this.handleSubmit}
-            onInputChange={this.handleInputChange}
-            validateInput={this.validateInput}
-            errors={errors}
-            onRadioChange={this.handleRadioChange}
-            whichApp={whichApp}
-            isSubmitted={isSubmitted}
-            uli={uli}
-            isValidUli={isValidUli}
-          />
-          <div ref={this.refScrollTo}>
-            <Answer
+    return (
+      <div id="main-content">
+        <AppIntro />
+
+        <div className="grid">
+          <div className="item">
+            <InputError errors={errors} isSubmitted={isSubmitted} />
+            <Form
+              inputValue={inputValue}
+              onSubmit={this.handleSubmit}
+              onInputChange={this.handleInputChange}
+              validateInput={this.validateInput}
+              errors={errors}
+              onRadioChange={this.handleRadioChange}
+              whichApp={whichApp}
+              isSubmitted={isSubmitted}
               uli={uli}
               isValidUli={isValidUli}
-              checkDigit={checkDigit}
-              isSubmitted={isSubmitted}
-              errors={errors}
             />
+            <div ref={this.refScrollTo}>
+              <Answer
+                uli={uli}
+                isValidUli={isValidUli}
+                checkDigit={checkDigit}
+                isSubmitted={isSubmitted}
+                errors={errors}
+              />
+            </div>
+          </div>
+          <div className="item">
+            <CSVUpload />
           </div>
         </div>
-        <div className="flex-item">
-          <CSVUpload />
-        </div>
       </div>
-    ]
+    )
   }
 }
