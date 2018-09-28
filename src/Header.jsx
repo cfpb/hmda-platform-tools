@@ -36,7 +36,7 @@ const Header = () => {
                     <a
                       href={link.href}
                       className={
-                        link.name === 'Home' ? 'nav-link active' : 'nav-link'
+                        link.name === 'Tools' ? 'nav-link active' : 'nav-link'
                       }
                       target={link.name === 'Filing' ? '_blank' : null}
                       rel={
