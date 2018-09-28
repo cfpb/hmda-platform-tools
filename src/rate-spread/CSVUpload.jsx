@@ -5,6 +5,8 @@ import Alert from '../shared-components/Alert.jsx'
 import Header from '../shared-components/Header.jsx'
 import runFetch from './runFetch.js'
 
+import './CSVUpload.css'
+
 const defaultState = {
   isFetching: false,
   filename: '',
@@ -90,11 +92,11 @@ class CSVUpload extends Component {
               href="#"
               id="csvfile"
             />
-            <label className="usa-button csvLabel" htmlFor="csvfile">
+            <label className="button csvLabel" htmlFor="csvfile">
               Upload a csv
             </label>
           </p>
-          <p className="usa-text-small">
+          <p className="text-small">
             Please see{' '}
             <a href="http://cfpb.github.io/hmda-platform/rate-spread/#batch">
               the batch section of the API documentation
