@@ -15,7 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/cfpb/hmda-platform-tools.git"
   },
-  "keywords": ["HMDA", "tools"],
+  "keywords": [
+    "HMDA",
+    "tools"
+  ],
   "author": "Consumer Financial Protection Bureau",
   "license": "CC0-1.0",
   "bugs": {
@@ -30,10 +33,17 @@
     "react-dropzone": "5.1.0",
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
-    "react-scripts": "1.1.5",
+    "react-scripts": "2.0.1",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0",
     "split2": "3.0.0"
-  }
+  },
+  "homepage": "/tools",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
