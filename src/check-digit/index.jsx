@@ -98,7 +98,7 @@ export default class App extends Component {
       }
     }
 
-    const API_URL = 'https://ffiec-api.cfpb.gov/public/uli/'
+    const API_URL = '/v2/public/uli/'
 
     if (this.state.isSubmitted) {
       isomorphicFetch(API_URL + endpoint, {
