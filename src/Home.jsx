@@ -1,18 +1,16 @@
 import React from 'react'
 import Header from './shared-components/Header.jsx'
 
+import './Home.css'
+
 const Home = () => {
   return (
     <div className="home">
-      <div className="usa-grid">
-        <div className="usa-width-one-whole">
-          <Header
-            type="main"
-            headingText="HMDA tools"
-            paragraphText="Here you can find various tools to assist you in getting your HMDA LAR ready for filing."
-          />
-        </div>
-      </div>
+      <Header
+        type="main"
+        headingText="HMDA tools"
+        paragraphText="Here you can find various tools to assist you in getting your HMDA LAR ready for filing."
+      />
 
       <div className="card-container">
         <div className="card">

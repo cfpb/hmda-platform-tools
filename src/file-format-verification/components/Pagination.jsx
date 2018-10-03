@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import LoadingIcon from '../../shared-components/LoadingIcon.jsx'
-import { ERRORS_PER_PAGE } from '../constants'
+
+import './Pagination.css'
 
 let scrollHeight
 let scrollDiff

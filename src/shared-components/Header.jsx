@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import './Header.css'
+
 const makeHeadingLink = (headingText, headingLink) => {
   return <Link to={headingLink}>{headingText}</Link>
 }
@@ -28,7 +30,7 @@ const renderHeadingWithSelector = (type, heading, selector) => {
 }
 
 const renderParagraph = (type, paragraphText) => {
-  if (type === 'main') return <p className="usa-font-lead">{paragraphText}</p>
+  if (type === 'main') return <p className="font-lead">{paragraphText}</p>
   if (type === 'sub') return <p>{paragraphText}</p>
 }
 

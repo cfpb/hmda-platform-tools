@@ -5,6 +5,8 @@ import Header from '../shared-components/Header.jsx'
 import Alert from '../shared-components/Alert.jsx'
 import runFetch from './utils/runFetch.js'
 
+import './CSVUpload.css'
+
 const defaultState = {
   isFetching: false,
   filename: '',
@@ -97,7 +99,7 @@ class CSVUpload extends PureComponent {
             id="generateCSV"
           />
           <p>
-            <label className="usa-button csvLabel" htmlFor="generateCSV">
+            <label className="button csvLabel" htmlFor="generateCSV">
               Generate check digits
             </label>{' '}
           </p>
@@ -111,11 +113,11 @@ class CSVUpload extends PureComponent {
               href="#"
               id="validateCSV"
             />
-            <label className="usa-button csvLabel" htmlFor="validateCSV">
+            <label className="button csvLabel" htmlFor="validateCSV">
               Validate check digits
             </label>
           </p>
-          <p className="usa-text-small">
+          <p className="text-small">
             Please see{' '}
             <a href="http://cfpb.github.io/hmda-platform/uli/#generate-batch">
               the batch section of the API documentation

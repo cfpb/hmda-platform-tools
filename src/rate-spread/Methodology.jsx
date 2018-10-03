@@ -2,14 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../shared-components/Header.jsx'
 
+import './Methodology.css'
+
 const Methodology = () => {
   return (
-    <div className="usa-grid methodology" id="main-content">
+    <div className="methodology" id="main-content">
       <Header
         type="main"
         headingText="Methodology for Determining Average Prime Offer Rates"
       >
-        <p className="usa-font-lead">
+        <p className="font-lead">
           The calculation of average prime offer rates is based on survey data
           for four hypothetical mortgage products (the four products): (1)
           30-year fixed-rate; (2) 15-year fixed-rate; (3) five-year
@@ -613,7 +615,7 @@ const Methodology = () => {
       </table>
       <hr />
       <a name="footnote" />
-      <p className="usa-text-small">
+      <p className="text-small">
         [1]The “30-year” and “15-year” fixed-rate product designations refer to
         those products’ terms to maturity. The “one-year” and “five-year”
         variable-rate product designations, on the other hand, refer to those

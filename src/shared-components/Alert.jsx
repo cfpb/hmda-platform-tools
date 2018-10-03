@@ -1,19 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './Alert.css'
+
 const Alert = ({ type = 'info', heading, children }) => {
   if (!children) return null
 
   return (
-    <div className={`usa-grid usa-alert usa-alert-${type}`}>
-      <div className="usa-alert-body">
+    <div className={`alert alert-${type}`}>
+      <div className="alert-body">
         {heading ? (
-          <h3 className="usa-alert-heading">
+          <h3 className="alert-heading">
             {type === 'success' ? <span className="alert-check" /> : null}
             {heading}
           </h3>
         ) : null}
-        {React.cloneElement(children, { className: 'usa-alert-text' })}
+        {React.cloneElement(children, { className: 'alert-text' })}
       </div>
     </div>
   )

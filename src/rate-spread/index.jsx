@@ -3,23 +3,23 @@ import AppIntro from './AppIntro.jsx'
 import CSVUpload from './CSVUpload.jsx'
 import Form from './Form.jsx'
 
+import './index.css'
+
 const App = () => {
-  return [
-    <div key={1} className="usa-grid" id="main-content">
-      <div className="usa-width-one-whole">
-        <AppIntro />
+  return (
+    <div id="main-content">
+      <AppIntro />
+
+      <div className="grid">
+        <div className="item">
+          <Form />
+        </div>
+        <div className="item">
+          <CSVUpload />
+        </div>
       </div>
-    </div>,
-    <div key={2} className="flex-row">
-      <div className="flex-item">
-        <Form />
-      </div>
-      <div className="flex-item">
-        <CSVUpload />
-      </div>
-    </div>,
-    <div key={3} className="usa-grid">
-      <div className="usa-alert" style={{ marginTop: '3em' }}>
+
+      <div className="alert" style={{ marginTop: '3em' }}>
         <p>
           Two sets of APORs were published for certain dates in 2017, one on the
           Bureau’s web site and one on the FFIEC’s web site. The APOR values
@@ -38,7 +38,7 @@ const App = () => {
         </p>
       </div>
     </div>
-  ]
+  )
 }
 
 export default App
