@@ -8,17 +8,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cfpb/hmda-platform-tools.git"
   },
-  "keywords": [
-    "HMDA",
-    "tools"
-  ],
+  "keywords": ["HMDA", "tools"],
   "author": "Consumer Financial Protection Bureau",
   "license": "CC0-1.0",
   "bugs": {
@@ -40,10 +37,5 @@
     "split2": "3.0.0"
   },
   "homepage": "/tools",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }
