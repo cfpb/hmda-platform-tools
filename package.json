@@ -26,6 +26,7 @@
     "filereader-stream": "2.0.0",
     "hmda-file-parser": "1.18.0",
     "react": "16.4.2",
+    "react-app-polyfill": "0.1.3",
     "react-dom": "16.4.2",
     "react-dropzone": "5.1.0",
     "react-redux": "5.0.7",
