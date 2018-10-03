@@ -91,7 +91,7 @@ class CSVUpload extends PureComponent {
           />
           <input
             onChange={this.makeSelectHandler(
-              'https://ffiec-api.cfpb.gov/public/uli/checkDigit/csv',
+              '/v2/public/uli/checkDigit/csv',
               'generated'
             )}
             type="file"
@@ -106,7 +106,7 @@ class CSVUpload extends PureComponent {
           <p>
             <input
               onChange={this.makeSelectHandler(
-                'https://ffiec-api.cfpb.gov/public/uli/validate/csv',
+                '/v2/public/uli/validate/csv',
                 'validated'
               )}
               type="file"
