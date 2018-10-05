@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: hmda/hmda-tools
+  repository: hmda/hmda-platform-tools
   tag: latest
   pullPolicy: IfNotPresent
 
