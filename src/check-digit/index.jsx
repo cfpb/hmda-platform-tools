@@ -87,12 +87,12 @@ export default class App extends Component {
   }
 
   getResponse(loanId) {
-    let endpoint = 'checkDigit'
+    let endpoint = 'checkDigit/'
     let body = {
       loanId: this.state.inputValue
     }
     if (this.state.whichApp === 'validate') {
-      endpoint = 'validate'
+      endpoint = 'validate/'
       body = {
         uli: this.state.inputValue
       }
@@ -112,7 +112,7 @@ export default class App extends Component {
           return response.json()
         })
         .then(json => {
-          if (endpoint === 'checkDigit') {
+          if (endpoint === 'checkDigit/') {
             this.setState({ uli: json.uli, checkDigit: json.checkDigit })
           } else {
             this.setState({ isValidUli: json.isValid })
