@@ -8,7 +8,7 @@ const Home = () => {
     <div className="home">
       <Header
         type="main"
-        headingText="HMDA tools"
+        headingText="HMDA Tools"
         paragraphText="Here you can find various tools to assist you in getting your HMDA LAR ready for filing."
       />
 
