@@ -85,7 +85,8 @@ export function triggerParse(file, filingPeriod) {
 
       isomorphicFetch('/v2/public/hmda/parse', {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: { Accept: 'application/json' }
       })
         .then(response => {
           if (response.status >= 400) {
