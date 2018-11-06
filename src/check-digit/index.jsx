@@ -87,12 +87,12 @@ export default class App extends Component {
   }
 
   getResponse(loanId) {
-    let endpoint = 'checkDigit/'
+    let endpoint = 'checkDigit'
     let body = {
       loanId: this.state.inputValue
     }
     if (this.state.whichApp === 'validate') {
-      endpoint = 'validate/'
+      endpoint = 'validate'
       body = {
         uli: this.state.inputValue
       }
@@ -105,14 +105,15 @@ export default class App extends Component {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         }
       })
         .then(response => {
           return response.json()
         })
         .then(json => {
-          if (endpoint === 'checkDigit/') {
+          if (endpoint === 'checkDigit') {
             this.setState({ uli: json.uli, checkDigit: json.checkDigit })
           } else {
             this.setState({ isValidUli: json.isValid })
