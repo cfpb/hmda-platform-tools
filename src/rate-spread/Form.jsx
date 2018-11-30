@@ -1,110 +1,110 @@
-import React, { Component } from 'react'
-import LoadingIcon from '../shared-components/LoadingIcon.jsx'
-import Alert from '../shared-components/Alert.jsx'
-import Header from '../shared-components/Header.jsx'
-import runFetch from './runFetch.js'
+import React, { Component } from "react";
+import LoadingIcon from "../shared-components/LoadingIcon.jsx";
+import Alert from "../shared-components/Alert.jsx";
+import Header from "../shared-components/Header.jsx";
+import runFetch from "./runFetch.js";
 
-import './Form.css'
+import "./Form.css";
 
 const defaultState = {
-  actionTaken: '1',
-  amortization: 'Fixed',
-  reverse: '2',
-  rateSetDate: '',
-  APR: '',
-  loanTerm: '',
+  actionTaken: "1",
+  amortization: "Fixed",
+  reverse: "2",
+  rateSetDate: "",
+  APR: "",
+  loanTerm: "",
   validationErrors: {},
   isFetching: false,
   error: false,
-  errorText: '',
-  rateSpread: ''
-}
+  errorText: "",
+  rateSpread: ""
+};
 
-const startDate = new Date('01/02/2017').getTime()
-const today = Date.now()
+const startDate = new Date("01/02/2017").getTime();
+const today = Date.now();
 
-const asNumber = val => +val
+const asNumber = val => +val;
 
 const ensureTwoDigits = s => {
-  if (s.length === 2) return s
-  return '0' + s
-}
+  if (s.length === 2) return s;
+  return "0" + s;
+};
 
 const ensureFourDigits = s => {
-  if (s.length === 4) return s
-  return '20' + s
-}
+  if (s.length === 4) return s;
+  return "20" + s;
+};
 
 const parseDate = date => {
-  const parts = date.split('/')
+  const parts = date.split("/");
   return `${ensureFourDigits(parts[2])}-${ensureTwoDigits(
     parts[0]
-  )}-${ensureTwoDigits(parts[1])}`
-}
+  )}-${ensureTwoDigits(parts[1])}`;
+};
 
 const getNumericAPR = apr => {
-  if (apr.match(/%$/)) apr = apr.slice(0, -1)
-  if (apr === '') return NaN
-  return +apr
-}
+  if (apr.match(/%$/)) apr = apr.slice(0, -1);
+  if (apr === "") return NaN;
+  return +apr;
+};
 
 const validatedInput = {
   rateSetDate: {
     validate(date) {
-      const parts = date.split('/')
-      if (parts.length !== 3) return true
-      const numericDate = new Date(date).getTime()
+      const parts = date.split("/");
+      if (parts.length !== 3) return true;
+      const numericDate = new Date(date).getTime();
       if (isNaN(numericDate) || numericDate < startDate || numericDate > today)
-        return true
-      return false
+        return true;
+      return false;
     },
     text:
       "Rate set date must be in mm/dd/yyyy format and between 01/02/2017 and today's date"
   },
   APR: {
     validate(apr) {
-      apr = getNumericAPR(apr)
-      return isNaN(apr) || apr < 0 || apr > 99.999
+      apr = getNumericAPR(apr);
+      return isNaN(apr) || apr < 0 || apr > 99.999;
     },
-    text: 'APR must be a number between 0 and 99.999'
+    text: "APR must be a number between 0 and 99.999"
   },
   loanTerm: {
     validate(term) {
-      return isNaN(asNumber(term)) || term > 50 || term < 1
+      return isNaN(asNumber(term)) || term > 50 || term < 1;
     },
-    text: 'Loan term must be a number between 1 and 50.'
+    text: "Loan term must be a number between 1 and 50."
   }
-}
+};
 
 class Form extends Component {
   constructor(props) {
-    super(props)
-    this.state = defaultState
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    this.actionTakenHandler = this.makeChangeHandler('actionTaken')
-    this.amortizationHandler = this.makeChangeHandler('amortization')
-    this.reverseHandler = this.makeChangeHandler('reverse')
-    this.rateSetDateHandler = this.makeChangeHandler('rateSetDate')
-    this.APRHandler = this.makeChangeHandler('APR')
-    this.loanTermHandler = this.makeChangeHandler('loanTerm')
-    this.rateSetValidator = this.makeValidator('rateSetDate')
-    this.APRValidator = this.makeValidator('APR')
-    this.loanTermValidator = this.makeValidator('loanTerm')
+    super(props);
+    this.state = defaultState;
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.actionTakenHandler = this.makeChangeHandler("actionTaken");
+    this.amortizationHandler = this.makeChangeHandler("amortization");
+    this.reverseHandler = this.makeChangeHandler("reverse");
+    this.rateSetDateHandler = this.makeChangeHandler("rateSetDate");
+    this.APRHandler = this.makeChangeHandler("APR");
+    this.loanTermHandler = this.makeChangeHandler("loanTerm");
+    this.rateSetValidator = this.makeValidator("rateSetDate");
+    this.APRValidator = this.makeValidator("APR");
+    this.loanTermValidator = this.makeValidator("loanTerm");
 
-    this.refScrollTo = React.createRef()
+    this.refScrollTo = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.isFetching) {
       window.scrollTo({
         top: this.refScrollTo.current.offsetTop,
-        behavior: 'smooth'
-      })
+        behavior: "smooth"
+      });
     }
   }
 
   onFetch() {
-    this.setState({ isFetching: true, error: false, errorText: '' })
+    this.setState({ isFetching: true, error: false, errorText: "" });
   }
 
   onCalculated(response) {
@@ -112,13 +112,13 @@ class Form extends Component {
       return this.setState({
         isFetching: false,
         error: true,
-        errorText: response.status === 404 ? response.statusText : ''
-      })
+        errorText: response.status === 404 ? response.statusText : ""
+      });
     }
     this.setState({
       isFetching: false,
       rateSpread: response.rateSpread
-    })
+    });
   }
 
   makeChangeHandler(target) {
@@ -128,15 +128,15 @@ class Form extends Component {
           validatedInput[target].validate(event.target.value) !==
           this.state.validationErrors[target]
         )
-          this.setValidationErrors(target, event)
+          this.setValidationErrors(target, event);
       }
       this.setState({
         [target]: event.target.value,
-        rateSpread: '',
+        rateSpread: "",
         error: false,
-        errorText: ''
-      })
-    }
+        errorText: ""
+      });
+    };
   }
 
   setValidationErrors(target, event) {
@@ -145,40 +145,40 @@ class Form extends Component {
         ...this.state.validationErrors,
         [target]: validatedInput[target].validate(event.target.value)
       }
-    })
+    });
   }
 
   validateAllInput(cb) {
-    const newState = {}
-    const validated = ['rateSetDate', 'APR', 'loanTerm']
+    const newState = {};
+    const validated = ["rateSetDate", "APR", "loanTerm"];
     validated.forEach(v => {
-      newState[v] = validatedInput[v].validate(this.state[v])
-    })
+      newState[v] = validatedInput[v].validate(this.state[v]);
+    });
     this.setState(
       {
         validationErrors: newState
       },
       cb
-    )
+    );
   }
 
   makeValidator(target) {
-    return event => this.setValidationErrors(target, event)
+    return event => this.setValidationErrors(target, event);
   }
 
   handleFormSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     this.validateAllInput(() => {
-      const errs = this.state.validationErrors
-      if (errs.rateSetDate || errs.APR || errs.loanTerm) return
+      const errs = this.state.validationErrors;
+      if (errs.rateSetDate || errs.APR || errs.loanTerm) return;
 
-      this.onFetch()
-      const API_URL = '/v2/public/rateSpread/'
+      this.onFetch();
+      const API_URL = "https://ffiec-api.cfpb.gov/public/rateSpread";
       runFetch(API_URL, this.prepareBodyFromState()).then(res => {
-        this.onCalculated(res)
-      })
-    })
+        this.onCalculated(res);
+      });
+    });
   }
 
   prepareBodyFromState() {
@@ -186,21 +186,21 @@ class Form extends Component {
       actionTakenType: asNumber(this.state.actionTaken),
       loanTerm: asNumber(this.state.loanTerm),
       reverseMortgage: asNumber(this.state.reverse),
-      amortizationType: this.state.amortization + 'Rate',
+      amortizationType: this.state.amortization + "Rate",
       apr: getNumericAPR(this.state.APR),
       lockInDate: parseDate(this.state.rateSetDate)
-    })
+    });
   }
 
   render() {
-    const errs = this.state.validationErrors
-    const rateSetError = errs.rateSetDate
-    const APRError = errs.APR
-    const loanTermError = errs.loanTerm
+    const errs = this.state.validationErrors;
+    const rateSetError = errs.rateSetDate;
+    const APRError = errs.APR;
+    const loanTermError = errs.loanTerm;
     const hasEmptyInputs =
-      this.state.rateSetDate === '' ||
-      this.state.APR === '' ||
-      this.state.loanTerm === ''
+      this.state.rateSetDate === "" ||
+      this.state.APR === "" ||
+      this.state.loanTerm === "";
 
     return (
       <div>
@@ -212,10 +212,10 @@ class Form extends Component {
               a single loan."
           >
             <div className="info">
-              <p style={{ marginTop: '0' }}>
+              <p style={{ marginTop: "0" }}>
                 You should report Rate Spread as <strong>NA</strong> if
               </p>
-              <ul style={{ marginBottom: '0' }}>
+              <ul style={{ marginBottom: "0" }}>
                 <li>
                   <strong>Action Taken Type</strong> is 3, 4, 5, 6, or 7; or if
                 </li>
@@ -235,7 +235,7 @@ class Form extends Component {
                   name="actionTaken"
                   value="1"
                   onChange={this.actionTakenHandler}
-                  checked={this.state.actionTaken === '1'}
+                  checked={this.state.actionTaken === "1"}
                 />
                 <label htmlFor="actionTaken1">1 - Originated</label>
               </li>
@@ -246,7 +246,7 @@ class Form extends Component {
                   name="actionTaken"
                   value="2"
                   onChange={this.actionTakenHandler}
-                  checked={this.state.actionTaken === '2'}
+                  checked={this.state.actionTaken === "2"}
                 />
                 <label htmlFor="actionTaken2">
                   2 - Application approved but not accepted
@@ -259,7 +259,7 @@ class Form extends Component {
                   name="actionTaken"
                   value="8"
                   onChange={this.actionTakenHandler}
-                  checked={this.state.actionTaken === '8'}
+                  checked={this.state.actionTaken === "8"}
                 />
                 <label htmlFor="actionTaken8">
                   8 - Pre-approval request approved but not accepted
@@ -276,7 +276,7 @@ class Form extends Component {
               name="reverse"
               value="2"
               onChange={this.reverseHandler}
-              checked={this.state.reverse === '2'}
+              checked={this.state.reverse === "2"}
             />
             <label htmlFor="reverse2">2 - Not a reverse mortgage</label>
           </fieldset>
@@ -290,7 +290,7 @@ class Form extends Component {
                   name="amortization"
                   value="Fixed"
                   onChange={this.amortizationHandler}
-                  checked={this.state.amortization === 'Fixed'}
+                  checked={this.state.amortization === "Fixed"}
                 />
                 <label htmlFor="amortizationFixed">Fixed</label>
               </li>
@@ -301,14 +301,14 @@ class Form extends Component {
                   name="amortization"
                   value="Variable"
                   onChange={this.amortizationHandler}
-                  checked={this.state.amortization === 'Variable'}
+                  checked={this.state.amortization === "Variable"}
                 />
                 <label htmlFor="amortizationVariable">Variable</label>
               </li>
             </ul>
           </fieldset>
 
-          <div className={rateSetError ? 'input-error' : ''}>
+          <div className={rateSetError ? "input-error" : ""}>
             <label htmlFor="rateSetDate">Rate Set Date</label>
             {rateSetError ? (
               <span className="input-error-message" role="alert">
@@ -324,7 +324,7 @@ class Form extends Component {
               placeholder="mm/dd/yyyy"
             />
           </div>
-          <div className={APRError ? 'input-error' : ''}>
+          <div className={APRError ? "input-error" : ""}>
             <label htmlFor="APR">APR%</label>
             {APRError ? (
               <span className="input-error-message" role="alert">
@@ -340,11 +340,11 @@ class Form extends Component {
               placeholder="0.000%"
             />
           </div>
-          <div className={loanTermError ? 'input-error' : ''}>
+          <div className={loanTermError ? "input-error" : ""}>
             <label htmlFor="loanTerm">
-              {this.state.amortization === 'Fixed'
-                ? 'Loan Term'
-                : 'Years to First Adjustment'}
+              {this.state.amortization === "Fixed"
+                ? "Loan Term"
+                : "Years to First Adjustment"}
             </label>
             {loanTermError ? (
               <span className="input-error-message" role="alert">
@@ -377,7 +377,7 @@ class Form extends Component {
                 <p>{this.state.errorText}</p>
               ) : (
                 <p>
-                  Please try again later. If the problem persists, contact{' '}
+                  Please try again later. If the problem persists, contact{" "}
                   <a href="mailto:hmdahelp@cfpb.gov">HMDA Help</a>.
                 </p>
               )}
@@ -389,8 +389,8 @@ class Form extends Component {
           ) : null}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Form
+export default Form;
