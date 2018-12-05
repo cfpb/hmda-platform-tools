@@ -7,8 +7,6 @@ import CSVUpload from './CSVUpload.jsx'
 import isomorphicFetch from 'isomorphic-fetch'
 import { isUliValid, isLoanIdValid } from './utils/index.js'
 
-import './index.css'
-
 const defaultState = {
   inputValue: '',
   checkDigit: null,
