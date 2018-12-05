@@ -1,6 +1,6 @@
 {
   "name": "hmda-platform-tools",
-  "version": "2.0.0",
+  "version": "v2.2.0",
   "description": "Tools to assist with submitting HMDA files",
   "engines": {
     "node": ">=8.x"
@@ -15,7 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/cfpb/hmda-platform-tools.git"
   },
-  "keywords": ["HMDA", "tools"],
+  "keywords": [
+    "HMDA",
+    "tools"
+  ],
   "author": "Consumer Financial Protection Bureau",
   "license": "CC0-1.0",
   "bugs": {
@@ -38,5 +41,11 @@
     "split2": "3.0.0"
   },
   "homepage": "/tools",
-  "browserslist": [">0.2%", "not dead", "not ie < 11", "not op_mini all"]
+  "browserslist": [
+    "Chrome >= 60",
+    "Safari >= 10.1",
+    "Firefox >= 54",
+    "Edge >= 15",
+    "ie >= 11"
+  ]
 }
