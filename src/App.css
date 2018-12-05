@@ -73,3 +73,36 @@ hr {
 .text-small {
   font-size: 1.3rem;
 }
+
+#main-content {
+  margin: 0 auto;
+  max-width: 1040px;
+}
+
+#main-content .header {
+  border-bottom: none;
+}
+
+#main-content .grid {
+  align-items: stretch;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 50% 50%;
+  margin: 0 auto;
+}
+
+#main-content .grid .item {
+  flex: 1;
+  margin: 0 20px;
+}
+
+#main-content .grid .item:first-child {
+  margin-left: 0;
+}
+#main-content .grid .item:last-child {
+  margin-right: 0;
+}
+#main-content h1 {
+  font-size: 4rem;
+  margin-top: 1.5em;
+}
