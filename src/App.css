@@ -85,9 +85,7 @@ hr {
 
 #main-content .grid {
   align-items: stretch;
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 50% 50%;
+  display: flex;
   margin: 0 auto;
 }
 
