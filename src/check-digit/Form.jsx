@@ -4,6 +4,8 @@ import Alert from '../shared-components/Alert.jsx'
 import Header from '../shared-components/Header.jsx'
 import LoadingIcon from '../shared-components/LoadingIcon.jsx'
 
+import './Form.css'
+
 class Form extends Component {
   constructor(props) {
     super(props)
@@ -76,7 +78,7 @@ class Form extends Component {
     const buttonText = this.buttonText[whichApp]
     const buttonDisabled =
       errors.length === 0 && inputValue !== '' ? false : true
-    const errorClass = errors.length !== 0 ? 'usa-input-error' : ''
+    const errorClass = errors.length !== 0 ? 'input-error' : ''
 
     return (
       <form className="Form" onSubmit={this.handleFormSubmit}>
@@ -87,7 +89,7 @@ class Form extends Component {
             check digit -or- you can manually enter a ULI to validate a check
             digit."
         />
-        <ul className="usa-unstyled-list">
+        <ul className="unstyled-list">
           <li>
             <input
               id="getCheckDigit"
@@ -115,7 +117,7 @@ class Form extends Component {
           {label}
           {errors.map((error, i) => {
             return (
-              <span key={i} className="usa-input-error-message" role="alert">
+              <span key={i} className="input-error-message" role="alert">
                 {error}
               </span>
             )

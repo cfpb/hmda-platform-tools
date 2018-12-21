@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Alert from '../shared-components/Alert.jsx'
 
+import './Answer.css'
+
 export default class Answer extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (

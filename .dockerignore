@@ -1,5 +1,3 @@
-node_modules/
-npm-packages-offline-cache/
-*/__tests__/
-*/src/
-*.md
+.git
+node_modules
+build

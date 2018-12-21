@@ -4,6 +4,8 @@ import Alert from '../shared-components/Alert.jsx'
 import Header from '../shared-components/Header.jsx'
 import runFetch from './runFetch.js'
 
+import './Form.css'
+
 const defaultState = {
   actionTaken: '1',
   amortization: 'Fixed',
@@ -225,37 +227,45 @@ class Form extends Component {
           </Header>
           <fieldset>
             <legend>Action Taken Type</legend>
-            <input
-              type="radio"
-              id="actionTaken1"
-              name="actionTaken"
-              value="1"
-              onChange={this.actionTakenHandler}
-              checked={this.state.actionTaken === '1'}
-            />
-            <label htmlFor="actionTaken1">1 - Originated</label>
-            <input
-              type="radio"
-              id="actionTaken2"
-              name="actionTaken"
-              value="2"
-              onChange={this.actionTakenHandler}
-              checked={this.state.actionTaken === '2'}
-            />
-            <label htmlFor="actionTaken2">
-              2 - Application approved but not accepted
-            </label>
-            <input
-              type="radio"
-              id="actionTaken8"
-              name="actionTaken"
-              value="8"
-              onChange={this.actionTakenHandler}
-              checked={this.state.actionTaken === '8'}
-            />
-            <label htmlFor="actionTaken8">
-              8 - Pre-approval request approved but not accepted
-            </label>
+            <ul class="unstyled-list">
+              <li>
+                <input
+                  type="radio"
+                  id="actionTaken1"
+                  name="actionTaken"
+                  value="1"
+                  onChange={this.actionTakenHandler}
+                  checked={this.state.actionTaken === '1'}
+                />
+                <label htmlFor="actionTaken1">1 - Originated</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  id="actionTaken2"
+                  name="actionTaken"
+                  value="2"
+                  onChange={this.actionTakenHandler}
+                  checked={this.state.actionTaken === '2'}
+                />
+                <label htmlFor="actionTaken2">
+                  2 - Application approved but not accepted
+                </label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  id="actionTaken8"
+                  name="actionTaken"
+                  value="8"
+                  onChange={this.actionTakenHandler}
+                  checked={this.state.actionTaken === '8'}
+                />
+                <label htmlFor="actionTaken8">
+                  8 - Pre-approval request approved but not accepted
+                </label>
+              </li>
+            </ul>
           </fieldset>
           <fieldset>
             <legend>Reverse Mortgage</legend>
@@ -272,35 +282,41 @@ class Form extends Component {
           </fieldset>
           <fieldset>
             <legend>Amortization Type</legend>
-            <input
-              type="radio"
-              id="amortizationFixed"
-              name="amortization"
-              value="Fixed"
-              onChange={this.amortizationHandler}
-              checked={this.state.amortization === 'Fixed'}
-            />
-            <label htmlFor="amortizationFixed">Fixed</label>
-            <input
-              type="radio"
-              id="amortizationVariable"
-              name="amortization"
-              value="Variable"
-              onChange={this.amortizationHandler}
-              checked={this.state.amortization === 'Variable'}
-            />
-            <label htmlFor="amortizationVariable">Variable</label>
+            <ul class="unstyled-list">
+              <li>
+                <input
+                  type="radio"
+                  id="amortizationFixed"
+                  name="amortization"
+                  value="Fixed"
+                  onChange={this.amortizationHandler}
+                  checked={this.state.amortization === 'Fixed'}
+                />
+                <label htmlFor="amortizationFixed">Fixed</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  id="amortizationVariable"
+                  name="amortization"
+                  value="Variable"
+                  onChange={this.amortizationHandler}
+                  checked={this.state.amortization === 'Variable'}
+                />
+                <label htmlFor="amortizationVariable">Variable</label>
+              </li>
+            </ul>
           </fieldset>
 
-          <div className={rateSetError ? 'usa-input-error' : ''}>
+          <div className={rateSetError ? 'input-error' : ''}>
             <label htmlFor="rateSetDate">Rate Set Date</label>
             {rateSetError ? (
-              <span className="usa-input-error-message" role="alert">
+              <span className="input-error-message" role="alert">
                 {validatedInput.rateSetDate.text}
               </span>
             ) : null}
             <input
-              type="input"
+              type="text"
               value={this.state.rateSetDate}
               onChange={this.rateSetDateHandler}
               onBlur={this.rateSetValidator}
@@ -308,15 +324,15 @@ class Form extends Component {
               placeholder="mm/dd/yyyy"
             />
           </div>
-          <div className={APRError ? 'usa-input-error' : ''}>
+          <div className={APRError ? 'input-error' : ''}>
             <label htmlFor="APR">APR%</label>
             {APRError ? (
-              <span className="usa-input-error-message" role="alert">
+              <span className="input-error-message" role="alert">
                 {validatedInput.APR.text}
               </span>
             ) : null}
             <input
-              type="input"
+              type="text"
               value={this.state.APR}
               onChange={this.APRHandler}
               onBlur={this.APRValidator}
@@ -324,21 +340,19 @@ class Form extends Component {
               placeholder="0.000%"
             />
           </div>
-          <div className={loanTermError ? 'usa-input-error' : ''}>
+          <div className={loanTermError ? 'input-error' : ''}>
             <label htmlFor="loanTerm">
-              {this.state.amortization === 'Fixed' ? (
-                'Loan Term'
-              ) : (
-                'Years to First Adjustment'
-              )}
+              {this.state.amortization === 'Fixed'
+                ? 'Loan Term'
+                : 'Years to First Adjustment'}
             </label>
             {loanTermError ? (
-              <span className="usa-input-error-message" role="alert">
+              <span className="input-error-message" role="alert">
                 {validatedInput.loanTerm.text}
               </span>
             ) : null}
             <input
-              type="input"
+              type="text"
               value={this.state.loanTerm}
               onChange={this.loanTermHandler}
               onBlur={this.loanTermValidator}

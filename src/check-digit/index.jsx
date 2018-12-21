@@ -96,14 +96,15 @@ export default class App extends Component {
       }
     }
 
-    const API_URL = 'https://ffiec-api.cfpb.gov/public/uli/'
+    const API_URL = '/v2/public/uli/'
 
     if (this.state.isSubmitted) {
       isomorphicFetch(API_URL + endpoint, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         }
       })
         .then(response => {
@@ -146,43 +147,40 @@ export default class App extends Component {
       isSubmitted
     } = this.state
 
-    return [
-      <div key={1} id="main-content">
-        <div className="usa-grid">
-          <div className="usa-width-one-whole">
-            <AppIntro />
-          </div>
-        </div>
-      </div>,
-      <div className="flex-row">
-        <div className="flex-item">
-          <InputError errors={errors} isSubmitted={isSubmitted} />
-          <Form
-            inputValue={inputValue}
-            onSubmit={this.handleSubmit}
-            onInputChange={this.handleInputChange}
-            validateInput={this.validateInput}
-            errors={errors}
-            onRadioChange={this.handleRadioChange}
-            whichApp={whichApp}
-            isSubmitted={isSubmitted}
-            uli={uli}
-            isValidUli={isValidUli}
-          />
-          <div ref={this.refScrollTo}>
-            <Answer
+    return (
+      <div id="main-content">
+        <AppIntro />
+
+        <div className="grid">
+          <div className="item">
+            <InputError errors={errors} isSubmitted={isSubmitted} />
+            <Form
+              inputValue={inputValue}
+              onSubmit={this.handleSubmit}
+              onInputChange={this.handleInputChange}
+              validateInput={this.validateInput}
+              errors={errors}
+              onRadioChange={this.handleRadioChange}
+              whichApp={whichApp}
+              isSubmitted={isSubmitted}
               uli={uli}
               isValidUli={isValidUli}
-              checkDigit={checkDigit}
-              isSubmitted={isSubmitted}
-              errors={errors}
             />
+            <div ref={this.refScrollTo}>
+              <Answer
+                uli={uli}
+                isValidUli={isValidUli}
+                checkDigit={checkDigit}
+                isSubmitted={isSubmitted}
+                errors={errors}
+              />
+            </div>
+          </div>
+          <div className="item">
+            <CSVUpload />
           </div>
         </div>
-        <div className="flex-item">
-          <CSVUpload />
-        </div>
       </div>
-    ]
+    )
   }
 }

@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Pagination from '../containers/Pagination.jsx'
 import Alert from '../../shared-components/Alert.jsx'
 import LoadingIcon from '../../shared-components/LoadingIcon.jsx'
 import { ERRORS_PER_PAGE } from '../constants'
+
+import './ParseErrors.css'
 
 const renderLarErrors = (larErrors, pagination) => {
   if (larErrors.length === 0) return null

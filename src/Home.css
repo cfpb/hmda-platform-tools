@@ -1,0 +1,48 @@
+.home {
+  margin: 0 auto;
+  max-width: 1040px;
+}
+.home h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  margin-top: 1.5em;
+}
+.home .card-container {
+  align-items: stretch;
+  display: flex;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+.home .card {
+  flex: 1;
+  margin: 0 20px;
+}
+.home .card:first-child {
+  margin-left: 0;
+}
+.home .card:last-child {
+  margin-right: 0;
+}
+
+.home .header {
+  border-bottom: none;
+}
+
+.home h4 {
+  margin: 0;
+}
+.home p {
+  color: $color-gray;
+  margin-top: 0;
+}
+.home .usa-button-secondary {
+  margin-top: 0;
+}
+.home .usa-label {
+  background-color: #f9c642;
+  color: #212121;
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}

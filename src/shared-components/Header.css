@@ -1,0 +1,27 @@
+.header h1,
+.header h4 {
+  margin-bottom: 0;
+}
+.header .usa-font-lead {
+  color: $color-gray;
+  margin-top: 0;
+}
+.header p {
+  max-width: 77rem;
+}
+.header p:first-of-type {
+  margin-top: 0;
+}
+.header form {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+.header form select {
+  background-position: right 0.5rem center;
+  font-size: 4rem;
+  font-weight: bold;
+  height: auto;
+  line-height: 1;
+  margin: 0 0 -2px;
+  padding: 0 2.5rem 0 0.5rem;
+}
