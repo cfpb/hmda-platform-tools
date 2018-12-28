@@ -10,7 +10,13 @@
   font-family: SourceSansProItalic;
   src: url(./fonts/sourcesanspro-italic-webfont.woff);
 }
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 html {
+  box-sizing: border-box;
   font-family: SourceSansPro;
   font-size: 10px;
   min-height: 100%;
@@ -20,7 +26,7 @@ body {
   margin: 0 0 350px;
   padding: 0;
   font-family: SourceSansPro;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
 }
 .skipnav {
   background: transparent;
@@ -45,8 +51,12 @@ a:active {
   color: #205493;
 }
 
-p {
+p, li {
   line-height: 1.5;
+}
+
+li {
+  margin-bottom: 0.5em;
 }
 
 h1,
@@ -56,6 +66,18 @@ h4,
 h5,
 h6 {
   font-family: SourceSansProBold;
+  clear: both;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+ol, ul {
+  padding-left: 1.94em;
+}
+
+h1+ul, h1+ol, h2+ul, h2+ol, h3+ul, h3+ol, h4+ul, h4+ol, h5+ul, h5+ol, h6+ul, h6+ol, p+ul, p+ol {
+  margin-top: 0;
 }
 
 hr {
@@ -68,15 +90,11 @@ hr {
   line-height: 1.7;
   margin-top: 0;
   max-width: 77rem;
+  color: #5b616b;
 }
 
 .text-small {
   font-size: 1.3rem;
-}
-
-#main-content {
-  margin: 0 auto;
-  max-width: 1040px;
 }
 
 #main-content .header {
@@ -86,7 +104,7 @@ hr {
 #main-content .grid {
   align-items: stretch;
   display: flex;
-  margin: 0 auto;
+  padding: 0;
 }
 
 #main-content .grid .item {
@@ -96,6 +114,7 @@ hr {
 
 #main-content .grid .item:first-child {
   margin-left: 0;
+  margin-right: 55px;
 }
 #main-content .grid .item:last-child {
   margin-right: 0;
@@ -103,4 +122,18 @@ hr {
 #main-content h1 {
   font-size: 4rem;
   margin-top: 1.5em;
+}
+
+.grid {
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  margin: 0 auto;
+  max-width: 1040px;
+}
+
+@media screen and (min-width: 600px) {
+  .grid {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
 }

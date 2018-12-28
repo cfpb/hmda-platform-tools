@@ -29,7 +29,7 @@ class FFVT extends React.Component {
     return (
       <Provider store={store}>
         <AppContainer>
-          <div id="main-content" className="FFVT">
+          <div id="main-content" className="grid FFVT">
             <Header
               type="main"
               headingText="File Format Verification Tool"

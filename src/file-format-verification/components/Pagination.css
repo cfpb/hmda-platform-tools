@@ -1,3 +1,10 @@
+.PaginationControls .button-disabled, .PaginationControls .button-disabled:hover,  .PaginationControls .button-disabled:active {
+  background-color: #d6d7d9;
+  border-color: #d6d7d9;
+  outline: 0;
+  color: #323a45;
+}
+
 .PaginationControls {
   display: table;
   font-size: 1.7rem;

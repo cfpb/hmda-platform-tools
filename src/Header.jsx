@@ -17,7 +17,7 @@ const Header = () => {
       <a className="skipnav" href="#main-content">
         Skip to main content
       </a>
-      <header className="hmda-header header header-basic" role="banner">
+      <header className="hmda-header header-basic" role="banner">
         <BannerUSA />
         <div className="nav-container">
           <div className="logo" id="logo">

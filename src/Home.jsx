@@ -5,7 +5,7 @@ import './Home.css'
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className="grid home">
       <Header
         type="main"
         headingText="HMDA Tools"
