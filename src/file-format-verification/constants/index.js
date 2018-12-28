@@ -8,4 +8,4 @@ export const PAGINATION_FADE_OUT = 'PAGINATION_FADE_OUT'
 export const SET_FILING_PERIOD = 'SET_FILING_PERIOD'
 export const UPLOAD_ERROR = 'UPLOAD_ERROR'
 
-export const ERRORS_PER_PAGE = 10
+export const ERRORS_PER_PAGE = 20

@@ -75,7 +75,7 @@ class Pagination extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.pagination || nextProps.isFetching) return
+    if (!nextProps.pagination) return
     this.setState({ value: nextProps.pagination.page })
   }
 
@@ -96,11 +96,11 @@ class Pagination extends Component {
     if (pagination.total === 1) return null
     const firstPage = page === 1
     const lastPage = page === pagination.total
-
+   console.log('rendering pagination', this.props)
     return (
       <div className="PaginationControls">
         <button
-          className={firstPage ? 'usa-button-disabled' : ''}
+          className={firstPage ? 'button-disabled' : ''}
           onClick={e => {
             if (!firstPage) {
               this._setScrollValues()
@@ -114,7 +114,7 @@ class Pagination extends Component {
           Page {this._getInput()} of {pagination.total}
         </div>
         <button
-          className={lastPage ? 'usa-button-disabled' : ''}
+          className={lastPage ? 'button-disabled' : ''}
           onClick={e => {
             if (!lastPage) {
               this._setScrollValues()
@@ -124,14 +124,13 @@ class Pagination extends Component {
         >
           Next
         </button>
-        {this.props.isFetching ? <LoadingIcon /> : null}
+        {this.props.pagination && this.props.pagination.fade ? <LoadingIcon /> : null}
       </div>
     )
   }
 }
 
 Pagination.propTypes = {
-  isFetching: PropTypes.bool,
   pagination: PropTypes.object,
   getPage: PropTypes.func
 }
