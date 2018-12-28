@@ -96,7 +96,7 @@ class Pagination extends Component {
     if (pagination.total === 1) return null
     const firstPage = page === 1
     const lastPage = page === pagination.total
-   console.log('rendering pagination', this.props)
+
     return (
       <div className="PaginationControls">
         <button
