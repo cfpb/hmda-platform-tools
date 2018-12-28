@@ -148,7 +148,7 @@ export default class App extends Component {
     } = this.state
 
     return (
-      <div id="main-content">
+      <div className="grid" id="main-content">
         <AppIntro />
 
         <div className="grid">

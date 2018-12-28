@@ -5,7 +5,7 @@ import Form from './Form.jsx'
 
 const App = () => {
   return (
-    <div id="main-content">
+    <div className="grid" id="main-content">
       <AppIntro />
 
       <div className="grid">
