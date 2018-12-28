@@ -4,6 +4,10 @@
   padding-left: 0;
 }
 
+.Form .LoadingIconWrapper {
+  margin-top: 1em;
+}
+
 .Form label {
   display: block;
   margin-top: 3rem;

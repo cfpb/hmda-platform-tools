@@ -71,7 +71,7 @@ class Form extends Component {
 
     let loadingIcon = null
     if (isSubmitted && (uli === null && isValidUli === null)) {
-      loadingIcon = <LoadingIcon />
+      loadingIcon = <div><LoadingIcon /></div>
     }
 
     const label = this.label[whichApp]

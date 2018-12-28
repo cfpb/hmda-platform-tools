@@ -227,7 +227,7 @@ class Form extends Component {
           </Header>
           <fieldset>
             <legend>Action Taken Type</legend>
-            <ul class="unstyled-list">
+            <ul className="unstyled-list">
               <li>
                 <input
                   type="radio"
@@ -282,7 +282,7 @@ class Form extends Component {
           </fieldset>
           <fieldset>
             <legend>Amortization Type</legend>
-            <ul class="unstyled-list">
+            <ul className="unstyled-list">
               <li>
                 <input
                   type="radio"

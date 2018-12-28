@@ -4,6 +4,10 @@
   padding-left: 0;
 }
 
+.Form+div .LoadingIconWrapper {
+  margin-top: 1em;
+}
+
 .Form .info {
   background-color: #e1f3f8;
   padding: 1.5em;
