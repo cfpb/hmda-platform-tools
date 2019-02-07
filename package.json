@@ -1,6 +1,6 @@
 {
   "name": "hmda-platform-tools",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Tools to assist with submitting HMDA files",
   "engines": {
     "node": ">=8.x"
