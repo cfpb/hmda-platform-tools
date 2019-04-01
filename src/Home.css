@@ -11,18 +11,12 @@
 .home .card-container {
   align-items: stretch;
   display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
-  padding: 3rem 0;
 }
 .home .card {
-  flex: 1;
-  margin: 0 20px;
-}
-.home .card:first-child {
-  margin-left: 0;
-}
-.home .card:last-child {
-  margin-right: 0;
+  flex: 1 1 300px;
+  margin: 3rem 40px 3rem 0;
 }
 
 .home .header {
