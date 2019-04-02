@@ -3,12 +3,7 @@
   max-width: 1040px;
 }
 
-.FFVT h1 {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 0;
-  margin-top: 1.5em;
-}
+
 
 .FFVT .header {
   border-bottom: none;
@@ -22,18 +17,12 @@
   margin: 0 auto;
 }
 
-.FFVT .grid .item {
-  flex: 1;
-  margin: 0 20px;
-}
-
-.FFVT .grid .item:first-child {
-  margin-left: 0;
-}
-.FFVT .grid .item:last-child {
-  margin-right: 0;
-}
-
 .FFVT .text-small p:first-child {
   margin-top: 0;
+}
+
+@media screen and (max-width: 800px) {
+  #main-content.FFVT .grid .item {
+    padding: 0;
+  }
 }

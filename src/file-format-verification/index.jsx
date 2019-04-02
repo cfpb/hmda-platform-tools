@@ -32,7 +32,6 @@ class FFVT extends React.Component {
           <div id="main-content" className="grid FFVT">
             <Header
               type="main"
-              headingText="File Format Verification Tool"
               paragraphText="Select a HMDA file from your computer and 
                 test whether it meets certain formatting requirements needed 
                 to submit HMDA data to the HMDA Platform. There is a unique 
