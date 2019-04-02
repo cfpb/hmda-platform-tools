@@ -5,6 +5,7 @@ const AppIntro = () => {
   return (
     <Header
       type="main"
+      style={{"margin-bottom": 0}}
       headingText="Check Digit Tool"
       paragraphText="You can use this tool for two functions. The first is to generate a two
       character check digit when you enter a Legal Entity Identifier (LEI) and

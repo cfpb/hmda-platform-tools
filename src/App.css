@@ -104,21 +104,16 @@ hr {
 #main-content .grid {
   align-items: stretch;
   display: flex;
+  flex-wrap: wrap;
   padding: 0;
 }
 
 #main-content .grid .item {
-  flex: 1;
-  margin: 0 20px;
+  flex: 1 1 450px;
+  margin: 3rem 0;
+  padding-right: 75px;
 }
 
-#main-content .grid .item:first-child {
-  margin-left: 0;
-  margin-right: 55px;
-}
-#main-content .grid .item:last-child {
-  margin-right: 0;
-}
 #main-content h1 {
   font-size: 4rem;
   margin-top: 1.5em;

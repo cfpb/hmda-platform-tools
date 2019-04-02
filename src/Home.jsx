@@ -15,11 +15,10 @@ const Home = () => {
       <div className="card-container">
         <div className="card">
           <Header
-            headingLink="/file-format-verification"
-            headingText="File Format Verification"
-            paragraphText="The File Format Verification Tool (FFVT) is a resource for testing
-              whether your file meets certain formatting requirements specified
-              in the HMDA Filing Instructions Guide."
+            headingLink="/rate-spread"
+            headingText="Rate Spread"
+            paragraphText="This calculator provides rate spreads for HMDA reportable loans
+              with a final action date on or after January 1st, 2018."
             type="sub"
           />
         </div>
@@ -38,10 +37,11 @@ const Home = () => {
 
         <div className="card">
           <Header
-            headingLink="/rate-spread"
-            headingText="Rate Spread"
-            paragraphText="This calculator provides rate spreads for HMDA reportable loans
-              with a final action date on or after January 1st, 2018."
+            headingLink="/file-format-verification"
+            headingText="File Format Verification"
+            paragraphText="The File Format Verification Tool (FFVT) is a resource for testing
+              whether your file meets certain formatting requirements specified
+              in the HMDA Filing Instructions Guide."
             type="sub"
           />
         </div>
