@@ -4,7 +4,7 @@ import Header from '../shared-components/Header.jsx'
 
 const AppIntro = () => {
   return (
-    <Header type="main" headingText="Rate Spread Calculator">
+    <Header type="main" style={{"margin-bottom": 0}} headingText="Rate Spread Calculator">
       <p className="font-lead">
         This calculator provides rate spreads for HMDA reportable loans with a
         final action date on or after January 1st, 2018. Use the{' '}

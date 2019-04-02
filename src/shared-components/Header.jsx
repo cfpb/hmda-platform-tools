@@ -10,7 +10,7 @@ const makeHeadingLink = (headingText, headingLink) => {
 
 const renderHeading = (type, heading) => {
   if (type === 'main') return <h1>{heading}</h1>
-  if (type === 'sub') return <h4>{heading}</h4>
+  if (type === 'sub') return <h3>{heading}</h3>
 }
 
 const renderHeadingWithSelector = (type, heading, selector) => {
@@ -37,6 +37,7 @@ const renderParagraph = (type, paragraphText) => {
 const Header = props => {
   let style = { marginBottom: '3em' }
   if (props.type === 'sub') style = { marginBottom: '1em' }
+  if (props.style) style = {...style, ...props.style}
 
   let heading = props.headingText
   if (props.headingLink)
@@ -62,7 +63,8 @@ Header.propTypes = {
   headingText: PropTypes.string,
   paragraphText: PropTypes.string,
   headingLink: PropTypes.string,
-  selector: PropTypes.element
+  selector: PropTypes.element,
+  style: PropTypes.object
 }
 
 export default Header
