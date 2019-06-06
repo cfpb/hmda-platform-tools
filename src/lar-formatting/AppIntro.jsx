@@ -45,10 +45,10 @@ const AppIntro = () => {
       </li>
       <li>
         <a
-          href="https://s3.amazonaws.com/cfpb-hmda-public/prod/larft/2018/HMDA_2018_LAR_Formatting_Tool.xlsm"
+          href="https://s3.amazonaws.com/cfpb-hmda-public/prod/larft/HMDA_LAR_Formatting_Tool.xlsm"
           download={true}
         >
-          2018 LAR Formatting Tool
+          LAR Formatting Tool for data collected in or after 2018
         </a>
       </li>
     </ul>
