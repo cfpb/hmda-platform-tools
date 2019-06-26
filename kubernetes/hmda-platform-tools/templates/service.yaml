@@ -34,10 +34,6 @@ metadata:
       rewrite: /tools/
       service: {{ include "hmda-platform-tools.fullname" . }}:{{ .Values.service.port }}
 spec:
-  type: {{ .Values.ambassador.service.type }}
+  clusterIP: None
   ports:
-  - name: {{ include "hmda-platform-tools.fullname" . }}-ambassador
-    port: {{ .Values.ambassador.port }}
-    targetPort: {{ .Values.service.port }}
-  selector:
-service: {{ include "hmda-platform-tools.fullname" . }}-ambassador
+    - port: {{ .Values.service.port }}
