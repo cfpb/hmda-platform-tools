@@ -17,6 +17,11 @@ service:
   type: ClusterIP
   port: 8080
 
+#ambassador:
+#  service:
+#    type: NodePort
+#  port: 80
+
 ingress:
   enabled: false
   annotations:
