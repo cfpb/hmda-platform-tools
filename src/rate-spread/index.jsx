@@ -18,8 +18,9 @@ const App = () => {
       </div>
 
       <div className="alert" style={{ marginTop: '3em' }}>
+        <p><b>7/18/2019:</b> Two sets of APOR values were published for the week of 03/04/19 and 06/17/19. The APOR values published by the Bureau and incorporated into the Bureau’s rate spread calculator are available in the tables accessible from this page.</p>
         <p>
-          Two sets of APORs were published for certain dates in 2017, one on the
+          <b>2/16/2018:</b> Two sets of APORs were published for certain dates in 2017, one on the
           Bureau’s web site and one on the FFIEC’s web site. The APOR values
           published by the FFIEC and incorporated into the FFIEC’s rate spread
           calculator are available in{' '}
