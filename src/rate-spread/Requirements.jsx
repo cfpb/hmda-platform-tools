@@ -4,7 +4,7 @@ import Header from '../shared-components/Header.jsx'
 
 const Requirements = () => {
   return (
-    <div className="data-requirements" id="main-content">
+    <div className="data-requirements grid" id="main-content">
       <Header
         type="main"
         headingText="Data Requirements for the Rate Spread Calculator"

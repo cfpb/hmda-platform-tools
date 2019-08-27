@@ -6,7 +6,7 @@ import './Methodology.css'
 
 const Methodology = () => {
   return (
-    <div className="methodology" id="main-content">
+    <div className="methodology grid" id="main-content">
       <Header
         type="main"
         headingText="Methodology for Determining Average Prime Offer Rates"
