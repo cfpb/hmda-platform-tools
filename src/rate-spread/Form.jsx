@@ -174,7 +174,7 @@ class Form extends Component {
       if (errs.rateSetDate || errs.APR || errs.loanTerm) return
 
       this.onFetch()
-      const API_URL = 'https://ffiec-api.cfpb.gov/public/rateSpread'
+      const API_URL = 'https://ffiec.cfpb.gov/public/rateSpread'
       runFetch(API_URL, this.prepareBodyFromState()).then(res => {
         this.onCalculated(res)
       })
