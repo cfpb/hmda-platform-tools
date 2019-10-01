@@ -119,7 +119,7 @@ class CSVUpload extends PureComponent {
           </p>
           <p className="text-small">
             Please see{' '}
-            <a href="http://cfpb.github.io/hmda-platform/uli/#generate-batch">
+            <a href="https://cfpb.github.io/hmda-platform/#rate-spread-csv-file-format">
               the batch section of the API documentation
             </a>{' '}
             for information on csv formatting.
