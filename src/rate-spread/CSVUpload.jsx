@@ -98,7 +98,7 @@ class CSVUpload extends Component {
           </p>
           <p className="text-small">
             Please see{' '}
-            <a href="http://cfpb.github.io/hmda-platform/rate-spread/#batch">
+            <a href="https://cfpb.github.io/hmda-platform/#rate-spread-csv-file-format">
               the batch section of the API documentation
             </a>{' '}
             for information on csv formatting.
