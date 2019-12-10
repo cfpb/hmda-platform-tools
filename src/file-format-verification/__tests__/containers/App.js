@@ -1,9 +1,9 @@
-jest.unmock('../../src/js/containers/App.jsx')
+jest.unmock('../../containers/App.jsx')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TestUtils from 'react-addons-test-utils'
-import AppContainer from '../../src/js/containers/App.jsx'
+import TestUtils from 'react-dom/test-utils'
+import AppContainer from '../../containers/App.jsx'
 import Wrapper from '../Wrapper.js'
 
 
@@ -19,7 +19,7 @@ describe('AppContainer', () => {
 
   it('renders the component', () => {
     expect(containerNode).toBeDefined()
-    expect(containerNode.firstChild.textContent).toEqual('This website is a work in progress')
+    expect(containerNode.firstChild.textContent).toEqual('hey')
     expect(console.error).not.toBeCalled()
   })
 })

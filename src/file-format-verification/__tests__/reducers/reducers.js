@@ -1,7 +1,7 @@
-jest.unmock('../../src/js/reducers')
+jest.unmock('../../reducers')
 
-import * as types from '../../src/js/constants'
-import { upload, status } from '../../src/js/reducers'
+import * as types from '../../constants'
+import { upload, status } from '../../reducers'
 
 const typesArr = Object.keys(types)
   .filter( v => v !== '__esModule')
@@ -55,7 +55,7 @@ describe('upload reducer', () => {
   })
 
   it('shouldn\'t modify state on an unknown action type', () => {
-    excludeTypes(types.SELECT_FILE, types.UPLOAD_PROGRESS)
+    excludeTypes(types.SELECT_FILE, types.SET_FILING_PERIOD, types.UPLOAD_ERROR)
       .forEach(v => expect(upload({}, v))
         .toEqual({})
       )

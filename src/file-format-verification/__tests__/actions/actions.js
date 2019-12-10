@@ -1,11 +1,11 @@
-jest.unmock('../../src/js/actions')
-jest.unmock('../../src/js/constants')
+jest.unmock('../../actions')
+jest.unmock('../../constants')
 
 import fs from 'fs'
-import * as actions from '../../src/js/actions'
-import * as types from '../../src/js/constants'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import * as actions from '../../actions'
+import * as types from '../../constants'
+// import configureMockStore from 'redux-mock-store'
+// import thunk from 'redux-thunk'
 
 describe('actions', () => {
   it('creates an action to update the status', () => {

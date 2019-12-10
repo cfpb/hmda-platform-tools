@@ -47,5 +47,9 @@
     "Firefox >= 54",
     "Edge >= 15",
     "ie >= 11"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/runtime": "^7.7.6",
+    "redux-mock-store": "^1.5.3"
+  }
 }
