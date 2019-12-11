@@ -10,7 +10,7 @@ import RateSpreadRequirements from './rate-spread/Requirements'
 import RateSpreadMethodology from './rate-spread/Methodology'
 import FFVT from './file-format-verification/index'
 import LARFormatting from './lar-formatting/index'
-import { fetchEnvConfig, findObjIndex } from './configUtils'
+import { fetchEnvConfig, findObjIndex, getEnvConfig } from './configUtils'
 import { links } from './links'
 
 import './App.css'
@@ -20,7 +20,7 @@ class App extends React.Component {
 
   componentDidMount() {
     fetchEnvConfig()
-      .then(config => this.updateFilingLink(config))
+      .then(config => this.updateFilingLink(getEnvConfig(config, window.location.host)))
       .catch(() => null)
   }
 
