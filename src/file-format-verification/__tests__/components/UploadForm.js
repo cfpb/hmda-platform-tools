@@ -1,12 +1,12 @@
-jest.unmock('../../src/js/components/UploadForm.jsx')
+jest.unmock('../../components/UploadForm.jsx')
 
 import UploadForm, {
   renderErrors
-} from '../../src/js/components/UploadForm.jsx'
+} from '../../components/UploadForm.jsx'
 import Wrapper from '../Wrapper.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TestUtils from 'react-addons-test-utils'
+import TestUtils from 'react-dom/test-utils'
 
 describe('submitform', function(){
   const handleSubmit = jest.fn()
@@ -22,7 +22,7 @@ describe('submitform', function(){
           uploading={true}
           file={{size:108}}
           code={5}
-          filingPeriod={2017}
+          filingPeriod={"2017"}
           errors={['this is an error', 'and another']}
         />
       </Wrapper>, node)
@@ -35,14 +35,6 @@ describe('submitform', function(){
   it('expects the file input to be empty', () => {
     const input = TestUtils.scryRenderedDOMComponentsWithTag(form, 'input')[0]
     expect(input.value).toEqual('')
-  })
-
-  it('submits the form', function(){
-    TestUtils.Simulate.submit(
-      TestUtils.findRenderedDOMComponentWithTag(form, 'form')
-    )
-
-    expect(handleSubmit).toBeCalled()
   })
 
   const form2 = ReactDOM.render(
@@ -68,7 +60,7 @@ describe('renderErrors', () => {
 
   it('renders errors', () => {
     const rendered = renderErrors(['this is an error'])
-    expect(!!getClass(rendered).match('usa-alert usa-alert-error')).toBe(true)
+    expect(!!getClass(rendered).match('alert alert-error')).toBe(true)
   })
 
   it('doesn\'t renders errors', () => {
