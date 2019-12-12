@@ -49,8 +49,7 @@
     "ie >= 11"
   ],
   "devDependencies": {
-    "@babel/helper-create-regexp-features-plugin": "^7.7.4",
-    "@babel/runtime": "^7.7.6",
-    "redux-mock-store": "^1.5.3"
+    "@babel/runtime": "7.7.6",
+    "redux-mock-store": "1.5.3"
   }
 }

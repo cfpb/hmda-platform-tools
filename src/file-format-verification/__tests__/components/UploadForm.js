@@ -37,14 +37,6 @@ describe('submitform', function(){
     expect(input.value).toEqual('')
   })
 
-  it('submits the form', function(){
-    TestUtils.Simulate.submit(
-      TestUtils.findRenderedDOMComponentWithTag(form, 'form')
-    )
-
-    expect(handleSubmit).toBeCalled()
-  })
-
   const form2 = ReactDOM.render(
       <Wrapper>
         <UploadForm
